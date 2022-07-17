@@ -18,6 +18,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
+import MainPanel from "../Main";
 
 const drawerWidth = 240;
 
@@ -79,10 +80,10 @@ export default function DriverPanel() {
     };
 
     return (
-        <Main>
-            <Box sx={{ display: 'flex' }}>
+        <MainPanel>
+            <Box sx={{ flexGrow: 1  }}>
                 <CssBaseline />
-                <AppBar position="fixed" open={open}>
+                <AppBar position="static" open={open} sx={{backgroundColor:"darkblue",marginTop:-5}}>
                     <Toolbar>
                         <IconButton
                             color="inherit"
@@ -107,7 +108,7 @@ export default function DriverPanel() {
                             boxSizing: 'border-box',
                         },
                     }}
-                    variant="persistent"
+                    variant="temporary"
                     anchor="left"
                     open={open}
                 >
@@ -118,20 +119,7 @@ export default function DriverPanel() {
                     </DrawerHeader>
                     <Divider />
                     <List>
-                        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-                            <ListItem key={text} disablePadding>
-                                <ListItemButton>
-                                    <ListItemIcon>
-                                        {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                                    </ListItemIcon>
-                                    <ListItemText primary={text} />
-                                </ListItemButton>
-                            </ListItem>
-                        ))}
-                    </List>
-                    <Divider />
-                    <List>
-                        {['All mail', 'Trash', 'Spam'].map((text, index) => (
+                        {['View Schedule'].map((text, index) => (
                             <ListItem key={text} disablePadding>
                                 <ListItemButton>
                                     <ListItemIcon>
@@ -145,15 +133,8 @@ export default function DriverPanel() {
                 </Drawer>
                 <Main open={open}>
                     <DrawerHeader />
-                    <Typography paragraph>
-
-                    </Typography>
-                    <Typography paragraph>
-
-                    </Typography>
                 </Main>
             </Box>
-        </Main>
-
+        </MainPanel>
     );
 }
