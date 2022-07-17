@@ -1,7 +1,7 @@
 import React from 'react'
 import Header from "../../component/header/appBar";
 
-const Main = ({ children }) => {
+const MainPanel = ({ children }) => {
     return(
         <React.Fragment>
             <Header/>
@@ -9,4 +9,4 @@ const Main = ({ children }) => {
         </React.Fragment>
         )
 }
-export default Main
+export default MainPanel
