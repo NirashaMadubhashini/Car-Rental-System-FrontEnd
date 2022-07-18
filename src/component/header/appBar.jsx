@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
+import Divider from "@mui/material/Divider";
 
 export default function Header() {
     return (
@@ -17,6 +18,7 @@ export default function Header() {
                     </Typography>
                     <Button color="inherit">Login</Button>
                 </Toolbar>
+                {/*<Divider />*/}
             </AppBar>
         </Box>
     );
