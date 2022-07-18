@@ -22,6 +22,7 @@ import ManageCustomer from "./Customer";
 import AirlineSeatReclineNormalIcon from '@mui/icons-material/AirlineSeatReclineNormal';
 import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
 import ManageCar from "./Car";
+import ManageDriver from "./Driver";
 
 const drawerWidth = 240;
 
@@ -142,7 +143,9 @@ export default function AdminPanel() {
                     </List>
                 </Drawer>
             </Box>
-            <ManageCar/>
+            {/*<ManageCar/>*/}
+            {/*<ManageCustomer/>*/}
+            <ManageDriver/>
         </MainPanel>
     );
 }
