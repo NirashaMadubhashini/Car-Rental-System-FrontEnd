@@ -1,20 +1,12 @@
 import React from 'react'
 import Box from "@mui/material/Box";
 import Table from "@mui/material/Table";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import TableCell from "@mui/material/TableCell";
-import TableBody from "@mui/material/TableBody";
 import Button from "@mui/material/Button";
-import DeleteIcon from '@mui/icons-material/Delete';
-import CreateIcon from '@mui/icons-material/Create';
-import Typography from "@mui/material/Typography";
-import TableContainer from "@mui/material/TableContainer";
-import Paper from "@mui/material/Paper";
+import Tables from "../../component/common/Table/table";
 
 const ManageCar = ({}) => {
     function createData(name, calories, fat, carbs, protein) {
-        return { name, calories, fat, carbs, protein };
+        return {name, calories, fat, carbs, protein};
     }
 
     const rows = [
@@ -27,17 +19,20 @@ const ManageCar = ({}) => {
 
     return (
         <div>
-            <Box sx={{bgcolor: '#cfe8fc', height: '100vh', flexGrow: 1}}>
+            <Box sx={{bgcolor: 'white', height: '100vh', flexGrow: 1}}>
                 <div>
+                    <div >
+                        <Button variant="contained" color="primary" sx={{position: "absolute", top: 120, left: 25}}>
+                            Add Car
+                        </Button>
 
-                    <Button variant="contained" color="primary"  sx={{position:"absolute",top:120,left:25}}>
-                        Add Car
-                    </Button>
+                        <Button variant="contained" color="success" sx={{position: "absolute", top: 120, left: 130}}>
+                            Add to Maintain
+                        </Button>
+                    </div>
 
-                    <Button variant="contained" color="success"  sx={{position:"absolute",top:120,left:130}}>
-                        Add to Maintain
-                    </Button>
 
+                    <Tables/>
                     {/*<Table sx={{position:"absolute",top:180}}>*/}
                     {/*    <TableHead>*/}
                     {/*        <TableRow>*/}
@@ -69,44 +64,59 @@ const ManageCar = ({}) => {
 
                     {/*    </TableBody>*/}
                     {/*</Table>*/}
-                    <TableContainer component={Paper} sx={{position:"absolute",top:180,bgcolor: '#cfe8fc',paddingLeft:15,paddingRight:15}}>
-                        <Table sx={{ minWidth: 850 }} aria-label="simple table">
-                            <TableHead>
-                                <TableRow>
-                                    <TableCell>registrationNO</TableCell>
-                                    <TableCell align="right">brand</TableCell>
-                                    <TableCell align="right">type</TableCell>
-                                    <TableCell align="right">noOfPassengers</TableCell>
-                                    <TableCell align="right">transmissionType</TableCell>
-                                    <TableCell align="right">fuelType</TableCell>
-                                    <TableCell align="right">color</TableCell>
-                                    {/*<TableCell align="right">frontViewImg</TableCell>*/}
-                                    {/*<TableCell align="right">backViewImg</TableCell>*/}
-                                    {/*<TableCell align="right">sideViewImg</TableCell>*/}
-                                    {/*<TableCell align="right">internalViewImg</TableCell>*/}
-                                    {/*<TableCell align="right">dailyRate</TableCell>*/}
-                                    {/*<TableCell align="right">monthlyRate</TableCell>*/}
-                                    {/*<TableCell align="right">monthlyRate</TableCell>*/}
-                                </TableRow>
-                            </TableHead>
-                            <TableBody>
-                                {rows.map((row) => (
-                                    <TableRow
-                                        key={row.name}
-                                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                                    >
-                                        <TableCell component="th" scope="row">
-                                            {row.name}
-                                        </TableCell>
-                                        <TableCell align="right">{row.calories}</TableCell>
-                                        <TableCell align="right">{row.fat}</TableCell>
-                                        <TableCell align="right">{row.carbs}</TableCell>
-                                        <TableCell align="right">{row.protein}</TableCell>
-                                    </TableRow>
-                                ))}
-                            </TableBody>
-                        </Table>
-                    </TableContainer>
+                    {/*<TableContainer component={Paper} sx={{*/}
+                    {/*    position: "absolute",*/}
+                    {/*    display:"flex",*/}
+                    {/*    justifyContent:"center",*/}
+                    {/*    alignItems:"center",*/}
+                    {/*    top: 180,*/}
+                    {/*    // bgcolor: '#cfe8fc',*/}
+                    {/*    bgcolor: 'white',*/}
+                    {/*    marginLeft: 15,*/}
+                    {/*    marginRight: 15,*/}
+
+                    {/*}}>*/}
+                    {/*    <Table sx={{minWidth: 850}} aria-label="simple table">*/}
+                    {/*        <TableHead>*/}
+                    {/*            <TableRow>*/}
+                    {/*                <TableCell>registrationNO</TableCell>*/}
+                    {/*                <TableCell align="right">brand</TableCell>*/}
+                    {/*                <TableCell align="right">type</TableCell>*/}
+                    {/*                <TableCell align="right">noOfPassengers</TableCell>*/}
+                    {/*                <TableCell align="right">transmissionType</TableCell>*/}
+                    {/*                <TableCell align="right">fuelType</TableCell>*/}
+                    {/*                <TableCell align="right">color</TableCell>*/}
+                    {/*                /!*<TableCell align="right">frontViewImg</TableCell>*!/*/}
+                    {/*                /!*<TableCell align="right">backViewImg</TableCell>*!/*/}
+                    {/*                /!*<TableCell align="right">sideViewImg</TableCell>*!/*/}
+                    {/*                /!*<TableCell align="right">internalViewImg</TableCell>*!/*/}
+                    {/*                /!*<TableCell align="right">dailyRate</TableCell>*!/*/}
+                    {/*                /!*<TableCell align="right">monthlyRate</TableCell>*!/*/}
+                    {/*                /!*<TableCell align="right">monthlyRate</TableCell>*!/*/}
+                    {/*            </TableRow>*/}
+                    {/*        </TableHead>*/}
+                    {/*        <TableBody>*/}
+                    {/*            {rows.map((row) => (*/}
+                    {/*                <TableRow*/}
+                    {/*                    key={row.name}*/}
+                    {/*                    sx={{'&:last-child td, &:last-child th': {border: 0}}}*/}
+                    {/*                >*/}
+                    {/*                    <TableCell component="th" scope="row">*/}
+                    {/*                        {row.name}*/}
+                    {/*                    </TableCell>*/}
+                    {/*                    <TableCell align="right">{row.calories}</TableCell>*/}
+                    {/*                    <TableCell align="right">{row.fat}</TableCell>*/}
+                    {/*                    <TableCell align="right">{row.carbs}</TableCell>*/}
+                    {/*                    <TableCell align="right">{row.protein}</TableCell>*/}
+                    {/*                    <TableCell*/}
+                    {/*                        align="right"><CreateIcon/></TableCell>*/}
+                    {/*                    <TableCell*/}
+                    {/*                        align="right"><DeleteIcon/></TableCell>*/}
+                    {/*                </TableRow>*/}
+                    {/*            ))}*/}
+                    {/*        </TableBody>*/}
+                    {/*    </Table>*/}
+                    {/*</TableContainer>*/}
                 </div>
             </Box>
         </div>
