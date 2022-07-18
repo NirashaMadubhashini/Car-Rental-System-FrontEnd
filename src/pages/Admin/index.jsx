@@ -18,11 +18,13 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import PersonIcon from '@mui/icons-material/Person';
 import MainPanel from "../Main";
-import ManageCustomer from "./Customer";
 import AirlineSeatReclineNormalIcon from '@mui/icons-material/AirlineSeatReclineNormal';
 import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
-import ManageCar from "./Car";
-import ManageDriver from "./Driver";
+import CreditScoreIcon from '@mui/icons-material/CreditScore';
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
+import SummarizeIcon from '@mui/icons-material/Summarize';
+import Income from "./Income";
+import DailySummary from "./Summary";
 
 const drawerWidth = 240;
 
@@ -117,7 +119,8 @@ export default function AdminPanel() {
                     open={open}
                 >
                     <DrawerHeader>
-                        <Typography variant="h6" noWrap component="div"  sx={{position:"absolute",left:55,fontWeight:"bold"}}>
+                        <Typography variant="h6" noWrap component="div"
+                                    sx={{position: "absolute", left: 55, fontWeight: "bold"}}>
                             DashBoard
                         </Typography>
 
@@ -132,9 +135,23 @@ export default function AdminPanel() {
                             <ListItem key={text} disablePadding>
                                 <ListItemButton>
                                     <ListItemIcon>
-                                        {index === 0 ? <PersonIcon/>:
-                                            index ===1 ? <AirlineSeatReclineNormalIcon/>:
-                                                <DirectionsCarIcon/> }
+                                        {index === 0 ? <PersonIcon/> :
+                                            index === 1 ? <AirlineSeatReclineNormalIcon/> : <DirectionsCarIcon/>
+                                                  }
+                                    </ListItemIcon>
+                                    <ListItemText primary={text}/>
+                                </ListItemButton>
+                            </ListItem>
+                        ))}
+                    </List>
+                    <Divider/>
+                    <List>
+                        {['View Rental Request', 'Income', 'Daily Summary'].map((text, index) => (
+                            <ListItem key={text} disablePadding>
+                                <ListItemButton>
+                                    <ListItemIcon>
+                                        {index ==0 ? <CreditScoreIcon/>:
+                                        index ==1 ? <AttachMoneyIcon/>:<SummarizeIcon/> }
                                     </ListItemIcon>
                                     <ListItemText primary={text}/>
                                 </ListItemButton>
@@ -145,7 +162,10 @@ export default function AdminPanel() {
             </Box>
             {/*<ManageCar/>*/}
             {/*<ManageCustomer/>*/}
-            <ManageDriver/>
+            {/*<ManageDriver/>*/}
+            {/*<ViewRentalRequest/>*/}
+            {/*<Income/>*/}
+            <DailySummary/>
         </MainPanel>
     );
 }
