@@ -20,6 +20,8 @@ import MailIcon from '@mui/icons-material/Mail';
 import PersonIcon from '@mui/icons-material/Person';
 import MainPanel from "../Main";
 import ManageCustomer from "./Customer";
+import AirlineSeatReclineNormalIcon from '@mui/icons-material/AirlineSeatReclineNormal';
+import ManageCar from "./Car";
 
 const drawerWidth = 240;
 
@@ -114,7 +116,7 @@ export default function AdminPanel() {
                     open={open}
                 >
                     <DrawerHeader>
-                        <Typography variant="h6" noWrap component="div">
+                        <Typography variant="h6" noWrap component="div"  sx={{position:"absolute",left:55,fontWeight:"bold"}}>
                             DashBoard
                         </Typography>
 
@@ -129,7 +131,7 @@ export default function AdminPanel() {
                             <ListItem key={text} disablePadding>
                                 <ListItemButton>
                                     <ListItemIcon>
-                                        {index % 2 === 0 ? <PersonIcon/> : <MailIcon/>}
+                                        {index % 2 === 0 ? <PersonIcon/> : <AirlineSeatReclineNormalIcon/>}
                                     </ListItemIcon>
                                     <ListItemText primary={text}/>
                                 </ListItemButton>
@@ -138,7 +140,7 @@ export default function AdminPanel() {
                     </List>
                 </Drawer>
             </Box>
-            <ManageCustomer/>
+            <ManageCar/>
         </MainPanel>
     );
 }
