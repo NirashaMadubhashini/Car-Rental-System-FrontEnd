@@ -16,11 +16,11 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import MailIcon from '@mui/icons-material/Mail';
 import PersonIcon from '@mui/icons-material/Person';
 import MainPanel from "../Main";
 import ManageCustomer from "./Customer";
 import AirlineSeatReclineNormalIcon from '@mui/icons-material/AirlineSeatReclineNormal';
+import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
 import ManageCar from "./Car";
 
 const drawerWidth = 240;
@@ -131,7 +131,9 @@ export default function AdminPanel() {
                             <ListItem key={text} disablePadding>
                                 <ListItemButton>
                                     <ListItemIcon>
-                                        {index % 2 === 0 ? <PersonIcon/> : <AirlineSeatReclineNormalIcon/>}
+                                        {index === 0 ? <PersonIcon/>:
+                                            index ===1 ? <AirlineSeatReclineNormalIcon/>:
+                                                <DirectionsCarIcon/> }
                                     </ListItemIcon>
                                     <ListItemText primary={text}/>
                                 </ListItemButton>
