@@ -23,6 +23,7 @@ import InfoIcon from '@mui/icons-material/Info';
 import CarDetails from "./CarDetail";
 import RequestDetails from "./RequestDetails";
 import UpdateInformation from "./UpdateInformation";
+import {useEffect} from "react";
 
 
 const drawerWidth = 240;
@@ -75,6 +76,13 @@ const DrawerHeader = styled('div')(({theme}) => ({
 export default function CustomerPanel() {
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
+    const [isCarDetail, setCarDetail] = React.useState(false);
+    const [isUpdateInformation, setUpdateInformation] = React.useState(false);
+    const [isRequestDetails, setRequestDetails] = React.useState(false);
+
+    useEffect(() => {
+
+    }, [])
 
     const handleDrawerOpen = () => {
         setOpen(true);
@@ -83,6 +91,37 @@ export default function CustomerPanel() {
     const handleDrawerClose = () => {
         setOpen(false);
     };
+
+    const ListItemBtnToggle = (index) => {
+        let dowerBtnName = getDowerBtnName(index);
+        if (dowerBtnName === 'carDetails') {
+            setCarDetail(true)
+            setUpdateInformation(false)
+            setRequestDetails(false)
+        } else if (dowerBtnName === 'updateInformation') {
+            setCarDetail(false)
+            setUpdateInformation(true)
+            setRequestDetails(false)
+        } else {
+            setCarDetail(false)
+            setUpdateInformation(false)
+            setRequestDetails(true)
+        }
+
+    }
+
+    const getDowerBtnName = (name) => {
+        switch (name) {
+            case 'Car Details':
+                return 'carDetails'
+            case 'Update Information':
+                return 'updateInformation'
+            case 'Request Details':
+                return 'requestDetails'
+            default:
+                return ''
+        }
+    }
 
     return (
         <MainPanel>
@@ -131,7 +170,7 @@ export default function CustomerPanel() {
                     <List>
                         {['Car Details','Update Information','Request Details'].map((text, index) => (
                             <ListItem key={text} disablePadding>
-                                <ListItemButton>
+                                <ListItemButton onClick={() => ListItemBtnToggle(text)}>
                                     <ListItemIcon>
                                         {index === 0 ? <CarCrashIcon/>:
                                             index ===1 ? <SecurityUpdateGoodIcon/>:
@@ -144,9 +183,12 @@ export default function CustomerPanel() {
                     </List>
                 </Drawer>
             </Box>
-           {/*<CarDetails/>*/}
-           {/*<RequestDetails/>*/}
-           <UpdateInformation/>
+            {
+                isCarDetail ? <CarDetails/> :
+                    isUpdateInformation ? <UpdateInformation/> :
+                        isRequestDetails ? <RequestDetails/> :
+                            ' '
+            }
         </MainPanel>
     );
 }
