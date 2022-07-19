@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {useEffect} from 'react';
 import {styled, useTheme} from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
@@ -24,6 +25,10 @@ import CreditScoreIcon from '@mui/icons-material/CreditScore';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import SummarizeIcon from '@mui/icons-material/Summarize';
 import Income from "./Income";
+import ManageCustomer from "./Customer";
+import ManageDriver from "./Driver";
+import ManageCar from "./Car";
+import ViewRentalRequest from "./ViewRentalRequest";
 import DailySummary from "./Summary";
 
 const drawerWidth = 240;
@@ -76,6 +81,16 @@ const DrawerHeader = styled('div')(({theme}) => ({
 export default function AdminPanel() {
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
+    const [isCustomer, setCustomer] = React.useState(false);
+    const [isDriver, setDriver] = React.useState(false);
+    const [isCar, setCar] = React.useState(false);
+    const [isRequest, setRequest] = React.useState(false);
+    const [isIncome, setIncome] = React.useState(false);
+    const [isSummary, setSummary] = React.useState(false);
+
+    useEffect(() => {
+
+    }, [])
 
     const handleDrawerOpen = () => {
         setOpen(true);
@@ -84,6 +99,73 @@ export default function AdminPanel() {
     const handleDrawerClose = () => {
         setOpen(false);
     };
+
+    const ListItemBtnToggle = (index) => {
+        let dowerBtnName = getDowerBtnName(index);
+        if (dowerBtnName === 'customer') {
+            setCustomer(true)
+            setDriver(false)
+            setCar(false)
+            setRequest(false)
+            setIncome(false)
+            setSummary(false)
+        } else if (dowerBtnName === 'driver') {
+            setCustomer(false)
+            setDriver(true)
+            setCar(false)
+            setRequest(false)
+            setIncome(false)
+            setSummary(false)
+        } else if (dowerBtnName === 'car') {
+            setCustomer(false)
+            setDriver(false)
+            setCar(true)
+            setRequest(false)
+            setIncome(false)
+            setSummary(false)
+        } else if (dowerBtnName === 'request') {
+            setCustomer(false)
+            setDriver(false)
+            setCar(false)
+            setRequest(true)
+            setIncome(false)
+            setSummary(false)
+        } else if (dowerBtnName === 'income') {
+            setCustomer(false)
+            setDriver(false)
+            setCar(false)
+            setRequest(false)
+            setIncome(true)
+            setSummary(false)
+        } else {
+            setCustomer(false)
+            setDriver(false)
+            setCar(false)
+            setRequest(false)
+            setIncome(false)
+            setSummary(true)
+        }
+
+    }
+
+    const getDowerBtnName = (name) => {
+        switch (name) {
+            case 'Manage Customer':
+                return 'customer'
+            case 'Manage Driver':
+                return 'driver'
+            case 'Manage Car':
+                return 'car'
+            case 'View Rental Request':
+                return 'request'
+            case 'Income':
+                return 'income'
+            case 'Daily Summary':
+                return 'summary'
+            default:
+                return ''
+        }
+    }
 
     return (
         <MainPanel>
@@ -131,27 +213,16 @@ export default function AdminPanel() {
                     </DrawerHeader>
                     <Divider/>
                     <List>
-                        {['Manage Customer', 'Manage Driver', 'Manage Car'].map((text, index) => (
+                        {['Manage Customer', 'Manage Driver', 'Manage Car', 'View Rental Request', 'Income', 'Daily Summary'].map((text, index) => (
                             <ListItem key={text} disablePadding>
-                                <ListItemButton>
+                                <ListItemButton onClick={() => ListItemBtnToggle(text)}>
                                     <ListItemIcon>
                                         {index === 0 ? <PersonIcon/> :
-                                            index === 1 ? <AirlineSeatReclineNormalIcon/> : <DirectionsCarIcon/>
-                                                  }
-                                    </ListItemIcon>
-                                    <ListItemText primary={text}/>
-                                </ListItemButton>
-                            </ListItem>
-                        ))}
-                    </List>
-                    <Divider/>
-                    <List>
-                        {['View Rental Request', 'Income', 'Daily Summary'].map((text, index) => (
-                            <ListItem key={text} disablePadding>
-                                <ListItemButton>
-                                    <ListItemIcon>
-                                        {index ==0 ? <CreditScoreIcon/>:
-                                        index ==1 ? <AttachMoneyIcon/>:<SummarizeIcon/> }
+                                            index === 1 ? <AirlineSeatReclineNormalIcon/> :
+                                                index === 2 ? <DirectionsCarIcon/> :
+                                                    index == 3 ? <CreditScoreIcon/> :
+                                                        index == 4 ? <AttachMoneyIcon/> : <SummarizeIcon/>
+                                        }
                                     </ListItemIcon>
                                     <ListItemText primary={text}/>
                                 </ListItemButton>
@@ -160,12 +231,17 @@ export default function AdminPanel() {
                     </List>
                 </Drawer>
             </Box>
-            {/*<ManageCar/>*/}
-            {/*<ManageCustomer/>*/}
-            {/*<ManageDriver/>*/}
-            {/*<ViewRentalRequest/>*/}
-            {/*<Income/>*/}
-            <DailySummary/>
+            {
+                isCustomer ? <ManageCustomer/> :
+                    isDriver ? <ManageDriver/> :
+                        isCar ? <ManageCar/> :
+                            isRequest ? <ViewRentalRequest/> :
+                                isIncome ? <Income/> :
+                                    isSummary ? <DailySummary/> :
+                                        ''
+
+
+            }
         </MainPanel>
     );
 }
