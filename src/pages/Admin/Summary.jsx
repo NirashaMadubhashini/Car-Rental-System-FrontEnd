@@ -3,6 +3,7 @@ import Box from "@mui/material/Box";
 import Table from "@mui/material/Table";
 import Button from "@mui/material/Button";
 import Tables from "../../component/common/Table/table";
+import Typography from "@mui/material/Typography";
 
 const DailySummary = ({}) => {
     function createData(name, calories, fat, carbs, protein) {
@@ -19,14 +20,17 @@ const DailySummary = ({}) => {
 
     return (
         <div>
+            <Typography sx={{marginLeft:40,fontSize:35,fontWeight:'bold'}}>
+                Daily Summary
+            </Typography>
             <Box sx={{bgcolor: 'white', height: '100vh', flexGrow: 1}}>
                 <div>
                     <div >
-                        <Button variant="contained" color="primary" sx={{position: "absolute", top: 120, left: 25}}>
+                        <Button variant="contained" color="primary" sx={{position: "absolute", top: 180, left: 25}}>
                             Add Car
                         </Button>
 
-                        <Button variant="contained" color="success" sx={{position: "absolute", top: 120, left: 130}}>
+                        <Button variant="contained" color="success" sx={{position: "absolute", top: 180, left: 130}}>
                             Add to Maintain
                         </Button>
                     </div>
