@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {useEffect} from 'react';
 import {styled, useTheme} from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
@@ -71,6 +72,11 @@ const DrawerHeader = styled('div')(({theme}) => ({
 export default function DriverPanel() {
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
+    const [isShedule, setShedule] = React.useState(false);
+
+    useEffect(() => {
+
+    }, [])
 
     const handleDrawerOpen = () => {
         setOpen(true);
@@ -79,6 +85,20 @@ export default function DriverPanel() {
     const handleDrawerClose = () => {
         setOpen(false);
     };
+
+    const ListItemBtnToggle = (index) => {
+        let dowerBtnName = getDowerBtnName(index);
+            setShedule(true)
+    }
+
+    const getDowerBtnName = (name) => {
+        switch (name) {
+            case 'Shedule':
+                return 'shedule'
+            default:
+                return ''
+        }
+    }
 
     return (
         <MainPanel>
@@ -128,7 +148,7 @@ export default function DriverPanel() {
                     <List>
                         {['View Shedule'].map((text, index) => (
                             <ListItem key={text} disablePadding>
-                                <ListItemButton>
+                                <ListItemButton onClick={() => ListItemBtnToggle(text)}>
                                     <ListItemIcon>
                                         {index % 2 === 0 ? <EventNoteIcon/> : <InfoIcon/>}
                                     </ListItemIcon>
@@ -139,7 +159,10 @@ export default function DriverPanel() {
                     </List>
                 </Drawer>
             </Box>
-            <Shedule/>
+            {
+                isShedule ? <Shedule/> :
+                    ''
+            }
         </MainPanel>
     );
 }
