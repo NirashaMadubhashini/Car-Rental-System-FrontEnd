@@ -31,6 +31,8 @@ import ManageCar from "./Car";
 import ViewRentalRequest from "./ViewRentalRequest";
 import DailySummary from "./Summary";
 
+
+
 const drawerWidth = 240;
 
 const Main = styled('main', {shouldForwardProp: (prop) => prop !== 'open'})(
@@ -78,7 +80,7 @@ const DrawerHeader = styled('div')(({theme}) => ({
     justifyContent: 'flex-end',
 }));
 
-export default function AdminPanel() {
+export default function AdminPanel () {
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
     const [isCustomer, setCustomer] = React.useState(false);
@@ -167,6 +169,10 @@ export default function AdminPanel() {
         }
     }
 
+
+
+
+
     return (
         <MainPanel>
             <Box sx={{flexGrow: 1}}>
@@ -238,10 +244,11 @@ export default function AdminPanel() {
                             isRequest ? <ViewRentalRequest/> :
                                 isIncome ? <Income/> :
                                     isSummary ? <DailySummary/> :
-                                        ''
+                                        'Admin'
 
 
             }
+
         </MainPanel>
     );
 }
