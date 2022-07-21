@@ -1,129 +1,313 @@
-import React from 'react'
+import React, {useState} from 'react'
 import Box from "@mui/material/Box";
-import Table from "@mui/material/Table";
-import Button from "@mui/material/Button";
 import Tables from "../../component/common/Table/table";
-import Typography from "@mui/material/Typography";
+import TextField from "@mui/material/TextField";
+import {Button, Grid, Typography} from "@mui/material";
+import AdminService from "../../services/AdminService";
+
 
 const ManageCar = ({}) => {
-    function createData(name, calories, fat, carbs, protein) {
-        return {name, calories, fat, carbs, protein};
+    const initialValues = {
+        registrationNO: "",
+        brand: "",
+        type: "",
+        noOfPassengers: 0,
+        transmissionType: "",
+        fuelType: "",
+        color: "",
+        dailyRate: "",
+        monthlyRate: "",
+        freeKmForPrice: "",
+        freeKmForDuration: "",
+        priceForExtraKm: "",
+
+    };
+
+    const statusObj = {
+        alert: false,
+        message: '',
+        severity: '',
     }
 
-    const rows = [
-        createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-        createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-        createData('Eclair', 262, 16.0, 24, 6.0),
-        createData('Cupcake', 305, 3.7, 67, 4.3),
-        createData('Gingerbread', 356, 16.0, 49, 3.9),
-    ];
+    const handleInputChange = (e) => {
+        const {name, value} = e.target;
+        setFormValues({
+            ...formValues,
+            [name]: value,
+        });
+    };
+    const [formValues, setFormValues] = useState(initialValues);
+
+    const [status, setStatus] = useState(statusObj);
+
+    const [btnLabel, setBtnLabel] = useState('AddCar');
+
+    const [btnColor, setBtnColor] = useState('primary');
+
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        console.log(formValues);
+        await submitCar();
+    }
+
+    const clearFields = () => {
+        setFormValues({
+            registrationNO: "",
+            brand: "",
+            type: "",
+            noOfPassengers: 0,
+            transmissionType: "",
+            fuelType: "",
+            color: "",
+            dailyRate: "",
+            monthlyRate: "",
+            freeKmForPrice: "",
+            freeKmForDuration: "",
+            priceForExtraKm: "",
+
+        });
+    };
+
+    const submitCar = async () => {
+        let formData = this.state.formData;
+
+        if (this.state.btnLabel === "save") {
+            let res = await AdminService.addCar(formData);//customer service --> postCustomer()
+
+            console.log(res)    //print the promise
+
+            if (res.status === 201) {
+                setStatus({
+                    alert: true,
+                    message: res.data.message,
+                    severity: 'success'
+                })
+
+                this.clearFields();
+                // this.loadData();
+            } else {
+                this.setState({
+                    alert: true,
+                    message: res.response.data.message,
+                    severity: 'error'
+                });
+            }
+        } else {
+            let res = await CustomerService.putCustomer(formData);//customer service --> putCustomer()
+            if (res.status === 200) {
+                this.setState({
+                    alert: true,
+                    message: res.data.message,
+                    severity: 'success',
+                    btnLabel: 'save',
+                    btnColor: 'primary'
+                });
+                this.clearFields();
+                this.loadData();
+            } else {
+                this.setState({
+                    alert: true,
+                    message: res.response.data.message,
+                    severity: 'error'
+                });
+            }
+        }
+    };
 
     return (
         <div>
-            <Typography sx={{marginLeft:40,fontSize:35,fontWeight:'bold'}}>
+            <Typography sx={{marginLeft: 40, fontSize: 35, fontWeight: 'bold'}}>
                 Car
             </Typography>
-            <Box sx={{bgcolor: 'white', height: '100vh', flexGrow: 1}}>
-                <div>
-                    <div >
-                        <Button variant="contained" color="primary" sx={{position: "absolute", top: 180, left: 25}}>
-                            Add Car
-                        </Button>
 
-                        <Button variant="contained" color="success" sx={{position: "absolute", top: 180, left: 130}}>
-                            Add to Maintain
+
+            <Box
+
+                component="form"
+                onSubmit={handleSubmit}
+                sx={{
+                    '& > :not(style)': {m: 1, width: '100vh'},
+                }}
+                noValidate
+                autoComplete="off"
+            >
+                {/*<Grid*/}
+                {/*    container*/}
+                {/*    spacing={0}*/}
+                {/*    direction="column"*/}
+                {/*    alignItems="center"*/}
+                {/*    justify="center"*/}
+                {/*    style={{minHeight: "100vh"}}*/}
+                {/*>*/}
+
+
+                <Grid container alignItems="center" justify="center" direction="row">
+                    <Grid item>
+                        <TextField id="outlined-basic" label="RegistrationNO" variant="outlined"
+                                   helperText="Enter RegistrationNO" name="registrationNO"
+                                   onChange={handleInputChange} value={formValues.registrationNO}/>
+                    </Grid>
+                    <Grid item>
+                        <TextField
+                            helperText="Enter Brand"
+                            variant="outlined"
+                            id="outlined-basic"
+                            label="Brand"
+                            name="brand"
+                            onChange={handleInputChange}
+                            value={formValues.brand}
+                        />
+                    </Grid>
+                    <Grid item>
+                        <TextField
+                            helperText="Enter Type"
+                            id="outlined-basic"
+                            label="Type"
+                            name="type"
+                            onChange={handleInputChange}
+                            value={formValues.type}
+                        />
+                    </Grid>
+                    <Grid item>
+                        <TextField
+                            id="outlined-number"
+                            label="Number"
+                            type="number"
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+                            helperText="Enter No_Of_Passengers"
+                            name="noOfPassengers"
+                            onChange={handleInputChange}
+                            value={formValues.noOfPassengers}
+                        />
+                    </Grid>
+                    <Grid item>
+                        <TextField
+                            helperText="Enter Transmission_Type"
+                            id="demo-helper-text-aligned"
+                            label="Transmission_Type"
+                            name="transmissionType"
+                            onChange={handleInputChange}
+                            value={formValues.transmissionType}
+                        />
+                    </Grid>
+                    <Grid item>
+                        <TextField
+                            helperText="Enter Fuel_Type"
+                            id="demo-helper-text-aligned"
+                            label="Fuel_Type"
+                            name="fuelType"
+                            onChange={handleInputChange}
+                            value={formValues.fuelType}
+                        />
+                    </Grid>
+                    <Grid item>
+                        <TextField
+                            helperText="Enter Color"
+                            id="demo-helper-text-aligned"
+                            label="Color"
+                            name="color"
+                            onChange={handleInputChange}
+                            value={formValues.color}
+                        />
+                    </Grid>
+                    {/*<Button component="label" variant="outlined" size="medium" startIcon={<PhotoCamera/>}*/}
+                    {/*        sx={{color: '#B1B1B1', fontSize: '50'}}>*/}
+                    {/*    Front_View_Img*/}
+                    {/*    <input hidden accept="image/*" multiple type="file"/>*/}
+                    {/*</Button>*/}
+
+                    {/*<Button component="label" variant="outlined" size="medium" startIcon={<PhotoCamera/>}*/}
+                    {/*        sx={{color: '#B1B1B1', fontSize: '50'}}>*/}
+                    {/*    Back_View_Img*/}
+                    {/*    <input hidden accept="image/*" multiple type="file"/>*/}
+                    {/*</Button>*/}
+                    {/*<Button component="label" variant="outlined" size="medium" startIcon={<PhotoCamera/>}*/}
+                    {/*        sx={{color: '#B1B1B1', fontSize: '50'}}>*/}
+                    {/*    Side_View_Img*/}
+                    {/*    <input hidden accept="image/*" multiple type="file"/>*/}
+                    {/*</Button>*/}
+                    {/*<Button component="label" variant="outlined" size="medium" startIcon={<PhotoCamera/>}*/}
+                    {/*        sx={{color: '#B1B1B1', fontSize: '50'}}>*/}
+                    {/*    Internal_View_Img*/}
+                    {/*    <input hidden accept="image/*" multiple type="file"/>*/}
+                    {/*</Button>*/}
+                    <Grid item>
+                        <TextField
+                            helperText="Enter Daily_Rate"
+                            id="demo-helper-text-aligned"
+                            label="Daily_Rate"
+                            name="dailyRate"
+                            onChange={handleInputChange}
+                            value={formValues.dailyRate}
+                        />
+                    </Grid>
+                    <Grid item>
+                        <TextField
+                            helperText="Enter Monthly_Rate"
+                            id="demo-helper-text-aligned"
+                            label="Monthly_Rate"
+                            name="monthlyRate"
+                            onChange={handleInputChange}
+                            value={formValues.monthlyRate}
+                        />
+                    </Grid>
+                    <Grid item>
+                        <TextField
+                            helperText="Enter Free_Km_For_Price"
+                            id="demo-helper-text-aligned"
+                            label="Free_Km_For_Price"
+                            name="freeKmForPrice"
+                            onChange={handleInputChange}
+                            value={formValues.freeKmForPrice}
+                        />
+                    </Grid>
+                    <Grid item>
+                        <TextField
+                            helperText="Enter Free_Km_For_Price"
+                            id="demo-helper-text-aligned"
+                            label="Free_Km_For_Duration"
+                            name="freeKmForDuration"
+                            onChange={handleInputChange}
+                            value={formValues.freeKmForDuration}
+                        />
+                    </Grid>
+                    <Grid item>
+                        <TextField
+                            helperText="Enter Price_For_Extra_Km"
+                            id="demo-helper-text-aligned"
+                            label="Price_For_Extra_Km"
+                            name="priceForExtraKm"
+                            onChange={handleInputChange}
+                            value={formValues.priceForExtraKm}
+                        />
+                    </Grid>
+                </Grid>
+
+                <div>
+                    <div>
+                        <Button label={btnLabel} color={btnColor} type="submit" variant="contained" color="primary"
+                                sx={{position: "absolute", top: 550, left: 25}}/>
+
+
+                        <Button type="reset" variant="contained" color="success"
+                                sx={{position: "absolute", top: 550, left: 130}}>
+                            Reset
                         </Button>
                     </div>
 
 
                     <Tables/>
-                    {/*<Table sx={{position:"absolute",top:180}}>*/}
-                    {/*    <TableHead>*/}
-                    {/*        <TableRow>*/}
-                    {/*            <TableCell>Id</TableCell>*/}
-                    {/*            <TableCell>FirstName</TableCell>*/}
-                    {/*            <TableCell align="right">LastName</TableCell>*/}
-                    {/*            <TableCell align="right">UserName</TableCell>*/}
-                    {/*            <TableCell align="right">Age</TableCell>*/}
-                    {/*            <TableCell align="right">Salary</TableCell>*/}
-                    {/*        </TableRow>*/}
-                    {/*    </TableHead>*/}
-                    {/*    <TableBody>*/}
-
-                    {/*        <TableRow key="1">*/}
-                    {/*            <TableCell component="th" scope="row">*/}
-                    {/*                "C001"*/}
-                    {/*            </TableCell>*/}
-                    {/*            <TableCell align="right">"Geeth"</TableCell>*/}
-                    {/*            <TableCell align="right">"dd"</TableCell>*/}
-                    {/*            <TableCell align="right">"232"</TableCell>*/}
-                    {/*            <TableCell align="right">"dfd"</TableCell>*/}
-                    {/*            <TableCell align="right">"dff"</TableCell>*/}
-                    {/*            <TableCell*/}
-                    {/*                align="right" ><CreateIcon/></TableCell>*/}
-                    {/*            <TableCell*/}
-                    {/*                align="right"><DeleteIcon/></TableCell>*/}
-
-                    {/*        </TableRow>*/}
-
-                    {/*    </TableBody>*/}
-                    {/*</Table>*/}
-                    {/*<TableContainer component={Paper} sx={{*/}
-                    {/*    position: "absolute",*/}
-                    {/*    display:"flex",*/}
-                    {/*    justifyContent:"center",*/}
-                    {/*    alignItems:"center",*/}
-                    {/*    top: 180,*/}
-                    {/*    // bgcolor: '#cfe8fc',*/}
-                    {/*    bgcolor: 'white',*/}
-                    {/*    marginLeft: 15,*/}
-                    {/*    marginRight: 15,*/}
-
-                    {/*}}>*/}
-                    {/*    <Table sx={{minWidth: 850}} aria-label="simple table">*/}
-                    {/*        <TableHead>*/}
-                    {/*            <TableRow>*/}
-                    {/*                <TableCell>registrationNO</TableCell>*/}
-                    {/*                <TableCell align="right">brand</TableCell>*/}
-                    {/*                <TableCell align="right">type</TableCell>*/}
-                    {/*                <TableCell align="right">noOfPassengers</TableCell>*/}
-                    {/*                <TableCell align="right">transmissionType</TableCell>*/}
-                    {/*                <TableCell align="right">fuelType</TableCell>*/}
-                    {/*                <TableCell align="right">color</TableCell>*/}
-                    {/*                /!*<TableCell align="right">frontViewImg</TableCell>*!/*/}
-                    {/*                /!*<TableCell align="right">backViewImg</TableCell>*!/*/}
-                    {/*                /!*<TableCell align="right">sideViewImg</TableCell>*!/*/}
-                    {/*                /!*<TableCell align="right">internalViewImg</TableCell>*!/*/}
-                    {/*                /!*<TableCell align="right">dailyRate</TableCell>*!/*/}
-                    {/*                /!*<TableCell align="right">monthlyRate</TableCell>*!/*/}
-                    {/*                /!*<TableCell align="right">monthlyRate</TableCell>*!/*/}
-                    {/*            </TableRow>*/}
-                    {/*        </TableHead>*/}
-                    {/*        <TableBody>*/}
-                    {/*            {rows.map((row) => (*/}
-                    {/*                <TableRow*/}
-                    {/*                    key={row.name}*/}
-                    {/*                    sx={{'&:last-child td, &:last-child th': {border: 0}}}*/}
-                    {/*                >*/}
-                    {/*                    <TableCell component="th" scope="row">*/}
-                    {/*                        {row.name}*/}
-                    {/*                    </TableCell>*/}
-                    {/*                    <TableCell align="right">{row.calories}</TableCell>*/}
-                    {/*                    <TableCell align="right">{row.fat}</TableCell>*/}
-                    {/*                    <TableCell align="right">{row.carbs}</TableCell>*/}
-                    {/*                    <TableCell align="right">{row.protein}</TableCell>*/}
-                    {/*                    <TableCell*/}
-                    {/*                        align="right"><CreateIcon/></TableCell>*/}
-                    {/*                    <TableCell*/}
-                    {/*                        align="right"><DeleteIcon/></TableCell>*/}
-                    {/*                </TableRow>*/}
-                    {/*            ))}*/}
-                    {/*        </TableBody>*/}
-                    {/*    </Table>*/}
-                    {/*</TableContainer>*/}
                 </div>
+
             </Box>
+
+
         </div>
+
+
     )
 
 }
