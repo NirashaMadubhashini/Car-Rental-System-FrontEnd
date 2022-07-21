@@ -187,7 +187,7 @@ export default function CustomerPanel() {
                 isCarDetail ? <CarDetails/> :
                     isUpdateInformation ? <UpdateInformation/> :
                         isRequestDetails ? <RequestDetails/> :
-                            ' '
+                            'Customer'
             }
         </MainPanel>
     );
