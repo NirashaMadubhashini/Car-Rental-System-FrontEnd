@@ -22,6 +22,7 @@ import EventNoteIcon from '@mui/icons-material/EventNote';
 import InfoIcon from '@mui/icons-material/Info';
 import Shedule from "./Shedule";
 
+
 const drawerWidth = 240;
 
 const Main = styled('main', {shouldForwardProp: (prop) => prop !== 'open'})(
@@ -161,7 +162,7 @@ export default function DriverPanel() {
             </Box>
             {
                 isShedule ? <Shedule/> :
-                    ''
+                    'Driver'
             }
         </MainPanel>
     );
