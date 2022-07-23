@@ -24,6 +24,7 @@ import CarDetails from "./CarDetail";
 import RequestDetails from "./RequestDetails";
 import UpdateInformation from "./UpdateInformation";
 import {useEffect} from "react";
+import CustomerDashBoard from "./CustomerDashBoard";
 
 
 const drawerWidth = 240;
@@ -187,7 +188,7 @@ export default function CustomerPanel() {
                 isCarDetail ? <CarDetails/> :
                     isUpdateInformation ? <UpdateInformation/> :
                         isRequestDetails ? <RequestDetails/> :
-                            'Customer'
+                            <CustomerDashBoard/>
             }
         </MainPanel>
     );

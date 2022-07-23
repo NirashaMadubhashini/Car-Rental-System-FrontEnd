@@ -6,6 +6,7 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import LockIcon from '@mui/icons-material/Lock';
 import Image from '../../assets/img/black3.jpg';
 
+
 const Login=()=>{
 
     const paperStyle={padding :20,height:'70vh',width:350, margin:"20px auto"}
@@ -41,9 +42,11 @@ const Login=()=>{
                             Forgot password ?
                         </Link>
                     </Typography>
-                    <Button type='submit' color='primary' variant="contained" sx={{mt:3}} fullWidth >Sign in</Button>
+                    <Link href="admin">
+                    <Button type='submit' color='primary' variant="contained" sx={{mt:3}} fullWidth>Sign in</Button>
+                    </Link>
                     <Typography sx={{mt:2,ml:7}}> Do you have an account ?
-                        <Link href="" >
+                        <Link href="signUp" >
                             Sign Up
                         </Link>
                     </Typography>

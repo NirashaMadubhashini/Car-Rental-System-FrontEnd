@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import Tables from "../../component/common/Table/table";
 import TextField from "@mui/material/TextField";
-import {Box, Button, Grid, Typography,IconButton} from "@mui/material";
+import {Box, Button, Grid, IconButton, Typography} from "@mui/material";
 import AdminService from "../../services/AdminService";
 import SearchIcon from '@mui/icons-material/Search';
 import InputBase from '@mui/material/InputBase';
@@ -24,6 +24,14 @@ const ManageCar = ({}) => {
         freeKmForPrice: "",
         freeKmForDuration: "",
         priceForExtraKm: "",
+        /**
+         * Exta data
+         * */
+        id: 0,
+        lossDamageWaiver: "",
+        completeKm: "",
+        isAvailable: "",
+
 
     };
 
@@ -79,8 +87,12 @@ const ManageCar = ({}) => {
 
     const submitCar = async () => {
 
+        let dto = {};
+        dto = formValues;
+
+        console.log(formValues)
         if (btnLabel === "AddCar") {
-            let res = await AdminService.addCar(formValues);//customer service --> postCustomer()
+            let res = AdminService.addCar(dto);//customer service --> postCustomer()
 
             console.log(res)    //print the promise
 
@@ -96,7 +108,7 @@ const ManageCar = ({}) => {
             } else {
                 setStatus({
                     alert: true,
-                    message:"E",
+                    message: "E",
                     severity: 'error'
                 });
             }
@@ -105,7 +117,7 @@ const ManageCar = ({}) => {
             if (res.status === 200) {
                 setStatus({
                     alert: true,
-                    message:"s",
+                    message: "s",
                     severity: 'success',
 
                 });
@@ -114,7 +126,7 @@ const ManageCar = ({}) => {
                 clearFields();
                 // this.loadData();
             } else {
-               setStatus({
+                setStatus({
                     alert: true,
                     message: "e",
                     severity: 'error'
@@ -319,24 +331,24 @@ const ManageCar = ({}) => {
                     </Grid>
                 </Grid>
                 <InputBase
-                    sx={{ ml: 10,mt:5, flex: 1 }}
+                    sx={{ml: 10, mt: 5, flex: 1}}
                     placeholder="Search RegistrationNO"
-                    inputProps={{ 'aria-label': 'search google maps' }}
+                    inputProps={{'aria-label': 'search google maps'}}
                     variant="standard"
                 />
-                <IconButton type="submit" sx={{ p: '10px' }} aria-label="search">
-                    <SearchIcon />
+                <IconButton type="submit" sx={{p: '10px'}} aria-label="search">
+                    <SearchIcon/>
                 </IconButton>
                 <div>
                     <div>
-                        <Button  color={btnColor} size="medium" type="submit" variant="contained"
-                                 sx={{ml:5,mt:5}}>
+                        <Button color={btnColor} size="medium" type="submit" variant="contained"
+                                sx={{ml: 5, mt: 5}}>
                             {btnLabel}
                         </Button>
 
 
                         <Button type="reset" variant="contained" color="success"
-                                sx={{ml:3,mt:5}}>
+                                sx={{ml: 3, mt: 5}}>
                             Reset
                         </Button>
 

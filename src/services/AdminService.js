@@ -6,8 +6,41 @@ class AdminService {
 
     addCar = async (data) => {
         console.log("form data: " + data)
+
+        const initialValues = {
+            registrationNO: "sadf",
+            brand: "tf",
+            type: "ds",
+            noOfPassengers: 5,
+            transmissionType: "sds",
+            fuelType: "fg",
+            color: "esssssss",
+            frontViewImg: "add",
+            backViewImg: "dad",
+            sideViewImg: "ada",
+            internalViewImg: "fggggg",
+            dailyRate: "eee",
+            monthlyRate: "hg",
+            freeKmForPrice: "fs",
+            freeKmForDuration: "sds",
+            priceForExtraKm: "aaad",
+            /**
+             * Exta data
+             * */
+            id: 0,
+            lossDamageWaiver: "",
+            completeKm: "",
+            isAvailable: "",
+
+
+        };
         const promise = new Promise((resolve, reject) => {
-            axios.post(`${this.baseURL}admin/car`, data, {
+            axios.post(`${this.baseURL}admin/car`, initialValues,{
+                headers: {
+                    accept: 'application/json',
+                    'accept-language': 'en_US',
+                    'content-type': 'application/x-www-form-urlencoded'
+                },
             })
                 .then((res) => {
                     return resolve(res)
