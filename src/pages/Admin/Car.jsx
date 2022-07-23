@@ -1,10 +1,10 @@
 import React, {useState} from 'react'
-import Box from "@mui/material/Box";
 import Tables from "../../component/common/Table/table";
 import TextField from "@mui/material/TextField";
-import {Button, Grid, Typography} from "@mui/material";
+import {Box, Button, Grid, Typography,IconButton} from "@mui/material";
 import AdminService from "../../services/AdminService";
-
+import SearchIcon from '@mui/icons-material/Search';
+import InputBase from '@mui/material/InputBase';
 
 const ManageCar = ({}) => {
     const initialValues = {
@@ -70,45 +70,45 @@ const ManageCar = ({}) => {
     };
 
     const submitCar = async () => {
-        let formData = this.state.formData;
 
-        if (this.state.btnLabel === "save") {
-            let res = await AdminService.addCar(formData);//customer service --> postCustomer()
+        if (btnLabel === "AddCar") {
+            let res = await AdminService.addCar(formValues);//customer service --> postCustomer()
 
             console.log(res)    //print the promise
 
             if (res.status === 201) {
                 setStatus({
                     alert: true,
-                    message: res.data.message,
+                    message: "S",
                     severity: 'success'
                 })
 
-                this.clearFields();
+                clearFields();
                 // this.loadData();
             } else {
-                this.setState({
+                setStatus({
                     alert: true,
-                    message: res.response.data.message,
+                    message:"E",
                     severity: 'error'
                 });
             }
         } else {
-            let res = await CustomerService.putCustomer(formData);//customer service --> putCustomer()
+            let res = await AdminService.putCar(formValues);//customer service --> putCustomer()
             if (res.status === 200) {
-                this.setState({
+                setStatus({
                     alert: true,
-                    message: res.data.message,
+                    message:"s",
                     severity: 'success',
-                    btnLabel: 'save',
-                    btnColor: 'primary'
+
                 });
-                this.clearFields();
-                this.loadData();
+                setBtnLabel("AddCar");
+                setBtnColor('primary')
+                clearFields();
+                // this.loadData();
             } else {
-                this.setState({
+               setStatus({
                     alert: true,
-                    message: res.response.data.message,
+                    message: "e",
                     severity: 'error'
                 });
             }
@@ -117,21 +117,22 @@ const ManageCar = ({}) => {
 
     return (
         <div>
-            <Typography sx={{marginLeft: 40, fontSize: 35, fontWeight: 'bold'}}>
-                Car
-            </Typography>
-
+            <Grid item lg={12} xs={12} sm={12} md={12}>
+                <Typography sx={{marginLeft: 40, fontSize: 35, fontWeight: 'bold'}}>
+                    Car
+                </Typography>
+            </Grid>
 
             <Box
-
                 component="form"
                 onSubmit={handleSubmit}
                 sx={{
-                    '& > :not(style)': {m: 1, width: '100vh'},
+                    '& > :not(style)': {},
                 }}
                 noValidate
                 autoComplete="off"
             >
+                {/*>*/}
                 {/*<Grid*/}
                 {/*    container*/}
                 {/*    spacing={0}*/}
@@ -142,11 +143,14 @@ const ManageCar = ({}) => {
                 {/*>*/}
 
 
-                <Grid container alignItems="center" justify="center" direction="row">
+                <Grid container alignItems="center" justify="center" direction="row" spacing={2}
+                      sx={{paddingLeft: 5}}
+                >
                     <Grid item>
                         <TextField id="outlined-basic" label="RegistrationNO" variant="outlined"
                                    helperText="Enter RegistrationNO" name="registrationNO"
-                                   onChange={handleInputChange} value={formValues.registrationNO}/>
+                                   onChange={handleInputChange} validators={['required']}
+                                   value={formValues.registrationNO}/>
                     </Grid>
                     <Grid item>
                         <TextField
@@ -284,18 +288,44 @@ const ManageCar = ({}) => {
                             value={formValues.priceForExtraKm}
                         />
                     </Grid>
+                    {/*<Grid item sx={{width:'500vh'}}>*/}
+                    {/*    <TextField*/}
+                    {/*        helperText="Enter RegistrationNO to Search Car"*/}
+                    {/*        id="demo-helper-text-aligned"*/}
+                    {/*        label="SearchByRegistrationNO"*/}
+                    {/*        name="searchRegistrationNO"*/}
+                    {/*        onChange={handleInputChange}*/}
+                    {/*        value={formValues.searchRegistrationNO}*/}
+                    {/*    />*/}
+                    {/*</Grid>*/}
                 </Grid>
-
+                <InputBase
+                    sx={{ ml: 10,mt:5, flex: 1 }}
+                    placeholder="Search Google Maps"
+                    inputProps={{ 'aria-label': 'search google maps' }}
+                    variant="standard"
+                />
+                <IconButton type="submit" sx={{ p: '10px' }} aria-label="search">
+                    <SearchIcon />
+                </IconButton>
                 <div>
                     <div>
-                        <Button label={btnLabel} color={btnColor} type="submit" variant="contained" color="primary"
-                                sx={{position: "absolute", top: 550, left: 25}}/>
+                        <Button  color={btnColor} size="medium" type="submit" variant="contained"
+                                 sx={{position: "absolute", top: 350, left: 350}}>
+                            {btnLabel}
+                        </Button>
 
 
                         <Button type="reset" variant="contained" color="success"
-                                sx={{position: "absolute", top: 550, left: 130}}>
+                                sx={{position: "absolute", top: 350, left: 450}}>
                             Reset
                         </Button>
+
+                        {/*<Button type="reset" variant="contained" color="success"*/}
+                        {/*        sx={{position: "absolute", top: 350, left: 130}}>*/}
+                        {/*    Reset*/}
+                        {/*</Button>*/}
+
                     </div>
 
 
@@ -303,11 +333,7 @@ const ManageCar = ({}) => {
                 </div>
 
             </Box>
-
-
         </div>
-
-
     )
 
 }

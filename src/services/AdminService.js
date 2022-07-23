@@ -2,10 +2,13 @@ import axios from "axios";
 
 class AdminService {
 
+    baseURL = "http://localhost:8080/backEnd/api/v1/";
+
     addCar = async (data) => {
         console.log("form data: " + data)
         const promise = new Promise((resolve, reject) => {
-            axios.post('admin/car', data)   //10s
+            axios.post(`${this.baseURL}admin/car`, data, {
+            })
                 .then((res) => {
                     return resolve(res)
                 })
@@ -17,10 +20,12 @@ class AdminService {
         return await promise
     }
 
-    putCustomer = async (data) => {
+    putCar = async (data) => {
         const promise = new Promise((resolve, reject) => {
-            axios.put('admin/car', data)
+            axios.put(`${this.baseURL}admin/car`, data, {
+            })
                 .then((res) => {
+
                     return resolve(res)
                 })
                 .catch((err) => {
