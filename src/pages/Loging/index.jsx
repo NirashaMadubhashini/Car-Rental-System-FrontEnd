@@ -1,51 +1,57 @@
-import React from 'react';
-import ride from '../../assets/img/car3.jpg';
-import MainPanel from "../Main";
-import {Box} from "@mui/material";
-import {styleSheet} from "./style";
-import withStyles from "@mui/styles/withStyles";
+import React from 'react'
+import TextField from "@mui/material/TextField";
+import Checkbox from "@mui/material/Checkbox";
+import { Grid,Paper, Avatar, Button, Typography,Link }  from "@mui/material";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import LockIcon from '@mui/icons-material/Lock';
+import Image from '../../assets/img/black3.jpg';
 
+const Login=()=>{
 
-const LogingSection = ({}) => {
+    const paperStyle={padding :20,height:'70vh',width:350, margin:"20px auto"}
+    const paperStyleContainer={padding :20,height:'80vh',width:680,
+        margin:"50px auto",backgroundImage: `url(${Image})`,
+        backgroundPosition: 'center',
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat'}
 
-    return (
-        <section className="about-section">
-            <MainPanel>
-                <Box>
-                    <img src={ride} className="img-fluid" alt="ride" width="1519"/>
-                    <div className="Auth-form-container">
-                        <form className="Auth-form">
-                            <div className="Auth-form-content">
-                                <h3 className="Auth-form-title">Sign In</h3>
-                                <div className="form-group mt-3">
-                                    <label>Email address</label>
-                                    <input
-                                        type="email"
-                                        className="form-control mt-1"
-                                        placeholder="Enter email"
-                                    />
-                                </div>
-                                <div className="form-group mt-3">
-                                    <label>Password</label>
-                                    <input
-                                        type="password"
-                                        className="form-control mt-1"
-                                        placeholder="Enter password"
-                                    />
-                                </div>
-                                <div className="d-grid gap-2 mt-3">
-                                    <button type="submit" className="btn btn-primary">
-                                        Submit
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </Box>
+    const avatarStyle={backgroundColor:'#1565C0'}
+    return(
+        <Grid>
+            <Paper elevation={10} style={paperStyleContainer}>
+                <Paper elevation={10} style={paperStyle}>
+                    <Grid align='center'>
+                        <Avatar style={avatarStyle}><LockIcon/></Avatar>
+                        <h2>Sign In</h2>
+                    </Grid>
+                    <TextField label='Username' placeholder='Enter username' fullWidth required sx={{mt:2}}/>
+                    <TextField label='Password' placeholder='Enter password' type='password' fullWidth required sx={{mt:2}}/>
+                    <Typography sx={{mt:1}}>
+                    <FormControlLabel
+                        control={
+                            <Checkbox
+                                name="checkedB"
+                                color="primary"
+                            />
+                        }
+                        label="Remember me"
 
-            </MainPanel>
-        </section>
-    );
+                    />
+                        <Link href="#" sx={{ml:5}}>
+                            Forgot password ?
+                        </Link>
+                    </Typography>
+                    <Button type='submit' color='primary' variant="contained" sx={{mt:3}} fullWidth >Sign in</Button>
+                    <Typography sx={{mt:2,ml:7}}> Do you have an account ?
+                        <Link href="" >
+                            Sign Up
+                        </Link>
+                    </Typography>
+                </Paper>
+            </Paper>
+
+        </Grid>
+    )
 }
 
-export default withStyles(styleSheet)(LogingSection)
+export default Login
