@@ -15,13 +15,13 @@ export default function Header() {
                     {/*<img src={logo} className={classes.logo} alt="ride"/>*/}
                     {/*</Avatar>*/}
 
-                    <Box
-                        component="img"
-                        sx={{
-                            width:50,
-                        }}
-                        src={Logo}
-                    />
+                    {/*<Box*/}
+                    {/*    component="img"*/}
+                    {/*    sx={{*/}
+                    {/*        width:50,*/}
+                    {/*    }}*/}
+                    {/*    src={Logo}*/}
+                    {/*/>*/}
                     <Typography variant="h5" component="div" sx={{flexGrow: 1, marginLeft: 70}}>
                         Easy Car Rental
                     </Typography>

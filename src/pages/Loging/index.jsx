@@ -1,5 +1,5 @@
 import React from 'react';
-import ride from '../../assets/img/car4.jpg';
+import ride from '../../assets/img/car3.jpg';
 import MainPanel from "../Main";
 import {Box} from "@mui/material";
 import {styleSheet} from "./style";

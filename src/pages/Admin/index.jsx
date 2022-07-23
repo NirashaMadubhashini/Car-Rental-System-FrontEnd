@@ -30,6 +30,7 @@ import ManageDriver from "./Driver";
 import ManageCar from "./Car";
 import ViewRentalRequest from "./ViewRentalRequest";
 import DailySummary from "./Summary";
+import AdminDashBoard from "./AdminDashBoard";
 
 
 
@@ -78,6 +79,7 @@ const DrawerHeader = styled('div')(({theme}) => ({
     // necessary for content to be below app bar
     ...theme.mixins.toolbar,
     justifyContent: 'flex-end',
+
 }));
 
 export default function AdminPanel () {
@@ -170,14 +172,11 @@ export default function AdminPanel () {
     }
 
 
-
-
-
     return (
         <MainPanel>
             <Box sx={{flexGrow: 1}}>
                 <CssBaseline/>
-                <AppBar position="static" open={open} sx={{backgroundColor: "darkblue", marginTop: -5}}>
+                <AppBar position="static" open={open} sx={{backgroundColor: "darkblue", marginTop: -6}}>
                     <Toolbar>
                         <IconButton
                             color="inherit"
@@ -244,7 +243,7 @@ export default function AdminPanel () {
                             isRequest ? <ViewRentalRequest/> :
                                 isIncome ? <Income/> :
                                     isSummary ? <DailySummary/> :
-                                        'Admin'
+                                        <AdminDashBoard/>
 
 
             }

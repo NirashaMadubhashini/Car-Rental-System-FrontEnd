@@ -15,6 +15,10 @@ const ManageCar = ({}) => {
         transmissionType: "",
         fuelType: "",
         color: "",
+        frontViewImg: "",
+        backViewImg: "",
+        sideViewImg: "",
+        internalViewImg: "",
         dailyRate: "",
         monthlyRate: "",
         freeKmForPrice: "",
@@ -60,6 +64,10 @@ const ManageCar = ({}) => {
             transmissionType: "",
             fuelType: "",
             color: "",
+            frontViewImg: "",
+            backViewImg: "",
+            sideViewImg: "",
+            internalViewImg: "",
             dailyRate: "",
             monthlyRate: "",
             freeKmForPrice: "",
@@ -217,27 +225,6 @@ const ManageCar = ({}) => {
                             value={formValues.color}
                         />
                     </Grid>
-                    {/*<Button component="label" variant="outlined" size="medium" startIcon={<PhotoCamera/>}*/}
-                    {/*        sx={{color: '#B1B1B1', fontSize: '50'}}>*/}
-                    {/*    Front_View_Img*/}
-                    {/*    <input hidden accept="image/*" multiple type="file"/>*/}
-                    {/*</Button>*/}
-
-                    {/*<Button component="label" variant="outlined" size="medium" startIcon={<PhotoCamera/>}*/}
-                    {/*        sx={{color: '#B1B1B1', fontSize: '50'}}>*/}
-                    {/*    Back_View_Img*/}
-                    {/*    <input hidden accept="image/*" multiple type="file"/>*/}
-                    {/*</Button>*/}
-                    {/*<Button component="label" variant="outlined" size="medium" startIcon={<PhotoCamera/>}*/}
-                    {/*        sx={{color: '#B1B1B1', fontSize: '50'}}>*/}
-                    {/*    Side_View_Img*/}
-                    {/*    <input hidden accept="image/*" multiple type="file"/>*/}
-                    {/*</Button>*/}
-                    {/*<Button component="label" variant="outlined" size="medium" startIcon={<PhotoCamera/>}*/}
-                    {/*        sx={{color: '#B1B1B1', fontSize: '50'}}>*/}
-                    {/*    Internal_View_Img*/}
-                    {/*    <input hidden accept="image/*" multiple type="file"/>*/}
-                    {/*</Button>*/}
                     <Grid item>
                         <TextField
                             helperText="Enter Daily_Rate"
@@ -288,20 +275,52 @@ const ManageCar = ({}) => {
                             value={formValues.priceForExtraKm}
                         />
                     </Grid>
-                    {/*<Grid item sx={{width:'500vh'}}>*/}
-                    {/*    <TextField*/}
-                    {/*        helperText="Enter RegistrationNO to Search Car"*/}
-                    {/*        id="demo-helper-text-aligned"*/}
-                    {/*        label="SearchByRegistrationNO"*/}
-                    {/*        name="searchRegistrationNO"*/}
-                    {/*        onChange={handleInputChange}*/}
-                    {/*        value={formValues.searchRegistrationNO}*/}
-                    {/*    />*/}
-                    {/*</Grid>*/}
+                    <Grid item>
+                        <TextField
+                            helperText="Upload Front_View_Img"
+                            id="demo-helper-text-aligned"
+                            label="Front_View_Img"
+                            name="frontViewImg"
+                            onChange={handleInputChange}
+                            value={formValues.frontViewImg}
+                        />
+                    </Grid>
+                    <Grid item>
+                        <TextField
+                            helperText="Upload Back_View_Img"
+                            id="demo-helper-text-aligned"
+                            label="Back_View_Img"
+                            name="backViewImg"
+                            onChange={handleInputChange}
+                            value={formValues.backViewImg}
+                        />
+                    </Grid>
+
+                    <Grid item>
+                        <TextField
+                            helperText="Upload Side_View_Img"
+                            id="demo-helper-text-aligned"
+                            label="Side_View_Img"
+                            name="sideViewImg"
+                            onChange={handleInputChange}
+                            value={formValues.sideViewImg}
+                        />
+                    </Grid>
+
+                    <Grid item>
+                        <TextField
+                            helperText="Upload  Internal_View_Img"
+                            id="demo-helper-text-aligned"
+                            label="Internal_View_Img"
+                            name="internalViewImg"
+                            onChange={handleInputChange}
+                            value={formValues.internalViewImg}
+                        />
+                    </Grid>
                 </Grid>
                 <InputBase
                     sx={{ ml: 10,mt:5, flex: 1 }}
-                    placeholder="Search Google Maps"
+                    placeholder="Search RegistrationNO"
                     inputProps={{ 'aria-label': 'search google maps' }}
                     variant="standard"
                 />
@@ -311,20 +330,16 @@ const ManageCar = ({}) => {
                 <div>
                     <div>
                         <Button  color={btnColor} size="medium" type="submit" variant="contained"
-                                 sx={{position: "absolute", top: 350, left: 350}}>
+                                 sx={{ml:5,mt:5}}>
                             {btnLabel}
                         </Button>
 
 
                         <Button type="reset" variant="contained" color="success"
-                                sx={{position: "absolute", top: 350, left: 450}}>
+                                sx={{ml:3,mt:5}}>
                             Reset
                         </Button>
 
-                        {/*<Button type="reset" variant="contained" color="success"*/}
-                        {/*        sx={{position: "absolute", top: 350, left: 130}}>*/}
-                        {/*    Reset*/}
-                        {/*</Button>*/}
 
                     </div>
 
