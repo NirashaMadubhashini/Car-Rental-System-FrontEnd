@@ -337,7 +337,7 @@ const ManageCar = ({}) => {
                     id="outlined-basic"
                     sx={{ml: 10, mt: 5, flex: 1}}
                     placeholder="Search RegistrationNO"
-                    inputProps={{'aria-label': 'search google maps'}}
+                    inputProps={{'aria-label': 'search RegistrationNO'}}
                     variant="standard"
                 />
                 <IconButton type="submit" sx={{p:'20px'}} aria-label="search">
