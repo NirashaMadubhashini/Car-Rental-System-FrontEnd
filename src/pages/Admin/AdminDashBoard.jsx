@@ -1,121 +1,52 @@
 import * as React from 'react';
-import {Box} from '@mui/system';
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import Typography from "@mui/material/Typography";
-import CardMedia from "@mui/material/CardMedia";
-import User from "../../assets/img/register.jfif"
-import Book from "../../assets/img/book.png"
-import Driver from "../../assets/img/driver.jpg"
-import Maintain from "../../assets/img/maintain.jpg"
+import AspectRatio from '@mui/joy/AspectRatio';
+import Avatar from '@mui/joy/Avatar';
+import Box from '@mui/joy/Box';
+import Card from '@mui/joy/Card';
+import IconButton from '@mui/joy/IconButton';
+import Typography from '@mui/joy/Typography';
+import Link from '@mui/joy/Link';
+import FavoriteBorderRoundedIcon from '@mui/icons-material/FavoriteBorderRounded';
+import {BookmarkAdd} from "@mui/icons-material";
+import Button from "@mui/material/Button";
+import Admin from "../../assets/img/admin.jpeg";
 
-
-const AdminDashBoard = ({}) => {
-
+export default function AdminDashBoard() {
     return (
-        <Typography>
-            <Card sx={{ display: 'flex',width:371,height:150,mt:15,ml:35,backgroundColor:'green' }}>
-                <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-                    <CardContent sx={{ flex: '1 0 auto' }}>
-                        <Typography component="div" variant="h5">
-                            Registered users
-                        </Typography>
-                        <Typography variant="subtitle1" color="text.secondary" component="div" sx={{fontWeight:'bold'}}>
-                            25
-                        </Typography>
-                    </CardContent>
+        <Card variant="outlined" sx={{ minWidth: '450px',mt:5,ml:25,mr:25 }}>
+            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 0.5 }}>
+                <Typography level="h2" fontSize="md" sx={{ alignSelf: 'flex-start',fontSize:40 }}>
+                    Admin DashBord
+                </Typography>
+            </Box>
+            <IconButton
+                aria-label="bookmark Bahamas Islands"
+                variant="plain"
+                color="neutral"
+                size="sm"
+                sx={{ position: 'absolute', top: '0.5rem', right: '0.5rem' }}
+            >
+                <BookmarkAdd />
+            </IconButton>
 
-                </Box>
-                <CardMedia
-                    component="img"
-                    sx={{ backgroundSize: 'cover',width:157}}
-                    image={User}
-                    alt="Live from space album cover"
+            <AspectRatio minHeight="120px" maxHeight="400px" sx={{ my: 2 }}>
+                <img
+                    src="https://miro.medium.com/max/1000/1*Z0sot6Wqp0pXxUsqRYlFnw.jpeg"
+                    alt=""
                 />
-            </Card>
-            <Card sx={{ display: 'flex',width:421,height:150,mt:-19,ml:110,backgroundColor:'#006AF0' }}>
-                <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-                    <CardContent sx={{ flex: '1 0 auto' }}>
-                        <Typography component="div" variant="h5">
-                            Bookings for the day
-                        </Typography>
-                        <Typography variant="subtitle1" color="text.secondary" component="div" sx={{fontWeight:'bold'}}>
-                            10
-                        </Typography>
+            </AspectRatio>
+            <Box sx={{ display: 'flex' }}>
 
-                        <Typography component="div" variant="h5">
-                            Active Bookings
-                        </Typography>
-                        <Typography variant="subtitle1" color="text.secondary" component="div" sx={{fontWeight:'bold'}}>
-                            5
-                        </Typography>
-                    </CardContent>
-
-                </Box>
-                <CardMedia
-                    component="img"
-                    sx={{width:170}}
-                    image={Book}
-                    alt="Live from space album cover"
-                />
-            </Card>
-            <Card sx={{ display: 'flex',width:387,height:150,mt:15,ml:34,backgroundColor:'#006AF0' }}>
-                <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-                    <CardContent sx={{ flex: '1 0 auto' }}>
-                        <Typography component="div" variant="h5">
-                            Available Drivers
-                        </Typography>
-                        <Typography variant="subtitle1" color="text.secondary" component="div" sx={{fontWeight:'bold'}}>
-                            40
-                        </Typography>
-
-                        <Typography component="div" variant="h5">
-                            Occupied Drivers
-                        </Typography>
-                        <Typography variant="subtitle1" color="text.secondary" component="div" sx={{fontWeight:'bold'}}>
-                            15
-                        </Typography>
-                    </CardContent>
-
-                </Box>
-                <CardMedia
-                    component="img"
-                    sx={{width: 170}}
-                    image={Driver}
-                    alt="Live from space album cover"
-                />
-            </Card>
-            <Card sx={{ display: 'flex',width:462,height:150,mt:-19,ml:110,backgroundColor:'green' }}>
-                <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-                    <CardContent sx={{ flex: '1 0 auto' }}>
-                        <Typography component="div" variant="h5">
-                          Cars need Maintenance
-                        </Typography>
-                        <Typography variant="subtitle1" color="text.secondary" component="div" sx={{fontWeight:'bold'}}>
-                            40
-                        </Typography>
-
-                        <Typography component="div" variant="h5">
-                          Cars under Maintenance
-                        </Typography>
-                        <Typography variant="subtitle1" color="text.secondary" component="div" sx={{fontWeight:'bold'}}>
-                            15
-                        </Typography>
-                    </CardContent>
-
-                </Box>
-                <CardMedia
-                    component="img"
-                    sx={{ width: 151,ml:2 }}
-                    image={Maintain}
-                    alt="Live from space album cover"
-                />
-            </Card>
-        </Typography>
-
+                <Button
+                    variant="solid"
+                    size="sm"
+                    color="primary"
+                    aria-label="Explore Bahamas Islands"
+                    sx={{ ml: 'auto', fontWeight: 600 }}
+                >
+                    Explore
+                </Button>
+            </Box>
+        </Card>
     );
-
 }
-
-export default AdminDashBoard
-
