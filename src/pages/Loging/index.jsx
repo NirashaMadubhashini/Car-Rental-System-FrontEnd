@@ -4,14 +4,14 @@ import Checkbox from "@mui/material/Checkbox";
 import { Grid,Paper, Avatar, Button, Typography,Link }  from "@mui/material";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import LockIcon from '@mui/icons-material/Lock';
-import Image from '../../assets/img/black3.jpg';
+import Image from '../../assets/img/black4.jpg';
 
 
 const Login=()=>{
 
-    const paperStyle={padding :20,height:'70vh',width:350, margin:"20px auto"}
-    const paperStyleContainer={padding :20,height:'80vh',width:680,
-        margin:"50px auto",backgroundImage: `url(${Image})`,
+    const paperStyle={padding :20,height:'80vh',width:350,marginLeft:700,marginTop:-19}
+    const paperStyleContainer={padding :20,height:'80vh',width:680,marginTop:50,marginLeft:200 ,
+        backgroundImage: `url(${Image})`,
         backgroundPosition: 'center',
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat'}

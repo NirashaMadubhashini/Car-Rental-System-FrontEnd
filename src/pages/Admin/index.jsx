@@ -31,6 +31,7 @@ import ManageCar from "./Car";
 import ViewRentalRequest from "./ViewRentalRequest";
 import DailySummary from "./Summary";
 import AdminDashBoard from "./AdminDashBoard";
+import MultipleInteractionCard from "./AdminDashBoard";
 
 
 
@@ -244,6 +245,7 @@ export default function AdminPanel () {
                                 isIncome ? <Income/> :
                                     isSummary ? <DailySummary/> :
                                         <AdminDashBoard/>
+
 
 
             }

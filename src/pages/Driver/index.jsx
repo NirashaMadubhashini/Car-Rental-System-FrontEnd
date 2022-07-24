@@ -21,6 +21,7 @@ import MainPanel from "../Main";
 import EventNoteIcon from '@mui/icons-material/EventNote';
 import InfoIcon from '@mui/icons-material/Info';
 import Shedule from "./Shedule";
+import DriverDashboard from "./DriverDashboard";
 
 
 const drawerWidth = 240;
@@ -162,7 +163,7 @@ export default function DriverPanel() {
             </Box>
             {
                 isShedule ? <Shedule/> :
-                    'Driver'
+                    <DriverDashboard/>
             }
         </MainPanel>
     );
