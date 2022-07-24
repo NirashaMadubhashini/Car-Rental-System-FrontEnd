@@ -3,8 +3,7 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Tables from "../../component/common/Table/table";
 import Typography from "@mui/material/Typography";
-
-
+import Divider from "@mui/material/Divider";
 
 
 const ManageCustomer = ({}) => {
@@ -12,8 +11,8 @@ const ManageCustomer = ({}) => {
     return (
 
         <div>
-            <Typography sx={{marginLeft: 40, fontSize: 35, fontWeight: 'bold', top: 100}}>
-                Customer
+            <Typography sx={{marginLeft: 40, fontSize: 35, fontWeight: 'bold', top: 100, fontFamily: 'system-ui'}}>
+                Manage Customer
             </Typography>
 
             <Box sx={{bgcolor: 'white', height: '100vh', flexGrow: 1}}>

@@ -314,7 +314,7 @@ export default function Tables() {
                 <EnhancedTableToolbar numSelected={selected.length}/>
                 <TableContainer>
                     <Table
-                        sx={{minWidth: 750, marginTop: 15}}
+                        sx={{minWidth: 750, marginTop: 5}}
                         aria-labelledby="tableTitle"
                         size={dense ? 'small' : 'medium'}
                     >

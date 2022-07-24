@@ -5,6 +5,7 @@ import {Box, Button, Grid, IconButton, Typography} from "@mui/material";
 import AdminService from "../../services/AdminService";
 import SearchIcon from '@mui/icons-material/Search';
 import InputBase from '@mui/material/InputBase';
+import Divider from "@mui/material/Divider";
 
 const ManageCar = ({}) => {
     const initialValues = {
@@ -138,11 +139,11 @@ const ManageCar = ({}) => {
     return (
         <div>
             <Grid item lg={12} xs={12} sm={12} md={12}>
-                <Typography sx={{marginLeft: 40, fontSize: 35, fontWeight: 'bold'}}>
-                    Car
+                <Typography sx={{marginLeft: 40, fontSize: 35, fontWeight: 'bold',fontFamily:'system-ui'}}>
+                    Manage Car
                 </Typography>
             </Grid>
-
+            <Divider/>
             <Box
                 component="form"
                 onSubmit={handleSubmit}
@@ -164,7 +165,7 @@ const ManageCar = ({}) => {
 
 
                 <Grid container alignItems="center" justify="center" direction="row" spacing={2}
-                      sx={{paddingLeft: 5}}
+                      sx={{paddingLeft: 5,mt:5}}
                 >
                     <Grid item>
                         <TextField id="outlined-basic" label="RegistrationNO" variant="outlined"
@@ -336,26 +337,27 @@ const ManageCar = ({}) => {
                     inputProps={{'aria-label': 'search google maps'}}
                     variant="standard"
                 />
-                <IconButton type="submit" sx={{p: '10px'}} aria-label="search">
+                <IconButton type="submit" sx={{p:'20px'}} aria-label="search">
                     <SearchIcon/>
                 </IconButton>
                 <div>
                     <div>
+                        <Button color="secondary" size="medium" type="submit" variant="contained"
+                                sx={{ml: 45, mt: -13}}>
+                            Search
+                        </Button>
+
                         <Button color={btnColor} size="medium" type="submit" variant="contained"
-                                sx={{ml: 5, mt: 5}}>
+                                sx={{ml:3, mt: -13}}>
                             {btnLabel}
                         </Button>
 
 
                         <Button type="reset" variant="contained" color="success"
-                                sx={{ml: 3, mt: 5}}>
+                                sx={{ml: 3, mt: -13}}>
                             Reset
                         </Button>
-
-
                     </div>
-
-
                     <Tables/>
                 </div>
 
