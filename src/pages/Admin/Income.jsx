@@ -116,7 +116,7 @@ const Income = ({}) => {
     return (
         <div>
             <Grid item lg={12} xs={12} sm={12} md={12}>
-                <RubberBtn name="Income"/>
+                <RubberBtn name="Income Details"/>
             </Grid>
             <Box sx={{width: 250, ml: 25, mt: 15}}>
                 <Card variant="outlined">{card}</Card>
