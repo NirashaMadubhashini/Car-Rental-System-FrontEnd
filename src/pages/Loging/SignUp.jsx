@@ -1,6 +1,6 @@
 import React from 'react'
 import TextField from "@mui/material/TextField";
-import {Avatar, Button, Grid, Paper} from "@mui/material";
+import {Avatar, Button, Grid, Link, Paper, Typography} from "@mui/material";
 import LockOpenIcon from '@mui/icons-material/LockOpen';
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
@@ -108,8 +108,12 @@ const SignUp = () => {
                 </Grid>
 
                 <Button type='submit' color='primary' variant="contained" sx={{mt: 3, ml: 20}}>Create Account</Button>
+                <Typography sx={{mt:3,ml:20}}> Previous Page ?
+                    <Link href="/" >
+                        Sign In
+                    </Link>
+                </Typography>
             </Paper>
-
         </Grid>
     )
 }
