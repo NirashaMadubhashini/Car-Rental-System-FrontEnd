@@ -452,7 +452,7 @@ export default function Tables() {
                                             <TableCell component="th"
                                                        id={labelId}
                                                        scope="row"
-                                                       padding="none">{row.update}
+                                                       padding="none">{row.delete}
                                                 <DeleteIcon/>
                                             </TableCell>
 

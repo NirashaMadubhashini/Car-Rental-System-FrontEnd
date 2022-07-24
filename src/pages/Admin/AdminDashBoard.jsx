@@ -14,7 +14,7 @@ const AdminDashBoard = ({}) => {
 
     return (
         <Typography>
-            <Card sx={{ display: 'flex',width:366,height:150,mt:15,ml:35,backgroundColor:'#0E4380' }}>
+            <Card sx={{ display: 'flex',width:371,height:150,mt:15,ml:35,backgroundColor:'green' }}>
                 <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                     <CardContent sx={{ flex: '1 0 auto' }}>
                         <Typography component="div" variant="h5">
@@ -28,12 +28,12 @@ const AdminDashBoard = ({}) => {
                 </Box>
                 <CardMedia
                     component="img"
-                    sx={{ width: 151 }}
+                    sx={{ backgroundSize: 'cover',width:157}}
                     image={User}
                     alt="Live from space album cover"
                 />
             </Card>
-            <Card sx={{ display: 'flex',width:445,height:150,mt:-19,ml:110,backgroundColor:'#006AF0' }}>
+            <Card sx={{ display: 'flex',width:421,height:150,mt:-19,ml:110,backgroundColor:'#006AF0' }}>
                 <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                     <CardContent sx={{ flex: '1 0 auto' }}>
                         <Typography component="div" variant="h5">
@@ -54,12 +54,12 @@ const AdminDashBoard = ({}) => {
                 </Box>
                 <CardMedia
                     component="img"
-                    sx={{ width: 151,ml:5 }}
+                    sx={{width:170}}
                     image={Book}
                     alt="Live from space album cover"
                 />
             </Card>
-            <Card sx={{ display: 'flex',width:415,height:150,mt:15,ml:33 }}>
+            <Card sx={{ display: 'flex',width:387,height:150,mt:15,ml:34,backgroundColor:'#006AF0' }}>
                 <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                     <CardContent sx={{ flex: '1 0 auto' }}>
                         <Typography component="div" variant="h5">
@@ -80,12 +80,12 @@ const AdminDashBoard = ({}) => {
                 </Box>
                 <CardMedia
                     component="img"
-                    sx={{ width: 151,ml:5 }}
+                    sx={{width: 170}}
                     image={Driver}
                     alt="Live from space album cover"
                 />
             </Card>
-            <Card sx={{ display: 'flex',width:465,height:150,mt:-19,ml:110 }}>
+            <Card sx={{ display: 'flex',width:462,height:150,mt:-19,ml:110,backgroundColor:'green' }}>
                 <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                     <CardContent sx={{ flex: '1 0 auto' }}>
                         <Typography component="div" variant="h5">
