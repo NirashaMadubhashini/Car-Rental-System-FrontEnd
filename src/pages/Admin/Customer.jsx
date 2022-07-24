@@ -8,17 +8,244 @@ import {Grid, IconButton} from "@mui/material";
 import TextField from "@mui/material/TextField";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
+import RubberBtn from "../../component/common/RubberBandBtn";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import TableCell from "@mui/material/TableCell";
+import TableSortLabel from "@mui/material/TableSortLabel";
+import {visuallyHidden} from "@mui/utils";
+import PropTypes from "prop-types";
+import Paper from "@mui/material/Paper";
+import TableContainer from "@mui/material/TableContainer";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import CreateIcon from "@mui/icons-material/Create";
+import DeleteIcon from "@mui/icons-material/Delete";
+import ConstructionIcon from "@mui/icons-material/Construction";
+import TablePagination from "@mui/material/TablePagination";
+
+
+
+function createData(email,newPassword,nicNumber, nicPhoto, drivingLicenseNumber,drivingLicensePhoto,address,contactNumber,update,deleted) {
+    return {
+        email,
+        newPassword,
+        nicNumber,
+        nicPhoto,
+        drivingLicenseNumber,
+        drivingLicensePhoto,
+        address,
+        contactNumber,
+        update,
+        deleted
+    };
+}
+
+const rows = [
+    createData('nirasha@gmail.com', "nirasha", "1234567", "", "ABC123","","Galle","01234567"),
+    createData('geeth@gmail.com', "geeth", "7654321", "", "ABC456","","Kalegana","02345678"),
+    createData('hansi@gmail.com', "hansi", "6543218", "", "ABC789","","Matara","03456789"),
+    createData('chamodi@gmail.com', "chamodi", "5432198", "", "DEF123","","RichmondHill","04567891"),
+    createData('milasha@gmail.com', "milasha", "4321765", "", "DEF456","","Mirissa","05678912"),
+
+];
+
+function descendingComparator(a, b, orderBy) {
+    if (b[orderBy] < a[orderBy]) {
+        return -1;
+    }
+    if (b[orderBy] > a[orderBy]) {
+        return 1;
+    }
+    return 0;
+}
+
+function getComparator(order, orderBy) {
+    return order === 'desc'
+        ? (a, b) => descendingComparator(a, b, orderBy)
+        : (a, b) => -descendingComparator(a, b, orderBy);
+}
+
+
+function stableSort(array, comparator) {
+    const stabilizedThis = array.map((el, index) => [el, index]);
+    stabilizedThis.sort((a, b) => {
+        const order = comparator(a[0], b[0]);
+        if (order !== 0) {
+            return order;
+        }
+        return a[1] - b[1];
+    });
+    return stabilizedThis.map((el) => el[0]);
+}
+
+const headCells = [
+    {
+        id: 'email',
+        numeric: false,
+        disablePadding: true,
+        label: 'Email',
+    },
+    {
+        id: 'newPassword',
+        numeric: false,
+        disablePadding: true,
+        label: 'New Password',
+    },
+    {
+        id: 'nicNumber',
+        numeric: false,
+        disablePadding: true,
+        label: 'NIC Number',
+    },
+    {
+        id: 'nicPhoto',
+        numeric: false,
+        disablePadding: true,
+        label: 'NIC Photos',
+    },
+    {
+        id: 'drivingLicenseNumber',
+        numeric: false,
+        disablePadding: true,
+        label: 'Driving License Number',
+    },
+    {
+        id: 'drivingLicensePhoto',
+        numeric: false,
+        disablePadding: true,
+        label: 'Driving License Photo',
+    },
+    {
+        id: 'address',
+        numeric: false,
+        disablePadding: true,
+        label: 'Address',
+    },
+    {
+        id: 'contactNumber',
+        numeric: false,
+        disablePadding: true,
+        label: 'Contact Number',
+    },
+    {
+        id: 'update',
+        numeric: false,
+        disablePadding: true,
+        label: 'Update',
+    },
+    {
+        id: 'deleted',
+        numeric: false,
+        disablePadding: true,
+        label: 'Delete',
+    },
+];
+
+function EnhancedTableHead(props) {
+    const {onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort} =
+        props;
+    const createSortHandler = (property) => (event) => {
+        onRequestSort(event, property);
+    };
+    return (
+        <TableHead>
+            <TableRow>
+                <TableCell padding="checkbox">
+
+                </TableCell>
+                {headCells.map((headCell) => (
+                    <TableCell
+                        key={headCell.id}
+                        align={headCell.numeric ? 'right' : 'left'}
+                        padding={headCell.disablePadding ? 'none' : 'normal'}
+                        sortDirection={orderBy === headCell.id ? order : false}
+                    >
+                        <TableSortLabel
+                            active={orderBy === headCell.id}
+                            direction={orderBy === headCell.id ? order : 'asc'}
+                            onClick={createSortHandler(headCell.id)}
+                        >
+                            {headCell.label}
+                            {orderBy === headCell.id ? (
+                                <Box component="span" sx={visuallyHidden}>
+                                    {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
+                                </Box>
+                            ) : null}
+                        </TableSortLabel>
+                    </TableCell>
+                ))}
+            </TableRow>
+        </TableHead>
+    );
+}
+
+EnhancedTableHead.propTypes = {
+    numSelected: PropTypes.number.isRequired,
+    onRequestSort: PropTypes.func.isRequired,
+    onSelectAllClick: PropTypes.func.isRequired,
+    order: PropTypes.oneOf(['asc', 'desc']).isRequired,
+    orderBy: PropTypes.string.isRequired,
+    rowCount: PropTypes.number.isRequired,
+};
+
+const EnhancedTableToolbar = (props) => {
+    const {numSelected} = props;
+
+};
+
+EnhancedTableToolbar.propTypes = {
+    numSelected: PropTypes.number.isRequired,
+};
+
 
 
 const ManageCustomer = ({}) => {
+
+    const [order, setOrder] = React.useState('asc');
+    const [orderBy, setOrderBy] = React.useState('calories');
+    const [selected, setSelected] = React.useState([]);
+    const [page, setPage] = React.useState(0);
+    const [dense, setDense] = React.useState(false);
+    const [rowsPerPage, setRowsPerPage] = React.useState(5);
+
+    const handleRequestSort = (event, property) => {
+        const isAsc = orderBy === property && order === 'asc';
+        setOrder(isAsc ? 'desc' : 'asc');
+        setOrderBy(property);
+    };
+
+    const handleSelectAllClick = (event) => {
+        if (event.target.checked) {
+            const newSelecteds = rows.map((n) => n.name);
+            setSelected(newSelecteds);
+            return;
+        }
+        setSelected([]);
+    };
+
+
+    const handleChangePage = (event, newPage) => {
+        setPage(newPage);
+    };
+
+    const handleChangeRowsPerPage = (event) => {
+        setRowsPerPage(parseInt(event.target.value, 10));
+        setPage(0);
+    };
+
+
+    const isSelected = (name) => selected.indexOf(name) !== -1;
+
+
+    const emptyRows =
+        page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
     return (
 
         <div>
             <Grid item lg={12} xs={12} sm={12} md={12}>
-                <Typography sx={{marginLeft: 40, fontSize: 35, fontWeight: 'bold',fontFamily:'system-ui'}}>
-                    Manage Customer
-                </Typography>
+                <RubberBtn name="Manage Customer"/>
             </Grid>
             <Divider/>
 
@@ -30,16 +257,6 @@ const ManageCustomer = ({}) => {
                 noValidate
                 autoComplete="off"
             >
-                {/*>*/}
-                {/*<Grid*/}
-                {/*    container*/}
-                {/*    spacing={0}*/}
-                {/*    direction="column"*/}
-                {/*    alignItems="center"*/}
-                {/*    justify="center"*/}
-                {/*    style={{minHeight: "100vh"}}*/}
-                {/*>*/}
-
 
                 <Grid container alignItems="center" justify="center" direction="row" spacing={2}
                       sx={{paddingLeft: 5,mt:5}}
@@ -51,150 +268,72 @@ const ManageCustomer = ({}) => {
                     </Grid>
                     <Grid item>
                         <TextField
-                            helperText="Enter Brand"
+                            helperText="Enter New Password"
                             variant="outlined"
                             id="outlined-basic"
-                            label="Brand"
-                            name="brand"
+                            label="New Password"
+                            name="newPassword"
 
                         />
                     </Grid>
                     <Grid item>
                         <TextField
-                            helperText="Enter Type"
+                            helperText="Enter NIC Number"
                             id="outlined-basic"
-                            label="Type"
-                            name="type"
+                            label="NIC Number"
+                            name="nicNumber"
 
                         />
                     </Grid>
                     <Grid item>
                         <TextField
-                            id="outlined-number"
-                            label="Number"
-                            type="number"
-                            InputLabelProps={{
-                                shrink: true,
-                            }}
-                            helperText="Enter No_Of_Passengers"
-                            name="noOfPassengers"
-
-                        />
-                    </Grid>
-                    <Grid item>
-                        <TextField
-                            helperText="Enter Transmission_Type"
+                            helperText="Upload NIC Photo"
                             id="demo-helper-text-aligned"
-                            label="Transmission_Type"
-                            name="transmissionType"
+                                label="NIC Photo"
+                            name="nicPhoto"
 
                         />
                     </Grid>
                     <Grid item>
                         <TextField
-                            helperText="Enter Fuel_Type"
+                            helperText="Enter Driving License number"
                             id="demo-helper-text-aligned"
-                            label="Fuel_Type"
-                            name="fuelType"
+                            label="Driving License number"
+                            name="drivingLicenseNumber"
 
                         />
                     </Grid>
                     <Grid item>
                         <TextField
-                            helperText="Enter Color"
+                            helperText="Upload Driving License Photo"
                             id="demo-helper-text-aligned"
-                            label="Color"
-                            name="color"
+                            label="Driving License Photo"
+                            name="drivingLicensePhoto"
+                        />
+                    </Grid>
+                    <Grid item>
+                        <TextField
+                            helperText="Enter Address"
+                            id="demo-helper-text-aligned"
+                            label="Address"
+                            name="address"
 
                         />
                     </Grid>
                     <Grid item>
                         <TextField
-                            helperText="Enter Daily_Rate"
+                            helperText="Enter Contact Number"
                             id="demo-helper-text-aligned"
-                            label="Daily_Rate"
-                            name="dailyRate"
-
-                        />
-                    </Grid>
-                    <Grid item>
-                        <TextField
-                            helperText="Enter Monthly_Rate"
-                            id="demo-helper-text-aligned"
-                            label="Monthly_Rate"
-                            name="monthlyRate"
-
-                        />
-                    </Grid>
-                    <Grid item>
-                        <TextField
-                            helperText="Enter Free_Km_For_Price"
-                            id="demo-helper-text-aligned"
-                            label="Free_Km_For_Price"
-                            name="freeKmForPrice"
-
-                        />
-                    </Grid>
-                    <Grid item>
-                        <TextField
-                            helperText="Enter Free_Km_For_Price"
-                            id="demo-helper-text-aligned"
-                            label="Free_Km_For_Duration"
-                            name="freeKmForDuration"
-
-                        />
-                    </Grid>
-                    <Grid item>
-                        <TextField
-                            helperText="Enter Price_For_Extra_Km"
-                            id="demo-helper-text-aligned"
-                            label="Price_For_Extra_Km"
-                            name="priceForExtraKm"
-
-                        />
-                    </Grid>
-                    <Grid item>
-                        <TextField
-                            helperText="Upload Front_View_Img"
-                            id="demo-helper-text-aligned"
-                            label="Front_View_Img"
-                            name="frontViewImg"
-
-                        />
-                    </Grid>
-                    <Grid item>
-                        <TextField
-                            helperText="Upload Back_View_Img"
-                            id="demo-helper-text-aligned"
-                            label="Back_View_Img"
-                            name="backViewImg"
-                        />
-                    </Grid>
-
-                    <Grid item>
-                        <TextField
-                            helperText="Upload Side_View_Img"
-                            id="demo-helper-text-aligned"
-                            label="Side_View_Img"
-                            name="sideViewImg"
-
-                        />
-                    </Grid>
-
-                    <Grid item>
-                        <TextField
-                            helperText="Upload  Internal_View_Img"
-                            id="demo-helper-text-aligned"
-                            label="Internal_View_Img"
-                            name="internalViewImg"
+                            label="Contact Number"
+                            name="contactNumber"
 
                         />
                     </Grid>
                 </Grid>
                 <InputBase
                     sx={{ml: 10, mt: 5, flex: 1}}
-                    placeholder="Search RegistrationNO"
-                    inputProps={{'aria-label': 'search google maps'}}
+                    placeholder="Search NIC Number"
+                    inputProps={{'aria-label': 'search NIC Number'}}
                     variant="standard"
                 />
                 <IconButton type="submit" sx={{p:'20px'}} aria-label="search">
@@ -212,9 +351,137 @@ const ManageCustomer = ({}) => {
                             Reset
                         </Button>
                     </div>
-                    <Tables/>
-                </div>
 
+                    <Box sx={{width: '100%'}}>
+                        <Paper sx={{width: '100%', mb: 2}}>
+                            <EnhancedTableToolbar numSelected={selected.length}/>
+                            <TableContainer>
+                                <Table
+                                    sx={{minWidth: 750, marginTop: 5}}
+                                    aria-labelledby="tableTitle"
+                                    size={dense ? 'small' : 'medium'}
+                                >
+                                    <EnhancedTableHead
+                                        numSelected={selected.length}
+                                        order={order}
+                                        orderBy={orderBy}
+                                        onSelectAllClick={handleSelectAllClick}
+                                        onRequestSort={handleRequestSort}
+                                        rowCount={rows.length}
+                                    />
+                                    <TableBody>
+                                        {stableSort(rows, getComparator(order, orderBy))
+                                            .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                                            .map((row, index) => {
+                                                const isItemSelected = isSelected(row.email);
+                                                const labelId = `enhanced-table-checkbox-${index}`;
+
+                                                return (
+                                                    <TableRow
+                                                        hover
+                                                        aria-checked={isItemSelected}
+                                                        tabIndex={-1}
+                                                        key={row.email}
+                                                        selected={isItemSelected}
+                                                    >
+                                                        <TableCell>
+                                                        </TableCell>
+                                                        <TableCell
+                                                            component="th"
+                                                            id={labelId}
+                                                            scope="row"
+                                                            padding="none"
+                                                        >
+                                                            {row.email}
+                                                        </TableCell>
+                                                        <TableCell component="th"
+                                                                   id={labelId}
+                                                                   scope="row"
+                                                                   padding="none">{row.newPassword}
+                                                        </TableCell>
+                                                        <TableCell component="th"
+                                                                   id={labelId}
+                                                                   scope="row"
+                                                                   padding="none">{row.nicNumber}
+                                                        </TableCell>
+                                                        <TableCell component="th"
+                                                                   id={labelId}
+                                                                   scope="row"
+                                                                   padding="none">{row.nicPhoto}
+                                                        </TableCell>
+                                                        <TableCell component="th"
+                                                                   id={labelId}
+                                                                   scope="row"
+                                                                   padding="none">{row.drivingLicenseNumber}
+                                                        </TableCell>
+                                                        <TableCell component="th"
+                                                                   id={labelId}
+                                                                   scope="row"
+                                                                   padding="none">{row.drivingLicensePhoto}
+                                                        </TableCell>
+                                                        <TableCell component="th"
+                                                                   id={labelId}
+                                                                   scope="row"
+                                                                   padding="none">{row.address}
+                                                        </TableCell>
+                                                        <TableCell component="th"
+                                                                   id={labelId}
+                                                                   scope="row"
+                                                                   padding="none">{row.contactNumber}
+                                                        </TableCell>
+
+                                                        <TableCell component="th"
+                                                                   id={labelId}
+                                                                   scope="row"
+                                                                   padding="none">{row.update}
+                                                            <CreateIcon/>
+                                                        </TableCell>
+                                                        <TableCell component="th"
+                                                                   id={labelId}
+                                                                   scope="row"
+                                                                   padding="none">{row.delete}
+                                                            <DeleteIcon/>
+                                                        </TableCell>
+                                                    </TableRow>
+                                                );
+                                            })}
+                                        {emptyRows > 0 && (
+                                            <TableRow
+                                                style={{
+                                                    height: (dense ? 33 : 53) * emptyRows,
+                                                }}
+                                            >
+                                                <TableCell colSpan={6}/>
+                                            </TableRow>
+                                        )}
+                                    </TableBody>
+                                </Table>
+                            </TableContainer>
+                            <TablePagination
+                                rowsPerPageOptions={[5, 10, 25]}
+                                component="div"
+                                count={rows.length}
+                                rowsPerPage={rowsPerPage}
+                                page={page}
+                                onPageChange={handleChangePage}
+                                onRowsPerPageChange={handleChangeRowsPerPage}
+                            />
+                        </Paper>
+                    </Box>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                </div>
             </Box>
         </div>
     )
