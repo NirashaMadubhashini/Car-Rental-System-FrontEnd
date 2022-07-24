@@ -6,6 +6,7 @@ import AdminService from "../../services/AdminService";
 import SearchIcon from '@mui/icons-material/Search';
 import InputBase from '@mui/material/InputBase';
 import Divider from "@mui/material/Divider";
+import RubberBtn from "../../component/common/RubberBandBtn";
 
 const ManageCar = ({}) => {
     const initialValues = {
@@ -139,9 +140,10 @@ const ManageCar = ({}) => {
     return (
         <div>
             <Grid item lg={12} xs={12} sm={12} md={12}>
-                <Typography sx={{marginLeft: 40, fontSize: 35, fontWeight: 'bold',fontFamily:'system-ui'}}>
-                    Manage Car
-                </Typography>
+                {/*<Typography sx={{marginLeft: 40, fontSize: 35, fontWeight: 'bold',fontFamily:'system-ui'}}>*/}
+                {/*    Manage Car*/}
+                {/*</Typography>*/}
+                <RubberBtn name="Manage Car"/>
             </Grid>
             <Divider/>
             <Box
@@ -332,6 +334,7 @@ const ManageCar = ({}) => {
                     </Grid>
                 </Grid>
                 <InputBase
+                    id="outlined-basic"
                     sx={{ml: 10, mt: 5, flex: 1}}
                     placeholder="Search RegistrationNO"
                     inputProps={{'aria-label': 'search google maps'}}

@@ -13,8 +13,9 @@ import Paper from '@mui/material/Paper';
 import {visuallyHidden} from '@mui/utils';
 import CreateIcon from '@mui/icons-material/Create';
 import DeleteIcon from '@mui/icons-material/Delete';
+import ConstructionIcon from '@mui/icons-material/Construction';
 
-function createData(registrationNO, brand, type, noOfPassengers, transmissionType,fuelType,color,frontViewImg,backViewImg,sideViewImg,internalViewImg,dailyRate,monthlyRate,freeKmForPrice,freeKmForDuration,lossDamageWaiver,priceForExtraKm,completeKm,isAvailable,update,deleted) {
+function createData(registrationNO, brand, type, noOfPassengers, transmissionType,fuelType,color,frontViewImg,backViewImg,sideViewImg,internalViewImg,dailyRate,monthlyRate,freeKmForPrice,freeKmForDuration,lossDamageWaiver,priceForExtraKm,completeKm,isAvailable,update,deleted,maintain) {
     return {
         registrationNO,
         brand,
@@ -36,7 +37,8 @@ function createData(registrationNO, brand, type, noOfPassengers, transmissionTyp
         completeKm,
         isAvailable,
         update,
-        deleted
+        deleted,
+        maintain
     };
 }
 
@@ -208,6 +210,12 @@ const headCells = [
         numeric: false,
         disablePadding: true,
         label: 'Delete',
+    },
+    {
+        id: 'maintain',
+        numeric: false,
+        disablePadding: true,
+        label: 'Maintain',
     },
 ];
 
@@ -446,6 +454,13 @@ export default function Tables() {
                                                        scope="row"
                                                        padding="none">{row.update}
                                                 <DeleteIcon/>
+                                            </TableCell>
+
+                                            <TableCell component="th"
+                                                       id={labelId}
+                                                       scope="row"
+                                                       padding="none">{row.maintain}
+                                                <ConstructionIcon/>
                                             </TableCell>
                                         </TableRow>
                                     );
