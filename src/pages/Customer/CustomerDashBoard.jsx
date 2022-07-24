@@ -1,117 +1,52 @@
 import * as React from 'react';
-import {styled} from '@mui/material/styles';
-import Card from '@mui/material/Card';
-import CardHeader from '@mui/material/CardHeader';
-import CardMedia from '@mui/material/CardMedia';
-import CardContent from '@mui/material/CardContent';
-import CardActions from '@mui/material/CardActions';
-import Avatar from '@mui/material/Avatar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import {red} from '@mui/material/colors';
-import Alto from '../../assets/img/alto.jpg';
-import Toyota from '../../assets/img/Toyota Corolla Axio.jpg';
-import I8 from '../../assets/img/bmw-i8.jpg';
+import AspectRatio from '@mui/joy/AspectRatio';
+import Avatar from '@mui/joy/Avatar';
+import Box from '@mui/joy/Box';
+import Card from '@mui/joy/Card';
+import IconButton from '@mui/joy/IconButton';
+import Typography from '@mui/joy/Typography';
+import Link from '@mui/joy/Link';
+import FavoriteBorderRoundedIcon from '@mui/icons-material/FavoriteBorderRounded';
+import {BookmarkAdd} from "@mui/icons-material";
+import Button from "@mui/material/Button";
+import Admin from "../../assets/img/admin.jpeg";
 
-const ExpandMore = styled((props) => {
-    const {expand, ...other} = props;
-    return <IconButton {...other} />;
-})(({theme, expand}) => ({
-    transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
-    marginLeft: 'auto',
-    transition: theme.transitions.create('transform', {
-        duration: theme.transitions.duration.shortest,
-    }),
-}));
-
-
-const CustomerDashBoard = ({}) => {
-    const [expanded, setExpanded] = React.useState(false);
-
-    const handleExpandClick = () => {
-        setExpanded(!expanded);
-    };
-
+export default function CustomerDashBoard() {
     return (
-        <Typography>
-            <Card sx={{maxWidth: 345, ml: 25, mt: 21,backgroundColor:'#0d47a1'}}>
-                <CardHeader
-                    avatar={
-                        <Avatar sx={{bgcolor: red[500]}} aria-label="recipe">
-                            GC
-                        </Avatar>
-                    }
-                    title="General Cars"
+        <Card variant="outlined" sx={{ minWidth: '450px',mt:5,ml:25,mr:25 }}>
+            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 0.5 }}>
+                <Typography level="h2" fontSize="md" sx={{ alignSelf: 'flex-start',fontSize:40 }}>
+                    CustomerDashBoard
+                </Typography>
+            </Box>
+            <IconButton
+                aria-label="bookmark Bahamas Islands"
+                variant="plain"
+                color="neutral"
+                size="sm"
+                sx={{ position: 'absolute', top: '0.5rem', right: '0.5rem' }}
+            >
+                <BookmarkAdd />
+            </IconButton>
+
+            <AspectRatio minHeight="120px" maxHeight="400px" sx={{ my: 2 }}>
+                <img
+                    src="https://wernerlawca.com/wp-content/uploads/2018/07/iStock-1007651674.jpg"
+                    alt=""
                 />
-                <CardMedia
-                    component="img"
-                    height="194"
-                    image={Alto}
-                    alt="Paella dish"
-                />
-                <CardContent>
-                    <Typography variant="body2" color="text.secondary">
+            </AspectRatio>
+            <Box sx={{ display: 'flex' }}>
 
-                    </Typography>
-                </CardContent>
-                <CardActions disableSpacing>
-                </CardActions>
-            </Card>
-
-            <Card sx={{maxWidth: 345, ml: 78, mt: -40,backgroundColor:'#0d47a1'}}>
-                <CardHeader
-                    avatar={
-                        <Avatar sx={{bgcolor: red[500]}} aria-label="recipe">
-                            PC
-                        </Avatar>
-                    }
-
-                    title="Premium Cars "
-
-                />
-                <CardMedia
-                    component="img"
-                    height="194"
-                    image={Toyota}
-                    alt="Paella dish"
-                />
-                <CardContent>
-                    <Typography variant="body2" color="text.secondary">
-
-                    </Typography>
-                </CardContent>
-                <CardActions disableSpacing>
-                </CardActions>
-            </Card>
-
-            <Card sx={{maxWidth: 345, ml: 130, mt: -39,backgroundColor:'#0d47a1'}}>
-                <CardHeader
-                    avatar={
-                        <Avatar sx={{bgcolor: red[500]}} aria-label="recipe">
-                            LC
-                        </Avatar>
-                    }
-
-                    title="Luxury Cars"
-
-                />
-                <CardMedia
-                    component="img"
-                    height="194"
-                    image={I8}
-                    alt="Paella dish"
-                />
-                <CardContent>
-                    <Typography variant="body2" color="text.secondary">
-
-                    </Typography>
-                </CardContent>
-                <CardActions disableSpacing>
-                </CardActions>
-            </Card>
-
-        </Typography>
+                <Button
+                    variant="solid"
+                    size="sm"
+                    color="primary"
+                    aria-label="Explore Bahamas Islands"
+                    sx={{ ml: 'auto', fontWeight: 600 }}
+                >
+                    Explore
+                </Button>
+            </Box>
+        </Card>
     );
 }
-
-export default CustomerDashBoard
