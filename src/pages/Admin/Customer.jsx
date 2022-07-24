@@ -26,7 +26,7 @@ import TablePagination from "@mui/material/TablePagination";
 
 
 
-function createData(email,newPassword,nicNumber, nicPhoto, drivingLicenseNumber,drivingLicensePhoto,address,contactNumber,update,deleted) {
+function createData(email,newPassword,nicNumber, nicPhoto, drivingLicenseNumber,drivingLicensePhoto,address,contactNumber,deleted) {
     return {
         email,
         newPassword,
@@ -36,7 +36,6 @@ function createData(email,newPassword,nicNumber, nicPhoto, drivingLicenseNumber,
         drivingLicensePhoto,
         address,
         contactNumber,
-        update,
         deleted
     };
 }
@@ -127,12 +126,6 @@ const headCells = [
         numeric: false,
         disablePadding: true,
         label: 'Contact Number',
-    },
-    {
-        id: 'update',
-        numeric: false,
-        disablePadding: true,
-        label: 'Update',
     },
     {
         id: 'deleted',
@@ -429,13 +422,6 @@ const ManageCustomer = ({}) => {
                                                                    scope="row"
                                                                    padding="none">{row.contactNumber}
                                                         </TableCell>
-
-                                                        <TableCell component="th"
-                                                                   id={labelId}
-                                                                   scope="row"
-                                                                   padding="none">{row.update}
-                                                            <CreateIcon/>
-                                                        </TableCell>
                                                         <TableCell component="th"
                                                                    id={labelId}
                                                                    scope="row"
@@ -468,18 +454,6 @@ const ManageCustomer = ({}) => {
                             />
                         </Paper>
                     </Box>
-
-
-
-
-
-
-
-
-
-
-
-
 
                 </div>
             </Box>
