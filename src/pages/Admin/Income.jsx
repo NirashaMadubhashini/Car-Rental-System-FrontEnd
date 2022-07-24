@@ -1,33 +1,140 @@
 import React from 'react'
-import Box from "@mui/material/Box";
-import Table from "@mui/material/Table";
-import Button from "@mui/material/Button";
-import Tables from "../../component/common/Table/table";
-import Typography from "@mui/material/Typography";
+import Box from '@mui/material/Box';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import {Grid} from "@mui/material";
+import RubberBtn from "../../component/common/RubberBandBtn";
+
+
+const bull = (
+    <Box
+        component="span"
+        sx={{display: 'row', mx: '2px', transform: 'scale(0.8)'}}
+    >
+        •
+    </Box>
+);
+
+const card = (
+    <React.Fragment>
+        <Box sx={{color:'green'}}>
+            <CardContent>
+                <Typography variant="h5" component="div">
+                    Daily Income
+                </Typography>
+                <Typography sx={{mb: 1.5}} color="text.secondary">
+                    $
+                </Typography>
+                <Typography variant="body2">
+                    Rupees:
+                    <br/>
+                    20,000
+                </Typography>
+            </CardContent>
+            <CardActions>
+                <Button size="small">More Details</Button>
+            </CardActions>
+        </Box>
+    </React.Fragment>
+);
+
+const card2 = (
+    <React.Fragment>
+        <Box sx={{color:'green'}}>
+            <CardContent>
+                <Typography variant="h5" component="div">
+                    Weekly Income
+                </Typography>
+                <Typography sx={{mb: 1.5}} color="text.secondary">
+                    $
+                </Typography>
+                <Typography variant="body2">
+                    Rupees:
+                    <br/>
+                    90,000
+                </Typography>
+            </CardContent>
+            <CardActions>
+                <Button size="small">More Details</Button>
+            </CardActions>
+        </Box>
+    </React.Fragment>
+);
+
+const card3 = (
+    <React.Fragment>
+        <Box sx={{color:'green'}}>
+            <CardContent>
+                <Typography variant="h5" component="div">
+                    Monthly Income
+                </Typography>
+                <Typography sx={{mb: 1.5}} color="text.secondary">
+                    $
+                </Typography>
+                <Typography variant="body2">
+                    Rupees:
+                    <br/>
+                    90,000
+                </Typography>
+            </CardContent>
+            <CardActions>
+                <Button size="small">More Details</Button>
+            </CardActions>
+        </Box>
+    </React.Fragment>
+);
+
+const card4 = (
+    <React.Fragment>
+        <Box sx={{color:'green'}}>
+            <CardContent>
+                <Typography variant="h5" component="div">
+                    Annual Income
+                </Typography>
+                <Typography sx={{mb: 1.5}} color="text.secondary">
+                    $
+                </Typography>
+                <Typography variant="body2">
+                    Rupees:
+                    <br/>
+                    150,000
+                </Typography>
+            </CardContent>
+            <CardActions>
+                <Button size="small">More Details</Button>
+            </CardActions>
+        </Box>
+    </React.Fragment>
+);
+
 
 const Income = ({}) => {
 
     return (
         <div>
-            <Typography sx={{marginLeft:40,fontSize:35,fontWeight:'bold'}}>
-               Income
-            </Typography>
-            <Box sx={{bgcolor: 'white', height: '100vh', flexGrow: 1}}>
-                <div>
-                    <div >
-                        <Button variant="contained" color="primary" sx={{position: "absolute", top: 180, left: 25}}>
-                            Add Car
-                        </Button>
-
-                        <Button variant="contained" color="success" sx={{position: "absolute", top: 180, left: 130}}>
-                            Add to Maintain
-                        </Button>
-                    </div>
-
-
-                    <Tables/>
-                </div>
+            <Grid item lg={12} xs={12} sm={12} md={12}>
+                <RubberBtn name="Income"/>
+            </Grid>
+            <Box sx={{width: 250, ml: 25, mt: 15}}>
+                <Card variant="outlined">{card}</Card>
             </Box>
+
+            <Box sx={{width: 250, ml: 65, mt: -23}}>
+                <Card variant="outlined">{card2}</Card>
+            </Box>
+
+            <Box sx={{width: 250, ml: 105, mt: -23}}>
+                <Card variant="outlined">{card3}</Card>
+            </Box>
+
+            <Box sx={{width: 250, ml: 145, mt: -23}}>
+                <Card variant="outlined">{card4}</Card>
+            </Box>
+
+
         </div>
     )
 
