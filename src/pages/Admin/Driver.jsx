@@ -234,21 +234,6 @@ const ManageDriver = ({}) => {
                       sx={{paddingLeft: 5, mt: 5}}
                 >
                     <Grid item>
-                        <TextField id="outlined-basic" label="Email" variant="outlined"
-                                   helperText="Enter Email" name="email"
-                        />
-                    </Grid>
-                    <Grid item>
-                        <TextField
-                            helperText="Enter New Password"
-                            variant="outlined"
-                            id="outlined-basic"
-                            label="New Password"
-                            name="newPassword"
-
-                        />
-                    </Grid>
-                    <Grid item>
                         <TextField
                             helperText="Enter NIC Number"
                             id="outlined-basic"
@@ -259,10 +244,10 @@ const ManageDriver = ({}) => {
                     </Grid>
                     <Grid item>
                         <TextField
-                            helperText="Upload NIC Photo"
+                            helperText="Enter Name"
                             id="demo-helper-text-aligned"
-                            label="NIC Photo"
-                            name="nicPhoto"
+                            label="Name"
+                            name="name"
 
                         />
                     </Grid>
@@ -273,14 +258,6 @@ const ManageDriver = ({}) => {
                             label="Driving License number"
                             name="drivingLicenseNumber"
 
-                        />
-                    </Grid>
-                    <Grid item>
-                        <TextField
-                            helperText="Upload Driving License Photo"
-                            id="demo-helper-text-aligned"
-                            label="Driving License Photo"
-                            name="drivingLicensePhoto"
                         />
                     </Grid>
                     <Grid item>
@@ -316,6 +293,11 @@ const ManageDriver = ({}) => {
                         <Button color="secondary" size="medium" type="submit" variant="contained"
                                 sx={{ml: 45, mt: -13}}>
                             Search
+                        </Button>
+
+                        <Button  size="medium" type="submit" variant="contained"
+                                sx={{ml:3, mt: -13}}>
+                            Add Driver
                         </Button>
 
                         <Button type="reset" variant="contained" color="success"
