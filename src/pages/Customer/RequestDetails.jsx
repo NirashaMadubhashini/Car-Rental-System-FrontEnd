@@ -24,7 +24,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import ConstructionIcon from "@mui/icons-material/Construction";
 import TablePagination from "@mui/material/TablePagination";
 import CheckIcon from '@mui/icons-material/Check';
-
+import IDFront from'../../assets/img/WhatsApp Image 2022-07-24 at 3.20.03 PM.jpeg';
 
 function createData(nicNumber, nicPhoto, drivingLicenseNumber,drivingLicensePhoto,status) {
     return {
@@ -271,6 +271,7 @@ const RequestDetails = ({}) => {
                                                                    id={labelId}
                                                                    scope="row"
                                                                    padding="none">{row.nicPhoto}
+
                                                         </TableCell>
                                                         <TableCell component="th"
                                                                    id={labelId}
