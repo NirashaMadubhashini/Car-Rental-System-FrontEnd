@@ -15,7 +15,6 @@ import Chip from "@mui/material/Chip";
 import Rating from "@mui/material/Rating";
 
 
-
 export default function AdminDashBoard() {
     const [value, setValue] = React.useState(new Date());
     const values = 3.5;
@@ -23,9 +22,16 @@ export default function AdminDashBoard() {
 
     return (
 
-        <Card variant="outlined" sx={{minWidth: '450px', mt: 5, ml: 25, mr: 25}}>
+        <Card variant="outlined" sx={{minWidth: '550px', mt: 5, ml: 25, mr: 25}}>
             <Box sx={{display: 'flex', flexDirection: 'column', gap: 0.5}}>
-                <Typography level="h2" fontSize="md" sx={{alignSelf: 'flex-start', fontSize: 40,mt:5,ml:5,fontFamily:'system-ui',fontWeight:'bold'}}>
+                <Typography level="h2" fontSize="md" sx={{
+                    alignSelf: 'flex-start',
+                    fontSize: 40,
+                    mt: 5,
+                    ml: 5,
+                    fontFamily: 'system-ui',
+                    fontWeight: 'bold'
+                }}>
                     Admin DashBord
                 </Typography>
             </Box>
@@ -54,7 +60,7 @@ export default function AdminDashBoard() {
 
             <Box
                 sx={{
-                    '& > legend': {mt: -30,ml:5},
+                    '& > legend': {mt: -30, ml: 5},
                 }}
             >
                 <Typography component="legend">Controlled</Typography>
@@ -64,10 +70,10 @@ export default function AdminDashBoard() {
                     onChange={(event, newValues) => {
                         setValue(newValues);
                     }}
-sx={{ml:5}}
+                    sx={{ml: 5}}
                 />
             </Box>
-            <Box sx={{mt: -20,ml:5}}>
+            <Box sx={{mt: -20, ml: 5}}>
                 <Typography gutterBottom variant="body1">
                     Frameworks Used
                 </Typography>
