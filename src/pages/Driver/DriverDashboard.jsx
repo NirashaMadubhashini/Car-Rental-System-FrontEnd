@@ -80,7 +80,7 @@ export default function DriverDashBoard() {
             </Box>
 
             <Box sx={{width: '100%', mt: 15}}>
-                <LinearProgress/>
+                <LinearProgress color="secondary" />
             </Box>
         </Card>
 

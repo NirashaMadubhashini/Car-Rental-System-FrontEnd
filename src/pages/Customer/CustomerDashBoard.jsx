@@ -80,7 +80,7 @@ export default function CustomerDashBoard() {
             </Box>
 
             <Box sx={{width: '100%', mt: 15}}>
-                <LinearProgress/>
+                <LinearProgress color="inherit"/>
             </Box>
         </Card>
 
