@@ -1,13 +1,7 @@
 import React from 'react'
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Tables from "../../component/common/Table/table";
-import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import {Grid, IconButton} from "@mui/material";
-import TextField from "@mui/material/TextField";
-import InputBase from "@mui/material/InputBase";
-import SearchIcon from "@mui/icons-material/Search";
 import RubberBtn from "../../component/common/RubberBandBtn";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
@@ -19,29 +13,25 @@ import Paper from "@mui/material/Paper";
 import TableContainer from "@mui/material/TableContainer";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
-import CreateIcon from "@mui/icons-material/Create";
-import DeleteIcon from "@mui/icons-material/Delete";
-import ConstructionIcon from "@mui/icons-material/Construction";
 import TablePagination from "@mui/material/TablePagination";
 import CheckIcon from '@mui/icons-material/Check';
-import IDFront from'../../assets/img/WhatsApp Image 2022-07-24 at 3.20.03 PM.jpeg';
 
-function createData(nicNumber, nicPhoto, drivingLicenseNumber,drivingLicensePhoto,status) {
+function createData(nicNumber, drivingLicenseNumber, driverName, contactNumber, status) {
     return {
         nicNumber,
-        nicPhoto,
         drivingLicenseNumber,
-        drivingLicensePhoto,
+        driverName,
+        contactNumber,
         status
     };
 }
 
 const rows = [
-    createData( "1234567", "", "ABC123",""),
-    createData( "7654321", "", "ABC456",""),
-    createData( "6543218", "", "ABC789",""),
-    createData( "5432198", "", "DEF123",""),
-    createData( "4321765", "", "DEF456",""),
+    createData("1234567", "ABC123", "Praboda", "01234567"),
+    createData("7654321", "ABC456", "Sadali", "02345678"),
+    createData("6543218", "ABC789", "Geethika", "03456789"),
+    createData("5432198", "DEF123", "Anupama", "04567891"),
+    createData("4321765", "DEF456", "Pathum", "05678912"),
 
 ];
 
@@ -82,22 +72,22 @@ const headCells = [
         label: 'NIC Number',
     },
     {
-        id: 'nicPhoto',
-        numeric: false,
-        disablePadding: true,
-        label: 'NIC Photos',
-    },
-    {
         id: 'drivingLicenseNumber',
         numeric: false,
         disablePadding: true,
         label: 'Driving License Number',
     },
     {
-        id: 'drivingLicensePhoto',
+        id: 'driverName',
         numeric: false,
         disablePadding: true,
-        label: 'Driving License Photo',
+        label: 'Driver Name',
+    },
+    {
+        id: 'contactNumber',
+        numeric: false,
+        disablePadding: true,
+        label: 'Contact Number',
     },
     {
         id: 'status',
@@ -162,7 +152,6 @@ const EnhancedTableToolbar = (props) => {
 EnhancedTableToolbar.propTypes = {
     numSelected: PropTypes.number.isRequired,
 };
-
 
 
 const RequestDetails = ({}) => {
@@ -270,24 +259,26 @@ const RequestDetails = ({}) => {
                                                         <TableCell component="th"
                                                                    id={labelId}
                                                                    scope="row"
-                                                                   padding="none">{row.nicPhoto}
-
-                                                        </TableCell>
-                                                        <TableCell component="th"
-                                                                   id={labelId}
-                                                                   scope="row"
                                                                    padding="none">{row.drivingLicenseNumber}
                                                         </TableCell>
                                                         <TableCell component="th"
                                                                    id={labelId}
                                                                    scope="row"
-                                                                   padding="none">{row.drivingLicensePhoto}
+                                                                   padding="none">{row.driverName}
+                                                        </TableCell>
+                                                        <TableCell component="th"
+                                                                   id={labelId}
+                                                                   scope="row"
+                                                                   padding="none">{row.contactNumber}
                                                         </TableCell>
                                                         <TableCell component="th"
                                                                    id={labelId}
                                                                    scope="row"
                                                                    padding="none">{row.status}
-                                                            <CheckIcon/>
+                                                            <IconButton color="secondary" aria-label="status"
+                                                                        component="label">
+                                                                <CheckIcon/>
+                                                            </IconButton>
                                                         </TableCell>
                                                     </TableRow>
                                                 );
