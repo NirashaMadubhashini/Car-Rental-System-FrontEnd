@@ -38,15 +38,15 @@ const Login=()=>{
                         label="Remember me"
 
                     />
-                        <Link href="#" sx={{ml:5}}>
+                        <Link href="#" sx={{ml:5}} underline="none">
                             Forgot password ?
                         </Link>
                     </Typography>
-                    {/*<Link href="admin">*/}
+                    <Link href="admin" underline="none">
                     <Button type='submit' color='primary' variant="contained" sx={{mt:3}} fullWidth>Sign in</Button>
-                    {/*</Link>*/}
+                    </Link>
                     <Typography sx={{mt:2,ml:7}}> Do you have an account ?
-                        <Link href="signUp" >
+                        <Link href="signUp" underline="none" >
                             Sign Up
                         </Link>
                     </Typography>
