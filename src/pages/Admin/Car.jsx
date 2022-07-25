@@ -1,12 +1,13 @@
 import React, {useState} from 'react'
 import Tables from "../../component/common/Table/table";
 import TextField from "@mui/material/TextField";
-import {Box, Button, Grid, IconButton, Typography} from "@mui/material";
+import {Box, Button, Grid, IconButton, Link, Typography} from "@mui/material";
 import AdminService from "../../services/AdminService";
 import SearchIcon from '@mui/icons-material/Search';
 import InputBase from '@mui/material/InputBase';
 import Divider from "@mui/material/Divider";
 import RubberBtn from "../../component/common/RubberBandBtn";
+import CarTables from "./carTable";
 
 const ManageCar = ({}) => {
     const initialValues = {
@@ -355,13 +356,12 @@ const ManageCar = ({}) => {
                             {btnLabel}
                         </Button>
 
-
                         <Button type="reset" variant="contained" color="success"
                                 sx={{ml: 3, mt: -13}}>
                             Reset
                         </Button>
                     </div>
-                    <Tables/>
+                    <CarTables/>
                 </div>
 
             </Box>
