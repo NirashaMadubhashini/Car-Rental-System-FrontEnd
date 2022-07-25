@@ -22,10 +22,10 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import TablePagination from "@mui/material/TablePagination";
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 
-function createData(customerNICNumber,customerDrivingLicenseNumber,vehicleNumber,noOfCars,payement,date,update,deleted,manageRequest) {
+function createData(customerNICNumber,driverName,vehicleNumber,noOfCars,payement,date,update,deleted,manageRequest) {
     return {
         customerNICNumber,
-        customerDrivingLicenseNumber,
+        driverName,
         vehicleNumber,
         noOfCars,
         payement,
@@ -37,10 +37,10 @@ function createData(customerNICNumber,customerDrivingLicenseNumber,vehicleNumber
 }
 
 const rows = [
-    createData("1234567", "01234567", "ABC123","1", "3000","2022.07.24"),
-    createData("7654321",  "02345678","ABC456", "1", "4000","2022.07.23"),
-    createData("6543218",  "03456789","ABC789", "2", "6000","2022.07.24"),
-    createData("5432198",  "04567891","DEF123", "3", "10000","2022.07.24")
+    createData("1234567", "Praboda", "ABC123","1", "3000","2022.07.24"),
+    createData("7654321",  "Sadali","ABC456", "1", "4000","2022.07.23"),
+    createData("6543218",  "Geethika","ABC789", "2", "6000","2022.07.24"),
+    createData("5432198",  "Anupama","DEF123", "3", "10000","2022.07.24")
 ];
 
 function descendingComparator(a, b, orderBy) {
@@ -80,10 +80,10 @@ const headCells = [
         label: 'Customer NIC Number',
     },
     {
-        id: 'customerDrivingLicenseNumber',
+        id: 'driverName',
         numeric: false,
         disablePadding: true,
-        label: 'Customer License Number',
+        label: 'Driver Name',
     },
     {
         id: 'vehicleNumber',
@@ -259,10 +259,10 @@ const ViewRentalRequest = ({}) => {
                     </Grid>
                     <Grid item>
                         <TextField
-                            helperText="Enter Customer Driving License Number"
+                            helperText="Enter Driver Name"
                             id="outlined-basic"
-                            label="Driving License Number"
-                            name="customerDrivingLicenseNumber"
+                            label="Driver Name"
+                            name="driverName"
 
                         />
                     </Grid>
@@ -370,7 +370,7 @@ const ViewRentalRequest = ({}) => {
                                                         <TableCell component="th"
                                                                    id={labelId}
                                                                    scope="row"
-                                                                   padding="none">{row.customerDrivingLicenseNumber}
+                                                                   padding="none">{row.driverName}
                                                         </TableCell>
                                                         <TableCell component="th"
                                                                    id={labelId}
