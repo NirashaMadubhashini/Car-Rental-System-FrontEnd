@@ -1,22 +1,32 @@
 import * as React from 'react';
-import AspectRatio from '@mui/joy/AspectRatio';
-import Avatar from '@mui/joy/Avatar';
 import Box from '@mui/joy/Box';
 import Card from '@mui/joy/Card';
 import IconButton from '@mui/joy/IconButton';
 import Typography from '@mui/joy/Typography';
-import Link from '@mui/joy/Link';
-import FavoriteBorderRoundedIcon from '@mui/icons-material/FavoriteBorderRounded';
 import {BookmarkAdd} from "@mui/icons-material";
-import Button from "@mui/material/Button";
-import Admin from "../../assets/img/admin.jpeg";
+import {LocalizationProvider, StaticDatePicker} from "@mui/x-date-pickers";
+import {AdapterDateFns} from "@mui/x-date-pickers/AdapterDateFns";
+import TextField from "@mui/material/TextField";
+import isWeekend from 'date-fns/isWeekend';
+import "react-circular-progressbar/dist/styles.css";
+import LinearProgress from "@mui/material/LinearProgress";
+import Stack from "@mui/material/Stack";
+import Chip from "@mui/material/Chip";
+import Rating from "@mui/material/Rating";
+
+
 
 export default function CustomerDashBoard() {
+    const [value, setValue] = React.useState(new Date());
+    const values = 3.5;
+
+
     return (
-        <Card variant="outlined" sx={{ minWidth: '450px',mt:5,ml:25,mr:25 }}>
-            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 0.5 }}>
-                <Typography level="h2" fontSize="md" sx={{ alignSelf: 'flex-start',fontSize:40 }}>
-                    CustomerDashBoard
+
+        <Card variant="outlined" sx={{minWidth: '450px', mt: 5, ml: 25, mr: 25}}>
+            <Box sx={{display: 'flex', flexDirection: 'column', gap: 0.5}}>
+                <Typography level="h2" fontSize="md" sx={{alignSelf: 'flex-start', fontSize: 40,mt:5,ml:5,fontFamily:'system-ui',fontWeight:'bold'}}>
+                    Customer DashBoard
                 </Typography>
             </Box>
             <IconButton
@@ -24,29 +34,55 @@ export default function CustomerDashBoard() {
                 variant="plain"
                 color="neutral"
                 size="sm"
-                sx={{ position: 'absolute', top: '0.5rem', right: '0.5rem' }}
+                sx={{position: 'absolute', top: '0.5rem', right: '0.5rem'}}
             >
-                <BookmarkAdd />
+                <BookmarkAdd/>
             </IconButton>
-
-            <AspectRatio minHeight="120px" maxHeight="400px" sx={{ my: 2 }}>
-                <img
-                    src="https://wernerlawca.com/wp-content/uploads/2018/07/iStock-1007651674.jpg"
-                    alt=""
+            <LocalizationProvider dateAdapter={AdapterDateFns}>
+                <StaticDatePicker
+                    orientation="landscape"
+                    openTo="day"
+                    value={value}
+                    shouldDisableDate={isWeekend}
+                    onChange={(newValue) => {
+                        setValue(newValue);
+                    }}
+                    renderInput={(params) => <TextField {...params} />}
+                    sx={{ml: 80, width: 125, backgroundColor: '#1565C0'}}
                 />
-            </AspectRatio>
-            <Box sx={{ display: 'flex' }}>
+            </LocalizationProvider>
 
-                <Button
-                    variant="solid"
-                    size="sm"
-                    color="primary"
-                    aria-label="Explore Bahamas Islands"
-                    sx={{ ml: 'auto', fontWeight: 600 }}
-                >
-                    Explore
-                </Button>
+            <Box
+                sx={{
+                    '& > legend': {mt: -30,ml:5},
+                }}
+            >
+                <Typography component="legend">Controlled</Typography>
+                <Rating
+                    name="simple-controlled"
+                    values={values}
+                    onChange={(event, newValues) => {
+                        setValue(newValues);
+                    }}
+                    sx={{ml:5}}
+                />
+            </Box>
+            <Box sx={{mt: -20,ml:5}}>
+                <Typography gutterBottom variant="body1">
+                    Frameworks Used
+                </Typography>
+                <Stack direction="row" spacing={1}>
+                    <Chip label="JavaScript"/>
+                    <Chip color="primary" label="React"/>
+                    <Chip label="AJAX"/>
+                    <Chip label="Jason"/>
+                </Stack>
+            </Box>
+
+            <Box sx={{width: '100%', mt: 15}}>
+                <LinearProgress/>
             </Box>
         </Card>
+
     );
 }
