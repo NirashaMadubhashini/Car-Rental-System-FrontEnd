@@ -273,7 +273,7 @@ const ManageCar = ({}) => {
                     </Grid>
                     <Grid item>
                         <TextField
-                            helperText="Enter Free_Km_For_Price"
+                            helperText="Enter Free_Km_For_Duration"
                             id="demo-helper-text-aligned"
                             label="Free_Km_For_Duration"
                             name="freeKmForDuration"
