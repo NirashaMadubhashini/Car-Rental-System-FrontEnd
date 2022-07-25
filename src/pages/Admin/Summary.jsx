@@ -17,7 +17,7 @@ const DailySummary = ({}) => {
     return (
         <div>
             <Grid item lg={12} xs={12} sm={12} md={12}>
-                <RubberBtn name="...Summary..."/>
+                <RubberBtn name="Summary"/>
             </Grid>
             <Card sx={{ maxWidth: 345,ml:25,mt:10 }}>
                 <CardActionArea>
