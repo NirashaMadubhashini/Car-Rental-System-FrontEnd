@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {useEffect} from 'react';
 import {styled, useTheme} from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
@@ -23,9 +24,9 @@ import InfoIcon from '@mui/icons-material/Info';
 import CarDetails from "./CarDetail";
 import RequestDetails from "./RequestDetails";
 import UpdateInformation from "./UpdateInformation";
-import {useEffect} from "react";
 import CustomerDashBoard from "./CustomerDashBoard";
-
+import PlaceRequest from "./PlaceRequest";
+import CheckIcon from '@mui/icons-material/Check';
 
 const drawerWidth = 240;
 
@@ -80,6 +81,7 @@ export default function CustomerPanel() {
     const [isCarDetail, setCarDetail] = React.useState(false);
     const [isUpdateInformation, setUpdateInformation] = React.useState(false);
     const [isRequestDetails, setRequestDetails] = React.useState(false);
+    const [isPlaceRequest, setPlaceRequest] = React.useState(false);
 
     useEffect(() => {
 
@@ -99,14 +101,22 @@ export default function CustomerPanel() {
             setCarDetail(true)
             setUpdateInformation(false)
             setRequestDetails(false)
+            setPlaceRequest(false)
         } else if (dowerBtnName === 'updateInformation') {
             setCarDetail(false)
             setUpdateInformation(true)
             setRequestDetails(false)
+            setPlaceRequest(false)
+        } else if (dowerBtnName === 'placeRequest') {
+            setCarDetail(false)
+            setUpdateInformation(false)
+            setRequestDetails(false)
+            setPlaceRequest(true)
         } else {
             setCarDetail(false)
             setUpdateInformation(false)
             setRequestDetails(true)
+            setPlaceRequest(false)
         }
 
     }
@@ -117,6 +127,8 @@ export default function CustomerPanel() {
                 return 'carDetails'
             case 'Update Information':
                 return 'updateInformation'
+            case 'Place Request':
+                return 'placeRequest'
             case 'Request Details':
                 return 'requestDetails'
             default:
@@ -158,7 +170,8 @@ export default function CustomerPanel() {
                     open={open}
                 >
                     <DrawerHeader>
-                        <Typography variant="h6" noWrap component="div"  sx={{position:"absolute",left:55,fontWeight:"bold"}}>
+                        <Typography variant="h6" noWrap component="div"
+                                    sx={{position: "absolute", left: 55, fontWeight: "bold"}}>
                             DashBoard
                         </Typography>
 
@@ -169,13 +182,14 @@ export default function CustomerPanel() {
                     </DrawerHeader>
                     <Divider/>
                     <List>
-                        {['Car Details','Update Information','Request Details'].map((text, index) => (
+                        {['Car Details', 'Update Information', 'Place Request', 'Request Details'].map((text, index) => (
                             <ListItem key={text} disablePadding>
                                 <ListItemButton onClick={() => ListItemBtnToggle(text)}>
                                     <ListItemIcon>
-                                        {index === 0 ? <CarCrashIcon/>:
-                                            index ===1 ? <SecurityUpdateGoodIcon/>:
-                                                <InfoIcon/> }
+                                        {index === 0 ? <CarCrashIcon/> :
+                                            index === 1 ? <SecurityUpdateGoodIcon/> :
+                                                index === 2 ? <CheckIcon/> :
+                                                    <InfoIcon/>}
                                     </ListItemIcon>
                                     <ListItemText primary={text}/>
                                 </ListItemButton>
@@ -188,7 +202,8 @@ export default function CustomerPanel() {
                 isCarDetail ? <CarDetails/> :
                     isUpdateInformation ? <UpdateInformation/> :
                         isRequestDetails ? <RequestDetails/> :
-                            <CustomerDashBoard/>
+                            isPlaceRequest ? <PlaceRequest/> :
+                                <CustomerDashBoard/>
             }
         </MainPanel>
     );
