@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
 import Table from '@mui/material/Table';
@@ -15,8 +16,9 @@ import CreateIcon from '@mui/icons-material/Create';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ConstructionIcon from '@mui/icons-material/Construction';
 import IconButton from "@mui/material/IconButton";
+import AdminService from "../../services/AdminService";
 
-function createData(registrationNO, brand, type, noOfPassengers, transmissionType,fuelType,color,frontViewImg,backViewImg,sideViewImg,internalViewImg,dailyRate,monthlyRate,freeKmForPrice,freeKmForDuration,lossDamageWaiver,priceForExtraKm,completeKm,isAvailable,update,deleted,maintain) {
+function createData(registrationNO, brand, type, noOfPassengers, transmissionType, fuelType, color, frontViewImg, backViewImg, sideViewImg, internalViewImg, dailyRate, monthlyRate, freeKmForPrice, freeKmForDuration, lossDamageWaiver, priceForExtraKm, completeKm, update, deleted, maintain) {
     return {
         registrationNO,
         brand,
@@ -36,25 +38,12 @@ function createData(registrationNO, brand, type, noOfPassengers, transmissionTyp
         lossDamageWaiver,
         priceForExtraKm,
         completeKm,
-        isAvailable,
         update,
         deleted,
         maintain
     };
 }
 
-const rows = [
-    createData('ABC123', "Suzuki Alto", "Premium", 7, "Manual","Petrol","Red","!!","??","**","&&","2500","64,350.00","100","1Hour","10,000","30.00","10km","True"),
-    createData('ABC456', "Suzuki Alto", "Premium", 7, "Manual","Petrol","Red","!!","??","**","&&","2500","64,350.00","100","1Hour","10,000","30.00","10km","True"),
-    createData('ABC789', "Suzuki Alto", "Premium", 7, "Manual","Petrol","Red","!!","??","**","&&","2500","64,350.00","100","1Hour","10,000","30.00","10km","True"),
-    createData('DEF123', "Suzuki Alto", "Premium", 7, "Manual","Petrol","Red","!!","??","**","&&","2500","64,350.00","100","1Hour","10,000","30.00","10km","True"),
-    createData('DEF456', "Suzuki Alto", "Premium", 7, "Manual","Petrol","Red","!!","??","**","&&","2500","64,350.00","100","1Hour","10,000","30.00","10km","True"),
-    createData('DEF789', "Suzuki Alto", "Premium", 7, "Manual","Petrol","Red","!!","??","**","&&","2500","64,350.00","100","1Hour","10,000","30.00","10km","True"),
-    createData('GHI123', "Suzuki Alto", "Premium", 7, "Manual","Petrol","Red","!!","??","**","&&","2500","64,350.00","100","1Hour","10,000","30.00","10km","True"),
-    createData('GHI456', "Suzuki Alto", "Premium", 7, "Manual","Petrol","Red","!!","??","**","&&","2500","64,350.00","100","1Hour","10,000","30.00","10km","True"),
-
-
-];
 
 function descendingComparator(a, b, orderBy) {
     if (b[orderBy] < a[orderBy]) {
@@ -227,6 +216,7 @@ function EnhancedTableHead(props) {
         onRequestSort(event, property);
     };
 
+
     return (
         <TableHead>
             <TableRow>
@@ -277,13 +267,52 @@ EnhancedTableToolbar.propTypes = {
     numSelected: PropTypes.number.isRequired,
 };
 
-export default function CarTables() {
+export default function CarTable() {
     const [order, setOrder] = React.useState('asc');
     const [orderBy, setOrderBy] = React.useState('calories');
     const [selected, setSelected] = React.useState([]);
     const [page, setPage] = React.useState(0);
     const [dense, setDense] = React.useState(false);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
+    const [tblData, setTblData] = useState([]);
+    const [rows, setRows] = useState([]);
+
+    useEffect(() => {
+        loadData();
+    }, [])
+
+
+    const loadData = () => {
+        AdminService.fetchCar().then((res) => {
+            if (res.status === 200) {
+                setTblData(res.data.data)
+                setDataToRows(res.data.data)
+                console.log("res table",res.data.data)
+            }
+        });//car service --> fetchCustomer()
+    };
+    const setDataToRows = (td) => {
+
+        console.log("tablemap",td);
+        const newArr2 = []
+        for (let i = 0; i < td.length; i++) {
+            newArr2.push((createData(
+                td[i].registrationNO, td[i].brand, td[i].type, td[i].noOfPassengers, td[i].transmissionType, td[i].fuelType, td[i].color, td[i].frontViewImg,
+                td[i].backViewImg, td[i].sideViewImg, td[i].internalViewImg, td[i].dailyRate, td[i].monthlyRate, td[i].freeKmForPrice, td[i].freeKmForDuration,
+                td[i].lossDamageWaiver, td[i].priceForExtraKm, td[i].completeKm,"update","deleted","maintain"
+            )))
+        }
+        console.log("new Arra",newArr2)
+        setRows(newArr2)
+        // td.map((data) => (
+        //     setRows(createData(
+        //         data.registrationNO, data.brand, data.type, data.noOfPassengers, data.transmissionType, data.fuelType, data.color, data.frontViewImg,
+        //         data.backViewImg, data.sideViewImg, data.internalViewImg, data.dailyRate, data.monthlyRate, data.freeKmForPrice, data.freeKmForDuration,
+        //         data.lossDamageWaiver, data.priceForExtraKm, data.completeKm,"update","deleted","maintain"
+        //     ))
+        // ))
+
+    };
 
     const handleRequestSort = (event, property) => {
         const isAsc = orderBy === property && order === 'asc';
@@ -368,7 +397,7 @@ export default function CarTables() {
                                                        id={labelId}
                                                        scope="row"
                                                        padding="none">{row.type}</TableCell>
-                                            <TableCell >{row.noOfPassengers}</TableCell>
+                                            <TableCell>{row.noOfPassengers}</TableCell>
                                             <TableCell component="th"
                                                        id={labelId}
                                                        scope="row"

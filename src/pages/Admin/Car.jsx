@@ -1,7 +1,6 @@
-import React, {useState} from 'react'
-import Tables from "../../component/common/Table/table";
+import React, {useEffect, useState} from 'react'
 import TextField from "@mui/material/TextField";
-import {Box, Button, Grid, IconButton, Link, Typography} from "@mui/material";
+import {Box, Button, Grid, IconButton} from "@mui/material";
 import AdminService from "../../services/AdminService";
 import SearchIcon from '@mui/icons-material/Search';
 import InputBase from '@mui/material/InputBase';
@@ -10,6 +9,7 @@ import RubberBtn from "../../component/common/RubberBandBtn";
 import CarTables from "./carTable";
 
 const ManageCar = ({}) => {
+
     const initialValues = {
         registrationNO: "",
         brand: "",
@@ -34,8 +34,6 @@ const ManageCar = ({}) => {
         lossDamageWaiver: "",
         completeKm: "",
         isAvailable: "",
-
-
     };
 
     const statusObj = {
@@ -51,6 +49,11 @@ const ManageCar = ({}) => {
             [name]: value,
         });
     };
+
+    useEffect(() => {
+        loadData();
+    }, [])
+
     const [formValues, setFormValues] = useState(initialValues);
 
     const [status, setStatus] = useState(statusObj);
@@ -59,14 +62,17 @@ const ManageCar = ({}) => {
 
     const [btnColor, setBtnColor] = useState('primary');
 
+    const [tblData, setTblData] = useState([]);
+
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        console.log(formValues);
+
         await submitCar();
     }
 
     const clearFields = () => {
+
         setFormValues({
             registrationNO: "",
             brand: "",
@@ -93,11 +99,9 @@ const ManageCar = ({}) => {
         let dto = {};
         dto = formValues;
 
-        console.log(formValues)
         if (btnLabel === "AddCar") {
             let res = AdminService.addCar(dto);//customer service --> postCustomer()
 
-            console.log(res)    //print the promise
 
             if (res.status === 201) {
                 setStatus({
@@ -138,6 +142,15 @@ const ManageCar = ({}) => {
         }
     };
 
+    const loadData =  () => {
+         AdminService.fetchCar().then((res) => {
+             if (res.status === 200) {
+                 setTblData(res.data.data)
+             }
+         });//car service --> fetchCustomer()
+
+    };
+
     return (
         <div>
             <Grid item lg={12} xs={12} sm={12} md={12}>
@@ -168,7 +181,7 @@ const ManageCar = ({}) => {
 
 
                 <Grid container alignItems="center" justify="center" direction="row" spacing={2}
-                      sx={{paddingLeft: 5,mt:5}}
+                      sx={{paddingLeft: 5, mt: 5}}
                 >
                     <Grid item>
                         <TextField id="outlined-basic" label="RegistrationNO" variant="outlined"
@@ -341,7 +354,7 @@ const ManageCar = ({}) => {
                     inputProps={{'aria-label': 'search RegistrationNO'}}
                     variant="standard"
                 />
-                <IconButton type="submit" sx={{p:'20px'}} aria-label="search">
+                <IconButton type="submit" sx={{p: '20px'}} aria-label="search">
                     <SearchIcon/>
                 </IconButton>
                 <div>
@@ -352,11 +365,11 @@ const ManageCar = ({}) => {
                         </Button>
 
                         <Button color={btnColor} size="medium" type="submit" variant="contained"
-                                sx={{ml:3, mt: -13}}>
+                                sx={{ml: 3, mt: -13}}>
                             {btnLabel}
                         </Button>
 
-                        <Button type="reset" variant="contained" color="success"
+                        <Button onClick={clearFields} type="reset" variant="contained" color="success"
                                 sx={{ml: 3, mt: -13}}>
                             Reset
                         </Button>
