@@ -26,12 +26,10 @@ import TablePagination from "@mui/material/TablePagination";
 
 
 
-function createData(email,newPassword,nicNumber, nicPhoto, drivingLicenseNumber,drivingLicensePhoto,address,contactNumber,update,deleted) {
+function createData(userName,password,drivingLicenseNumber,drivingLicensePhoto,address,contactNumber,update,deleted) {
     return {
-        email,
-        newPassword,
-        nicNumber,
-        nicPhoto,
+        userName,
+        password,
         drivingLicenseNumber,
         drivingLicensePhoto,
         address,
@@ -42,11 +40,11 @@ function createData(email,newPassword,nicNumber, nicPhoto, drivingLicenseNumber,
 }
 
 const rows = [
-    createData('nirasha@gmail.com', "nirasha", "1234567", "", "ABC123","","Galle","01234567"),
-    createData('geeth@gmail.com', "geeth", "7654321", "", "ABC456","","Kalegana","02345678"),
-    createData('hansi@gmail.com', "hansi", "6543218", "", "ABC789","","Matara","03456789"),
-    createData('chamodi@gmail.com', "chamodi", "5432198", "", "DEF123","","RichmondHill","04567891"),
-    createData('milasha@gmail.com', "milasha", "4321765", "", "DEF456","","Mirissa","05678912"),
+    createData('nirasha@', "nirasha",  "ABC123","","Galle","01234567"),
+    createData('geeth@', "geeth", "ABC456","","Kalegana","02345678"),
+    createData('hansi@', "hansi",  "ABC789","","Matara","03456789"),
+    createData('chamodi@', "chamodi",  "DEF123","","RichmondHill","04567891"),
+    createData('milasha@', "milasha",  "DEF456","","Mirissa","05678912"),
 
 ];
 
@@ -81,28 +79,16 @@ function stableSort(array, comparator) {
 
 const headCells = [
     {
-        id: 'email',
+        id: 'userName',
         numeric: false,
         disablePadding: true,
-        label: 'Email',
+        label: 'UserName',
     },
     {
-        id: 'newPassword',
+        id: 'password',
         numeric: false,
         disablePadding: true,
-        label: 'New Password',
-    },
-    {
-        id: 'nicNumber',
-        numeric: false,
-        disablePadding: true,
-        label: 'NIC Number',
-    },
-    {
-        id: 'nicPhoto',
-        numeric: false,
-        disablePadding: true,
-        label: 'NIC Photos',
+        label: 'Password',
     },
     {
         id: 'drivingLicenseNumber',
@@ -262,35 +248,17 @@ const UpdateInformation = ({}) => {
                       sx={{paddingLeft: 5,mt:5}}
                 >
                     <Grid item>
-                        <TextField id="outlined-basic" label="Email" variant="outlined"
-                                   helperText="Enter Email" name="email"
+                        <TextField id="outlined-basic" label="UserName" variant="outlined"
+                                   helperText="Enter UserName" name="userName"
                         />
                     </Grid>
                     <Grid item>
                         <TextField
-                            helperText="Enter New Password"
+                            helperText="EnterPassword"
                             variant="outlined"
                             id="outlined-basic"
-                            label="New Password"
-                            name="newPassword"
-
-                        />
-                    </Grid>
-                    <Grid item>
-                        <TextField
-                            helperText="Enter NIC Number"
-                            id="outlined-basic"
-                            label="NIC Number"
-                            name="nicNumber"
-
-                        />
-                    </Grid>
-                    <Grid item>
-                        <TextField
-                            helperText="Upload NIC Photo"
-                            id="demo-helper-text-aligned"
-                            label="NIC Photo"
-                            name="nicPhoto"
+                            label="Password"
+                            name="password"
 
                         />
                     </Grid>
@@ -376,7 +344,7 @@ const UpdateInformation = ({}) => {
                                         {stableSort(rows, getComparator(order, orderBy))
                                             .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                             .map((row, index) => {
-                                                const isItemSelected = isSelected(row.email);
+                                                const isItemSelected = isSelected(row.userName);
                                                 const labelId = `enhanced-table-checkbox-${index}`;
 
                                                 return (
@@ -384,7 +352,7 @@ const UpdateInformation = ({}) => {
                                                         hover
                                                         aria-checked={isItemSelected}
                                                         tabIndex={-1}
-                                                        key={row.email}
+                                                        key={row.userName}
                                                         selected={isItemSelected}
                                                     >
                                                         <TableCell>
@@ -395,22 +363,12 @@ const UpdateInformation = ({}) => {
                                                             scope="row"
                                                             padding="none"
                                                         >
-                                                            {row.email}
+                                                            {row.userName}
                                                         </TableCell>
                                                         <TableCell component="th"
                                                                    id={labelId}
                                                                    scope="row"
-                                                                   padding="none">{row.newPassword}
-                                                        </TableCell>
-                                                        <TableCell component="th"
-                                                                   id={labelId}
-                                                                   scope="row"
-                                                                   padding="none">{row.nicNumber}
-                                                        </TableCell>
-                                                        <TableCell component="th"
-                                                                   id={labelId}
-                                                                   scope="row"
-                                                                   padding="none">{row.nicPhoto}
+                                                                   padding="none">{row.password}
                                                         </TableCell>
                                                         <TableCell component="th"
                                                                    id={labelId}
