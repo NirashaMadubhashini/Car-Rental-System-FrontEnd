@@ -109,7 +109,7 @@ const SignUp = () => {
 
                 <Button type='submit' color='primary' variant="contained" sx={{mt: 3, ml: 20}}>Create Account</Button>
                 <Typography sx={{mt:3,ml:20}}> Previous Page ?
-                    <Link href="/" >
+                    <Link href="/" underline="none">
                         Sign In
                     </Link>
                 </Typography>
