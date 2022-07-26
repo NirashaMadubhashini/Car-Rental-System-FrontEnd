@@ -18,7 +18,7 @@ import Rating from "@mui/material/Rating";
 
 export default function CustomerDashBoard() {
     const [value, setValue] = React.useState(new Date());
-    const values = 3.5;
+
 
 
     return (
@@ -52,34 +52,7 @@ export default function CustomerDashBoard() {
                 />
             </LocalizationProvider>
 
-            <Box
-                sx={{
-                    '& > legend': {mt: -30,ml:5},
-                }}
-            >
-                <Typography component="legend">Controlled</Typography>
-                <Rating
-                    name="simple-controlled"
-                    values={values}
-                    onChange={(event, newValues) => {
-                        setValue(newValues);
-                    }}
-                    sx={{ml:5}}
-                />
-            </Box>
-            <Box sx={{mt: -20,ml:5}}>
-                <Typography gutterBottom variant="body1">
-                    Frameworks Used
-                </Typography>
-                <Stack direction="row" spacing={1}>
-                    <Chip label="JavaScript"/>
-                    <Chip color="primary" label="React"/>
-                    <Chip label="AJAX"/>
-                    <Chip label="Jason"/>
-                </Stack>
-            </Box>
-
-            <Box sx={{width: '100%', mt: 15}}>
+            <Box sx={{width: '100%', mt:5}}>
                 <LinearProgress color="inherit"/>
             </Box>
         </Card>
