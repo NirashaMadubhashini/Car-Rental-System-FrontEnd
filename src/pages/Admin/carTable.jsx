@@ -18,7 +18,7 @@ import ConstructionIcon from '@mui/icons-material/Construction';
 import IconButton from "@mui/material/IconButton";
 import AdminService from "../../services/AdminService";
 
-function createData(registrationNO, brand, type, noOfPassengers, transmissionType, fuelType, color, frontViewImg, backViewImg, sideViewImg, internalViewImg, dailyRate, monthlyRate, freeKmForPrice, freeKmForDuration, lossDamageWaiver, priceForExtraKm, completeKm,isAvailable, update, deleted, maintain) {
+function createData(registrationNO, brand, type, noOfPassengers, transmissionType, fuelType, color, frontViewImg, backViewImg, sideViewImg, internalViewImg, dailyRate, monthlyRate, freeKmForPrice, freeKmForDuration, lossDamageWaiver, priceForExtraKm, completeKm,update, deleted, maintain) {
     return {
         registrationNO,
         brand,
@@ -38,7 +38,6 @@ function createData(registrationNO, brand, type, noOfPassengers, transmissionTyp
         lossDamageWaiver,
         priceForExtraKm,
         completeKm,
-        isAvailable,
         update,
         deleted,
         maintain
@@ -298,9 +297,10 @@ export default function CarTable() {
         const newArr2 = []
         for (let i = 0; i < td.length; i++) {
             newArr2.push((createData(
+
                 td[i].registrationNO, td[i].brand, td[i].type, td[i].noOfPassengers, td[i].transmissionType, td[i].fuelType, td[i].color, td[i].frontViewImg,
                 td[i].backViewImg, td[i].sideViewImg, td[i].internalViewImg, td[i].dailyRate, td[i].monthlyRate, td[i].freeKmForPrice, td[i].freeKmForDuration,
-                td[i].lossDamageWaiver, td[i].priceForExtraKm, td[i].completeKm,td[i].isAvailable,"update","deleted","maintain"
+                td[i].lossDamageWaiver, td[i].priceForExtraKm, td[i].completeKm
             )))
         }
         console.log("new Arra",newArr2)
