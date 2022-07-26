@@ -13,6 +13,38 @@ import LinearProgress from "@mui/material/LinearProgress";
 import Stack from "@mui/material/Stack";
 import Chip from "@mui/material/Chip";
 import Rating from "@mui/material/Rating";
+import CardContent from "@mui/material/CardContent";
+import CardActions from "@mui/material/CardActions";
+import Button from "@mui/material/Button";
+
+
+const card = (
+    <React.Fragment>
+        <Box sx={{backgroundColor:'#7B1FA2'}}>
+            <CardContent>
+                <Typography sx={{fontWeight:'bold',fontSize:20}} >
+                    Car Details
+                    ============
+                    Update Info
+                </Typography>
+            </CardContent>
+        </Box>
+    </React.Fragment>
+);
+const card2 = (
+    <React.Fragment >
+        <Box sx={{backgroundColor:'green'}}>
+            <CardContent>
+                <Typography sx={{fontWeight:'bold',fontSize:20}}>
+                    Place Request
+                    ============
+                    Request Details
+
+                </Typography>
+            </CardContent>
+        </Box>
+    </React.Fragment>
+);
 
 
 
@@ -20,12 +52,18 @@ export default function CustomerDashBoard() {
     const [value, setValue] = React.useState(new Date());
 
 
-
     return (
 
-        <Card variant="outlined" sx={{minWidth: '450px', mt: 5, ml: 25, mr: 25}}>
+        <Card variant="outlined" sx={{minWidth: '550px', mt: 5, ml: 25, mr: 25}}>
             <Box sx={{display: 'flex', flexDirection: 'column', gap: 0.5}}>
-                <Typography level="h2" fontSize="md" sx={{alignSelf: 'flex-start', fontSize: 40,mt:5,ml:5,fontFamily:'system-ui',fontWeight:'bold'}}>
+                <Typography level="h2" fontSize="md" sx={{
+                    alignSelf: 'flex-start',
+                    fontSize: 40,
+                    mt: 5,
+                    ml: 5,
+                    fontFamily: 'system-ui',
+                    fontWeight: 'bold'
+                }}>
                     Customer DashBoard
                 </Typography>
             </Box>
@@ -51,10 +89,17 @@ export default function CustomerDashBoard() {
                     sx={{ml: 80, width: 125, backgroundColor: '#1565C0'}}
                 />
             </LocalizationProvider>
-
-            <Box sx={{width: '100%', mt:5}}>
-                <LinearProgress color="inherit"/>
+            <Box sx={{width: 200, ml:5,mt:-40}}>
+                <Card variant="outlined">{card}</Card>
             </Box>
+
+            <Box sx={{width: 250, ml:35,mt:-21}}>
+                <Card variant="outlined">{card2}</Card>
+            </Box>
+            <Box sx={{width: '100%', mt: 23}}>
+                <LinearProgress/>
+            </Box>
+            <br/>
         </Card>
 
     );

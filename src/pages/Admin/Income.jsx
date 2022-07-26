@@ -9,15 +9,6 @@ import {Grid} from "@mui/material";
 import RubberBtn from "../../component/common/RubberBandBtn";
 
 
-const bull = (
-    <Box
-        component="span"
-        sx={{display: 'row', mx: '2px', transform: 'scale(0.8)'}}
-    >
-        •
-    </Box>
-);
-
 const card = (
     <React.Fragment>
         <Box sx={{color:'green'}}>

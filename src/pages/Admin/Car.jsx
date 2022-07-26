@@ -22,18 +22,18 @@ const ManageCar = ({}) => {
         backViewImg: "",
         sideViewImg: "",
         internalViewImg: "",
-        dailyRate: "",
-        monthlyRate: "",
-        freeKmForPrice: "",
-        freeKmForDuration: "",
-        priceForExtraKm: "",
+        dailyRate: 0,
+        monthlyRate: 0,
+        freeKmForPrice: 0,
+        freeKmForDuration: 0,
+        priceForExtraKm: 0,
         /**
          * Exta data
          * */
         id: 0,
-        lossDamageWaiver: "",
-        completeKm: "",
-        isAvailable: "",
+        lossDamageWaiver: 0,
+        completeKm: 0,
+        isAvailable: false,
     };
 
     const statusObj = {
@@ -50,9 +50,6 @@ const ManageCar = ({}) => {
         });
     };
 
-    useEffect(() => {
-        loadData();
-    }, [])
 
     const [formValues, setFormValues] = useState(initialValues);
 
@@ -64,6 +61,9 @@ const ManageCar = ({}) => {
 
     const [tblData, setTblData] = useState([]);
 
+    useEffect(() => {
+        loadData();
+    }, [])
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -85,11 +85,11 @@ const ManageCar = ({}) => {
             backViewImg: "",
             sideViewImg: "",
             internalViewImg: "",
-            dailyRate: "",
-            monthlyRate: "",
-            freeKmForPrice: "",
-            freeKmForDuration: "",
-            priceForExtraKm: "",
+            dailyRate: 0,
+            monthlyRate: 0,
+            freeKmForPrice: 0,
+            freeKmForDuration: 0,
+            priceForExtraKm: 0,
 
         });
     };
@@ -111,7 +111,7 @@ const ManageCar = ({}) => {
                 })
 
                 clearFields();
-                // this.loadData();
+                loadData();
             } else {
                 setStatus({
                     alert: true,
@@ -142,24 +142,21 @@ const ManageCar = ({}) => {
         }
     };
 
-    const loadData =  () => {
-         AdminService.fetchCar().then((res) => {
-             if (res.status === 200) {
-                 setTblData(res.data.data)
-             }
-         });//car service --> fetchCustomer()
-
+    const loadData = () => {
+        AdminService.fetchCar().then((res) => {
+            if (res.status === 200) {
+                setTblData(res.data.data)
+            }
+        });
     };
 
     return (
         <div>
             <Grid item lg={12} xs={12} sm={12} md={12}>
-                {/*<Typography sx={{marginLeft: 40, fontSize: 35, fontWeight: 'bold',fontFamily:'system-ui'}}>*/}
-                {/*    Manage Car*/}
-                {/*</Typography>*/}
                 <RubberBtn name="Manage Car"/>
             </Grid>
             <Divider/>
+
             <Box
                 component="form"
                 onSubmit={handleSubmit}
@@ -169,16 +166,6 @@ const ManageCar = ({}) => {
                 noValidate
                 autoComplete="off"
             >
-                {/*>*/}
-                {/*<Grid*/}
-                {/*    container*/}
-                {/*    spacing={0}*/}
-                {/*    direction="column"*/}
-                {/*    alignItems="center"*/}
-                {/*    justify="center"*/}
-                {/*    style={{minHeight: "100vh"}}*/}
-                {/*>*/}
-
 
                 <Grid container alignItems="center" justify="center" direction="row" spacing={2}
                       sx={{paddingLeft: 5, mt: 5}}

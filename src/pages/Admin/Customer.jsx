@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Divider from "@mui/material/Divider";
@@ -7,6 +7,8 @@ import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
 import RubberBtn from "../../component/common/RubberBandBtn";
 import CustomerTables from "./customerTable";
+import AdminService from "../../services/AdminService";
+
 
 const ManageCustomer = ({}) => {
 

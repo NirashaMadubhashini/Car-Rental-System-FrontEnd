@@ -46,6 +46,19 @@ class AdminService {
         return await promise;
     }
 
+    fetchAdminCustomer = async () => {
+        const promise = new Promise((resolve, reject) => {
+            axios.get(`${this.baseURL}admin/customer`)
+                .then((res) => {
+                    return resolve(res)
+                })
+                .catch((err) => {
+                    return resolve(err)
+                })
+        })
+        return await promise;
+    }
+
 }
 
 export default new AdminService()

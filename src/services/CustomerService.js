@@ -5,7 +5,7 @@ class CustomerService {
 
     addCustomer = async (data) => {
         const promise = new Promise((resolve, reject) => {
-            axios.post(`${this.baseURL}admin/customer`, data)
+            axios.post(`${this.baseURL}customer/customer`, data)
                 .then((res) => {
                     return resolve(res)
                 })
@@ -18,7 +18,7 @@ class CustomerService {
 
     putCustomer = async (data) => {
         const promise = new Promise((resolve, reject) => {
-            axios.put(`${this.baseURL}admin/customer`, data, {
+            axios.put(`${this.baseURL}customer/customer`, data, {
             })
                 .then((res) => {
 
@@ -33,7 +33,7 @@ class CustomerService {
 
     fetchCustomer = async () => {
         const promise = new Promise((resolve, reject) => {
-            axios.get(`${this.baseURL}admin/customer`)
+            axios.get(`${this.baseURL}customer/customer`)
                 .then((res) => {
                     return resolve(res)
                 })

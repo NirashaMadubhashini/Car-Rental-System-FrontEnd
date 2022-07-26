@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Tables from "../../component/common/Table/table";
@@ -10,10 +10,139 @@ import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
 import RubberBtn from "../../component/common/RubberBandBtn";
 import UpdateInfoTables from "./updateInfoTable";
+import AdminService from "../../services/AdminService";
+import CustomerService from "../../services/CustomerService";
 
 
 
 const UpdateInformation = ({}) => {
+
+    const initialValues = {
+        username: "",
+        password: "",
+        licenceNo: "",
+        licenceImg: "",
+        address: "",
+        contactNo: 0,
+        /**
+         * Exta data
+         * */
+        customerId: "",
+        name: "",
+        email: "",
+        nicNo: "",
+        nicImg: "",
+        isRegistered:false,
+        isDriverRequested: false,
+        isAccept: false,
+    };
+
+    const statusObj = {
+        alert: false,
+        message: '',
+        severity: '',
+    }
+
+    const handleInputChange = (e) => {
+        const {name, value} = e.target;
+        setFormValues({
+            ...formValues,
+            [name]: value,
+        });
+    };
+
+    useEffect(() => {
+        loadData();
+    }, [])
+
+    const [formValues, setFormValues] = useState(initialValues);
+
+    const [status, setStatus] = useState(statusObj);
+
+    const [btnLabel, setBtnLabel] = useState('Add Details');
+
+    const [btnColor, setBtnColor] = useState('primary');
+
+    const [tblData, setTblData] = useState([]);
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+
+        await submitCustomer();
+    }
+
+    const clearFields = () => {
+
+        setFormValues({
+            username: "",
+            password: "",
+            licenceNo: "",
+            licenceImg: "",
+            address: "",
+            contactNo: 0,
+
+        });
+    };
+
+
+    const submitCustomer = async () => {
+
+        let dto = {};
+        dto = formValues;
+
+        if (btnLabel === "Add Details") {
+            let res = CustomerService.addCustomer(dto);//customer service --> postCustomer()
+
+
+            if (res.status === 201) {
+                setStatus({
+                    alert: true,
+                    message: "S",
+                    severity: 'success'
+                })
+
+                clearFields();
+                // this.loadData();
+            } else {
+                setStatus({
+                    alert: true,
+                    message: "E",
+                    severity: 'error'
+                });
+            }
+        } else {
+            let res = await CustomerService.putCustomer(formValues);//customer service --> putCustomer()
+            if (res.status === 200) {
+                setStatus({
+                    alert: true,
+                    message: "s",
+                    severity: 'success',
+
+                });
+                setBtnLabel("Add Details");
+                setBtnColor('primary')
+                clearFields();
+                // this.loadData();
+            } else {
+                setStatus({
+                    alert: true,
+                    message: "e",
+                    severity: 'error'
+                });
+            }
+        }
+    };
+
+
+    const loadData =  () => {
+        CustomerService.fetchCustomer().then((res) => {
+            if (res.status === 200) {
+                setTblData(res.data.data)
+            }
+        });
+    };
+
+
 
     return (
 
@@ -25,6 +154,7 @@ const UpdateInformation = ({}) => {
 
             <Box
                 component="form"
+                onSubmit={handleSubmit}
                 sx={{
                     '& > :not(style)': {},
                 }}
@@ -38,7 +168,10 @@ const UpdateInformation = ({}) => {
                     <Grid item>
                         <TextField id="outlined-basic" label="UserName" variant="outlined"
                                    helperText="Enter UserName" name="userName"
+                                   onChange={handleInputChange}
+                                   value={formValues.username}
                         />
+
                     </Grid>
                     <Grid item>
                         <TextField
@@ -47,7 +180,8 @@ const UpdateInformation = ({}) => {
                             id="outlined-basic"
                             label="Password"
                             name="password"
-
+                            onChange={handleInputChange}
+                            value={formValues.password}
                         />
                     </Grid>
                     <Grid item>
@@ -56,7 +190,8 @@ const UpdateInformation = ({}) => {
                             id="demo-helper-text-aligned"
                             label="Driving License number"
                             name="drivingLicenseNumber"
-
+                            onChange={handleInputChange}
+                            value={formValues.licenceNo}
                         />
                     </Grid>
                     <Grid item>
@@ -65,6 +200,8 @@ const UpdateInformation = ({}) => {
                             id="demo-helper-text-aligned"
                             label="Driving License Photo"
                             name="drivingLicensePhoto"
+                            onChange={handleInputChange}
+                            value={formValues.licenceImg}
                         />
                     </Grid>
                     <Grid item>
@@ -73,7 +210,8 @@ const UpdateInformation = ({}) => {
                             id="demo-helper-text-aligned"
                             label="Address"
                             name="address"
-
+                            onChange={handleInputChange}
+                            value={formValues.address}
                         />
                     </Grid>
                     <Grid item>
@@ -82,7 +220,8 @@ const UpdateInformation = ({}) => {
                             id="demo-helper-text-aligned"
                             label="Contact Number"
                             name="contactNumber"
-
+                            onChange={handleInputChange}
+                            value={formValues.contactNo}
                         />
                     </Grid>
                 </Grid>
@@ -101,9 +240,9 @@ const UpdateInformation = ({}) => {
                                 sx={{ml: 45, mt: -13}}>
                             Search
                         </Button>
-                        <Button  size="medium" type="submit" variant="contained"
+                        <Button color={btnColor} size="medium" type="submit" variant="contained"
                                  sx={{ml:3, mt: -13}}>
-                            Add Details
+                            {btnLabel}
                         </Button>
                         <Button type="reset" variant="contained" color="success"
                                 sx={{ml: 3, mt: -13}}>

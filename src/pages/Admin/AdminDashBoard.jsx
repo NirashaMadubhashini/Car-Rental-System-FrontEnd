@@ -13,6 +13,42 @@ import LinearProgress from "@mui/material/LinearProgress";
 import Stack from "@mui/material/Stack";
 import Chip from "@mui/material/Chip";
 import Rating from "@mui/material/Rating";
+import CardContent from "@mui/material/CardContent";
+import CardActions from "@mui/material/CardActions";
+import Button from "@mui/material/Button";
+
+
+const card = (
+    <React.Fragment>
+        <Box sx={{backgroundColor:'#7B1FA2'}}>
+            <CardContent>
+                <Typography sx={{fontWeight:'bold',fontSize:20}} >
+                    Customer
+                    ============
+                    Car
+                    ============
+                    Driver
+                </Typography>
+            </CardContent>
+        </Box>
+    </React.Fragment>
+);
+const card2 = (
+    <React.Fragment >
+        <Box sx={{backgroundColor:'green'}}>
+            <CardContent>
+                <Typography sx={{fontWeight:'bold',fontSize:20}}>
+                    Rent Request
+                    ============
+                    Income
+                    ============
+                    Daily Summary
+                </Typography>
+            </CardContent>
+        </Box>
+    </React.Fragment>
+);
+
 
 
 export default function AdminDashBoard() {
@@ -56,10 +92,17 @@ export default function AdminDashBoard() {
                     sx={{ml: 80, width: 125, backgroundColor: '#1565C0'}}
                 />
             </LocalizationProvider>
+            <Box sx={{width: 200, ml:5,mt:-40}}>
+                <Card variant="outlined">{card}</Card>
+            </Box>
 
-            <Box sx={{width: '100%', mt: 5}}>
+            <Box sx={{width: 250, ml:35,mt:-28}}>
+                <Card variant="outlined">{card2}</Card>
+            </Box>
+            <Box sx={{width: '100%', mt: 15}}>
                 <LinearProgress/>
             </Box>
+            <br/>
         </Card>
 
     );

@@ -25,14 +25,14 @@ import ConstructionIcon from "@mui/icons-material/Construction";
 import TablePagination from "@mui/material/TablePagination";
 
 
-function createData(userName,password,drivingLicenseNumber,drivingLicensePhoto,address,contactNumber,update,deleted) {
+function createData(username,password,licenceNo,licenceImg,address,contactNo,update,deleted) {
     return {
-        userName,
+        username,
         password,
-        drivingLicenseNumber,
-        drivingLicensePhoto,
+        licenceNo,
+        licenceImg,
         address,
-        contactNumber,
+        contactNo,
         update,
         deleted
     };
@@ -78,10 +78,10 @@ function stableSort(array, comparator) {
 
 const headCells = [
     {
-        id: 'userName',
+        id: 'username',
         numeric: false,
         disablePadding: true,
-        label: 'UserName',
+        label: 'User Name',
     },
     {
         id: 'password',
@@ -90,13 +90,13 @@ const headCells = [
         label: 'Password',
     },
     {
-        id: 'drivingLicenseNumber',
+        id: 'licenceNo',
         numeric: false,
         disablePadding: true,
         label: 'Driving License Number',
     },
     {
-        id: 'drivingLicensePhoto',
+        id: 'licenceImg',
         numeric: false,
         disablePadding: true,
         label: 'Driving License Photo',
@@ -108,7 +108,7 @@ const headCells = [
         label: 'Address',
     },
     {
-        id: 'contactNumber',
+        id: 'contactNo',
         numeric: false,
         disablePadding: true,
         label: 'Contact Number',
@@ -248,7 +248,7 @@ export default function UpdateInfoTables() {
                             {stableSort(rows, getComparator(order, orderBy))
                                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                 .map((row, index) => {
-                                    const isItemSelected = isSelected(row.userName);
+                                    const isItemSelected = isSelected(row.username);
                                     const labelId = `enhanced-table-checkbox-${index}`;
 
                                     return (
@@ -256,7 +256,7 @@ export default function UpdateInfoTables() {
                                             hover
                                             aria-checked={isItemSelected}
                                             tabIndex={-1}
-                                            key={row.userName}
+                                            key={row.username}
                                             selected={isItemSelected}
                                         >
                                             <TableCell>
@@ -267,7 +267,7 @@ export default function UpdateInfoTables() {
                                                 scope="row"
                                                 padding="none"
                                             >
-                                                {row.userName}
+                                                {row.username}
                                             </TableCell>
                                             <TableCell component="th"
                                                        id={labelId}
@@ -277,12 +277,12 @@ export default function UpdateInfoTables() {
                                             <TableCell component="th"
                                                        id={labelId}
                                                        scope="row"
-                                                       padding="none">{row.drivingLicenseNumber}
+                                                       padding="none">{row.licenceNo}
                                             </TableCell>
                                             <TableCell component="th"
                                                        id={labelId}
                                                        scope="row"
-                                                       padding="none">{row.drivingLicensePhoto}
+                                                       padding="none">{row.licenceImg}
                                             </TableCell>
                                             <TableCell component="th"
                                                        id={labelId}
@@ -292,7 +292,7 @@ export default function UpdateInfoTables() {
                                             <TableCell component="th"
                                                        id={labelId}
                                                        scope="row"
-                                                       padding="none">{row.contactNumber}
+                                                       padding="none">{row.contactNo}
                                             </TableCell>
 
                                             <TableCell component="th"
