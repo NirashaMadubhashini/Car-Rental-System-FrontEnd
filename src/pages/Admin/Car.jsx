@@ -306,16 +306,6 @@ const ManageCar = ({}) => {
                     </Grid>
                     <Grid item>
                         <TextField
-                            helperText="Enter Is_Available"
-                            id="demo-helper-text-aligned"
-                            label="Is_Available"
-                            name="isAvailable"
-                            onChange={handleInputChange}
-                            value={formValues.isAvailable}
-                        />
-                    </Grid>
-                    <Grid item>
-                        <TextField
                             helperText="Upload Front_View_Img"
                             id="demo-helper-text-aligned"
                             label="Front_View_Img"
