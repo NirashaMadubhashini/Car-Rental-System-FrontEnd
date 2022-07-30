@@ -5,7 +5,6 @@ class AdminService {
     baseURL = "http://localhost:8080/backEnd/api/v1/";
 
     addCar = async (data) => {
-
         const promise = new Promise((resolve, reject) => {
             axios.post(`${this.baseURL}admin/car`, data)
                 .then((res) => {
@@ -18,9 +17,36 @@ class AdminService {
         return await promise
     }
 
+    addDriver = async (data) => {
+        const promise = new Promise((resolve, reject) => {
+            axios.post(`${this.baseURL}admin/driver`, data)
+                .then((res) => {
+                    return resolve(res)
+                })
+                .catch((er) => {
+                    return resolve(er)
+                })
+        })
+        return await promise
+    }
+
     putCar = async (data) => {
         const promise = new Promise((resolve, reject) => {
-            axios.put(`${this.baseURL}admin/car`, data, {
+            axios.put(`${this.baseURL}admin/car`, data)
+                .then((res) => {
+
+                    return resolve(res)
+                })
+                .catch((er) => {
+                    return resolve(er)
+                })
+        })
+        return await promise;
+    };
+
+    putDriver = async (data) => {
+        const promise = new Promise((resolve, reject) => {
+            axios.put(`${this.baseURL}admin/driver`, data, {
             })
                 .then((res) => {
 
@@ -32,6 +58,51 @@ class AdminService {
         })
         return await promise;
     };
+
+    putCustomerDetail = async (data) => {
+        const promise = new Promise((resolve, reject) => {
+            axios.put(`${this.baseURL}admin/customer`, data, {
+            })
+                .then((res) => {
+
+                    return resolve(res)
+                })
+                .catch((err) => {
+                    return resolve(err)
+                })
+        })
+        return await promise;
+    };
+
+
+
+    deleteCar = async (params) => {
+        const promise = new Promise((resolve, reject) => {
+            axios.delete(`${this.baseURL}admin/car`, {params: params})
+                .then((res) => {
+                    return resolve(res)
+                })
+                .catch((err) => {
+                    return resolve(err)
+                })
+        })
+        return await promise;
+    };
+
+    deleteDriver = async (params) => {
+        const promise = new Promise((resolve, reject) => {
+            axios.delete(`${this.baseURL}admin/driver`, {params: params})
+                .then((res) => {
+                    return resolve(res)
+                })
+                .catch((err) => {
+                    return resolve(err)
+                })
+        })
+        return await promise;
+    };
+
+
 
     fetchCar = async () => {
         const promise = new Promise((resolve, reject) => {
@@ -46,7 +117,20 @@ class AdminService {
         return await promise;
     }
 
-    fetchAdminCustomer = async () => {
+    fetchDriver = async () => {
+        const promise = new Promise((resolve, reject) => {
+            axios.get(`${this.baseURL}admin/driver`)
+                .then((res) => {
+                    return resolve(res)
+                })
+                .catch((err) => {
+                    return resolve(err)
+                })
+        })
+        return await promise;
+    }
+
+    fetchCustomerDetail= async () => {
         const promise = new Promise((resolve, reject) => {
             axios.get(`${this.baseURL}admin/customer`)
                 .then((res) => {
@@ -58,7 +142,6 @@ class AdminService {
         })
         return await promise;
     }
-
 }
 
 export default new AdminService()

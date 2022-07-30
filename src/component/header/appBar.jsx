@@ -9,7 +9,7 @@ export default function Header() {
     return (
         <Box sx={{flexGrow: 1}}>
             <AppBar position="static">
-                <Toolbar sx={{backgroundColor: "darkblue"}}>
+                <Toolbar sx={{backgroundColor: "#1565BF"}}>
                     <Typography variant="h5" component="div" sx={{flexGrow: 1, marginLeft: 70,fontFamily:'sans-serif'}}>
                         Easy Car Rental
                     </Typography>

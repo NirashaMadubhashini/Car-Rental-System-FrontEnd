@@ -22,9 +22,9 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import TablePagination from "@mui/material/TablePagination";
 
 
-function createData(nicNumber, name, drivingLicenseNumber,location,pickupDate,pickupTime,returnDate,returnTime) {
+function createData( nicNo, name,licenseNo,location,pickupDate,pickupTime,returnDate,returnTime) {
     return {
-        nicNumber, name, drivingLicenseNumber,location,pickupDate,pickupTime,returnDate,returnTime
+        nicNo, name,licenseNo,location,pickupDate,pickupTime,returnDate,returnTime
     };
 }
 
@@ -66,7 +66,7 @@ function stableSort(array, comparator) {
 
 const headCells = [
     {
-        id: 'nicNumber',
+        id: 'nicNo',
         numeric: false,
         disablePadding: true,
         label: 'NIC Number',
@@ -78,7 +78,7 @@ const headCells = [
         label: 'Name',
     },
     {
-        id: 'drivingLicenseNumber',
+        id: 'licenseNo',
         numeric: false,
         disablePadding: true,
         label: 'License Number',
@@ -252,7 +252,7 @@ const Shedule = ({}) => {
                                         {stableSort(rows, getComparator(order, orderBy))
                                             .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                             .map((row, index) => {
-                                                const isItemSelected = isSelected(row.nicNumber);
+                                                const isItemSelected = isSelected(row.nicNo);
                                                 const labelId = `enhanced-table-checkbox-${index}`;
 
                                                 return (
@@ -260,7 +260,7 @@ const Shedule = ({}) => {
                                                         hover
                                                         aria-checked={isItemSelected}
                                                         tabIndex={-1}
-                                                        key={row.nicNumber}
+                                                        key={row.nicNo}
                                                         selected={isItemSelected}
                                                     >
                                                         <TableCell>
@@ -271,7 +271,7 @@ const Shedule = ({}) => {
                                                             scope="row"
                                                             padding="none"
                                                         >
-                                                            {row.nicNumber}
+                                                            {row.nicNo}
                                                         </TableCell>
                                                         <TableCell component="th"
                                                                    id={labelId}
@@ -281,7 +281,7 @@ const Shedule = ({}) => {
                                                         <TableCell component="th"
                                                                    id={labelId}
                                                                    scope="row"
-                                                                   padding="none">{row.drivingLicenseNumber}
+                                                                   padding="none">{row.licenseNo}
                                                         </TableCell>
                                                         <TableCell component="th"
                                                                    id={labelId}

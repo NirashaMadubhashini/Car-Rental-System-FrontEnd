@@ -106,7 +106,7 @@ export default function DriverPanel() {
         <MainPanel>
             <Box sx={{flexGrow: 1}}>
                 <CssBaseline/>
-                <AppBar position="static" open={open} sx={{backgroundColor: "darkblue", marginTop: -5}}>
+                <AppBar position="static" open={open} sx={{backgroundColor: "#1565BF", marginTop: -5}}>
                     <Toolbar>
                         <IconButton
                             color="inherit"

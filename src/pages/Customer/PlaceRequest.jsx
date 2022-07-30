@@ -103,6 +103,16 @@ const PlaceRequest = ({}) => {
 
                         />
                     </Grid>
+
+                    <Grid item>
+                        <TextField
+                            helperText="Enter Slip Photo"
+                            id="demo-helper-text-aligned"
+                            label="Slip Photo"
+                            name="slipFile"
+
+                        />
+                    </Grid>
                 </Grid>
                 <InputBase
                     sx={{ml: 10, mt: 5, flex: 1}}

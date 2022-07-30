@@ -61,10 +61,10 @@ export default function DriverDashBoard() {
                 />
             </LocalizationProvider>
 
-            <Box sx={{width: '100%', mt: 5}}>
+            <Box sx={{width: '100%', mt: 3}}>
                 <LinearProgress/>
             </Box>
-            <br/>
+
         </Card>
 
     );

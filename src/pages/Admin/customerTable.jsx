@@ -26,16 +26,16 @@ import TablePagination from "@mui/material/TablePagination";
 
 
 
-function createData(email,newPassword,nicNumber, nicPhoto, drivingLicenseNumber,drivingLicensePhoto,address,contactNumber,deleted) {
+function createData(email,password,nicNo,nicImg,licenceNo,licenceImg,address,contactNo,deleted) {
     return {
         email,
-        newPassword,
-        nicNumber,
-        nicPhoto,
-        drivingLicenseNumber,
-        drivingLicensePhoto,
+        password,
+        nicNo,
+        nicImg,
+        licenceNo,
+        licenceImg,
         address,
-        contactNumber,
+        contactNo,
         deleted
     };
 }
@@ -86,31 +86,31 @@ const headCells = [
         label: 'Email',
     },
     {
-        id: 'newPassword',
+        id: 'password',
         numeric: false,
         disablePadding: true,
         label: 'New Password',
     },
     {
-        id: 'nicNumber',
+        id: 'nicNo',
         numeric: false,
         disablePadding: true,
         label: 'NIC Number',
     },
     {
-        id: 'nicPhoto',
+        id: 'nicImg',
         numeric: false,
         disablePadding: true,
         label: 'NIC Photos',
     },
     {
-        id: 'drivingLicenseNumber',
+        id: 'licenceNo',
         numeric: false,
         disablePadding: true,
         label: 'Driving License Number',
     },
     {
-        id: 'drivingLicensePhoto',
+        id: 'licenceImg',
         numeric: false,
         disablePadding: true,
         label: 'Driving License Photo',
@@ -122,7 +122,7 @@ const headCells = [
         label: 'Address',
     },
     {
-        id: 'contactNumber',
+        id: 'contactNo',
         numeric: false,
         disablePadding: true,
         label: 'Contact Number',
@@ -278,27 +278,27 @@ export default function CustomerTables() {
                                             <TableCell component="th"
                                                        id={labelId}
                                                        scope="row"
-                                                       padding="none">{row.newPassword}
+                                                       padding="none">{row.password}
                                             </TableCell>
                                             <TableCell component="th"
                                                        id={labelId}
                                                        scope="row"
-                                                       padding="none">{row.nicNumber}
+                                                       padding="none">{row.nicNo}
                                             </TableCell>
                                             <TableCell component="th"
                                                        id={labelId}
                                                        scope="row"
-                                                       padding="none">{row.nicPhoto}
+                                                       padding="none">{row.nicImg}
                                             </TableCell>
                                             <TableCell component="th"
                                                        id={labelId}
                                                        scope="row"
-                                                       padding="none">{row.drivingLicenseNumber}
+                                                       padding="none">{row.licenceNo}
                                             </TableCell>
                                             <TableCell component="th"
                                                        id={labelId}
                                                        scope="row"
-                                                       padding="none">{row.drivingLicensePhoto}
+                                                       padding="none">{row.licenceImg}
                                             </TableCell>
                                             <TableCell component="th"
                                                        id={labelId}
@@ -308,7 +308,7 @@ export default function CustomerTables() {
                                             <TableCell component="th"
                                                        id={labelId}
                                                        scope="row"
-                                                       padding="none">{row.contactNumber}
+                                                       padding="none">{row.contactNo}
                                             </TableCell>
                                             <TableCell component="th"
                                                        id={labelId}

@@ -25,7 +25,7 @@ import ConstructionIcon from "@mui/icons-material/Construction";
 import TablePagination from "@mui/material/TablePagination";
 import Autocomplete from "@mui/material/Autocomplete";
 
-function createData(carNames,pickupDate,pickupTime,returnDate,returnTime,location,update,deleted) {
+function createData(carNames,pickupDate,pickupTime,returnDate,returnTime,location,slipFile,update,deleted) {
     return {
         carNames,
         pickupDate,
@@ -33,6 +33,7 @@ function createData(carNames,pickupDate,pickupTime,returnDate,returnTime,locatio
         returnDate,
         returnTime,
         location,
+        slipFile,
         update,
         deleted
     };
@@ -111,6 +112,12 @@ const headCells = [
         numeric: false,
         disablePadding: true,
         label: 'Location',
+    },
+    {
+        id: 'slipFile',
+        numeric: false,
+        disablePadding: true,
+        label: 'Slip Photo',
     },
     {
         id: 'update',
@@ -290,6 +297,11 @@ export default function PlaceRequestTables() {
                                                        id={labelId}
                                                        scope="row"
                                                        padding="none">{row.location}
+                                            </TableCell>
+                                            <TableCell component="th"
+                                                       id={labelId}
+                                                       scope="row"
+                                                       padding="none">{row.slipFile}
                                             </TableCell>
 
                                             <TableCell component="th"
