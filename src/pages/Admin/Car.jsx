@@ -743,7 +743,7 @@ const ManageCar = ({}) => {
                 </IconButton>
                 <div>
                     <div>
-                        <Button color="secondary" size="medium" type="submit" variant="contained"
+                        <Button color="secondary" size="medium" variant="contained"
                                 sx={{ml: 45, mt: -13}}>
                             Search
                         </Button>

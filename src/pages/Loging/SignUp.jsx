@@ -109,157 +109,156 @@ const SignUp = () => {
             licenceImg: "",
 
         });
-    };
-
-    const submitUser = async () => {
-
-        let dto = {};
-        dto = formValues;
-        console.log("form Values",formValues)
-        let res = await CustomerService.registerCustomer(formValues);//customer service --> postCustomer()
-        console.log(res.status)
-
-        console.log("res Status", res.data)
-        if (res.data.code === 200) {
-
-            setStatus({
-                alert: true,
-                message: "S",
-                severity: 'success'
-            })
-            showToast('success', 'saved successfully !');
-
-            clearFields();
-
-        } else {
-            setStatus({
-                alert: true,
-                message: "E",
-                severity: 'error'
-            });
-            console.log("not Equal")
-            showToast('error', 'Not Saved');
-        }
 };
 
+        const submitUser = async () => {
 
-return (
-    <Grid>
-        <Paper elevation={10} style={paperStyleContainer}>
-            <Grid align='center'>
-                <Avatar style={avatarStyle}><LockOpenIcon/></Avatar>
-                <h2>Sign Up</h2>
+            let dto = {};
+            dto = formValues;
+            console.log("form Values",formValues)
+            let res = await CustomerService.registerCustomer(formValues);
+            console.log(res.status)
+
+            console.log("res Status", res.data)
+            if (res.data.code === 200) {
+
+                setStatus({
+                    alert: true,
+                    message: "S",
+                    severity: 'success'
+                })
+                showToast('success', 'saved successfully !');
+
+                clearFields();
+
+            } else {
+                setStatus({
+                    alert: true,
+                    message: "E",
+                    severity: 'error'
+                });
+                console.log("not Equal")
+                showToast('error', 'Not Saved');
+            }
+        };
+
+
+        return (
+            <Grid>
+                <Paper elevation={10} style={paperStyleContainer}>
+                    <Grid align='center'>
+                        <Avatar style={avatarStyle}><LockOpenIcon/></Avatar>
+                        <h2>Sign Up</h2>
+                    </Grid>
+
+                    <Box
+                        component="form"
+                        onSubmit={handleSubmit}
+                        sx={{
+                            '& > :not(style)': {},
+                        }}
+                        noValidate
+                        autoComplete="off"
+                    >
+                        <Grid container alignItems="center" justify="center" direction="row" spacing={2}
+                              sx={{paddingLeft: 2, mt:5}}>
+
+                            <Grid item sx={{paddingLeft: 2, mt:-12}}>
+                                <TextField label='UserName' placeholder='Enter UserName'
+                                           name="username"
+                                           onChange={handleInputChange} validators={['required']}
+                                           value={formValues.username}/>
+                            </Grid>
+
+                            <Grid item sx={{ml:-30, mt:5}}>
+                                <TextField label='Email' placeholder='Enter  Email'
+                                           name="email"
+                                           onChange={handleInputChange} validators={['required']}
+                                           value={formValues.email}/>
+                            </Grid>
+
+                            <Grid item >
+                                <FormControl sx={{mt: -17.5, ml: 30}} variant="outlined">
+                                    <InputLabel htmlFor="outlined-adornment-password">New Password</InputLabel>
+                                    <OutlinedInput
+                                        id="outlined-adornment-password"
+                                        type={values.showPassword ? 'text' : 'password'}
+                                        value={values.password}
+                                        onChange={handleChange('password')}
+                                        endAdornment={
+                                            <InputAdornment position="end">
+                                                <IconButton
+                                                    aria-label="toggle password visibility"
+                                                    onClick={handleClickShowPassword}
+                                                    onMouseDown={handleMouseDownPassword}
+                                                    edge="end"
+                                                >
+                                                    {values.showPassword ? <VisibilityOff/> : <Visibility/>}
+                                                </IconButton>
+                                            </InputAdornment>
+                                        }
+                                        label="Password"
+                                        name="password"
+                                        onChange={handleInputChange}
+                                        value={formValues.password}
+                                    />
+                                </FormControl>
+                            </Grid>
+
+                            <Grid item sx={{mt: -17, ml: 30}}>
+                                <TextField label='Address' placeholder='Enter Address'
+                                           name="address"
+                                           onChange={handleInputChange}
+                                           value={formValues.address}/>
+                            </Grid>
+
+
+                            <Grid item sx={{mt: -4}}>
+                                <TextField label='NIC Number' placeholder='Enter NIC Number'
+                                           name="nicNo"
+                                           onChange={handleInputChange}
+                                           value={formValues.nicNo}/>
+                            </Grid>
+
+                            <Grid item sx={{mt: -4}}>
+                                <TextField label='NIC Photo' placeholder='Upload NIC Photo'
+                                           name="nicImg"
+                                           onChange={handleInputChange}
+                                           value={formValues.nicImg}/>
+                            </Grid>
+
+                            <Grid item>
+                                <TextField label='Driving License Number' placeholder='Enter Driving License Number'
+                                           name="licenceNo"
+                                           onChange={handleInputChange}
+                                           value={formValues.licenceNo}/>
+                            </Grid>
+
+                            <Grid item>
+                                <TextField label='Driving License Photo' placeholder='Upload Driving License Photo'
+                                           name="licenceImg"
+                                           onChange={handleInputChange}
+                                           value={formValues.licenceImg}/>
+                            </Grid>
+                            <Grid item sx={{ml:15}}>
+                                <TextField label='Contact Number' placeholder='Enter Contact Number'
+                                           name="contactNo"
+                                           onChange={handleInputChange}
+                                           value={formValues.contactNo}/>
+                            </Grid>
+
+                        </Grid>
+                        <Button type='submit' color={btnColor} variant="contained" sx={{mt: 3, ml: 20}}>
+                            {btnLabel}
+                        </Button>
+                    </Box>
+                    <Typography sx={{mt: 3, ml: 20}}> Previous Page ?
+                        <Link href="/" underline="none">
+                            Sign In
+                        </Link>
+                    </Typography>
+                </Paper>
             </Grid>
-
-            <Box
-                component="form"
-                onSubmit={handleSubmit}
-                sx={{
-                    '& > :not(style)': {},
-                }}
-                noValidate
-                autoComplete="off"
-            >
-                <Grid container alignItems="center" justify="center" direction="row" spacing={2}
-                      sx={{paddingLeft: 2, mt:5}}>
-
-                    <Grid item sx={{paddingLeft: 2, mt:-12}}>
-                        <TextField label='UserName' placeholder='Enter UserName'
-                                   name="username"
-                                   onChange={handleInputChange} validators={['required']}
-                                   value={formValues.username}/>
-                    </Grid>
-
-                    <Grid item sx={{ml:-30, mt:5}}>
-                        <TextField label='Email' placeholder='Enter  Email'
-                                   name="email"
-                                   onChange={handleInputChange} validators={['required']}
-                                   value={formValues.email}/>
-                    </Grid>
-
-                    <Grid item >
-                        <FormControl sx={{mt: -17.5, ml: 30}} variant="outlined">
-                            <InputLabel htmlFor="outlined-adornment-password">New Password</InputLabel>
-                            <OutlinedInput
-                                id="outlined-adornment-password"
-                                type={values.showPassword ? 'text' : 'password'}
-                                value={values.password}
-                                onChange={handleChange('password')}
-                                endAdornment={
-                                    <InputAdornment position="end">
-                                        <IconButton
-                                            aria-label="toggle password visibility"
-                                            onClick={handleClickShowPassword}
-                                            onMouseDown={handleMouseDownPassword}
-                                            edge="end"
-                                        >
-                                            {values.showPassword ? <VisibilityOff/> : <Visibility/>}
-                                        </IconButton>
-                                    </InputAdornment>
-                                }
-                                label="Password"
-                                name="password"
-                                onChange={handleInputChange}
-                                value={formValues.password}
-                            />
-                        </FormControl>
-                    </Grid>
-
-                    <Grid item sx={{mt: -17, ml: 30}}>
-                        <TextField label='Address' placeholder='Enter Address'
-                                   name="address"
-                                   onChange={handleInputChange}
-                                   value={formValues.address}/>
-                    </Grid>
-
-
-                    <Grid item sx={{mt: -4}}>
-                        <TextField label='NIC Number' placeholder='Enter NIC Number'
-                                   name="nicNo"
-                                   onChange={handleInputChange}
-                                   value={formValues.nicNo}/>
-                    </Grid>
-
-                    <Grid item sx={{mt: -4}}>
-                        <TextField label='NIC Photo' placeholder='Upload NIC Photo'
-                                   name="nicImg"
-                                   onChange={handleInputChange}
-                                   value={formValues.nicImg}/>
-                    </Grid>
-
-                    <Grid item>
-                        <TextField label='Driving License Number' placeholder='Enter Driving License Number'
-                                   name="licenceNo"
-                                   onChange={handleInputChange}
-                                   value={formValues.licenceNo}/>
-                    </Grid>
-
-                    <Grid item>
-                        <TextField label='Driving License Photo' placeholder='Upload Driving License Photo'
-                                   name="licenceImg"
-                                   onChange={handleInputChange}
-                                   value={formValues.licenceImg}/>
-                    </Grid>
-                    <Grid item sx={{ml:15}}>
-                        <TextField label='Contact Number' placeholder='Enter Contact Number'
-                                   name="contactNo"
-                                   onChange={handleInputChange}
-                                   value={formValues.contactNo}/>
-                    </Grid>
-
-                </Grid>
-                <Button type='submit' color={btnColor} variant="contained" sx={{mt: 3, ml: 20}}>
-                    {btnLabel}
-                </Button>
-            </Box>
-            <Typography sx={{mt: 3, ml: 20}}> Previous Page ?
-                <Link href="/" underline="none">
-                    Sign In
-                </Link>
-            </Typography>
-        </Paper>
-    </Grid>
-)
-}
-
-export default SignUp
+        )
+    }
+    export default SignUp

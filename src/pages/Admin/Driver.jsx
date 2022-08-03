@@ -273,7 +273,7 @@ const ManageDriver = ({}) => {
             let res = await AdminService.addDriver(dto);//customer service --> postCustomer()
 
 
-            if (res.status === 201) {
+            if (res.data.code === 200 ) {
                 setStatus({
                     alert: true,
                     message: "S",
@@ -427,8 +427,8 @@ const ManageDriver = ({}) => {
         page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
     return (
-
         <div>
+            <ToastContainer/>
             <Grid item lg={12} xs={12} sm={12} md={12}>
                 <RubberBtn name="Manage Driver"/>
             </Grid>
@@ -521,7 +521,7 @@ const ManageDriver = ({}) => {
                 </IconButton>
                 <div>
                     <div>
-                        <Button color="secondary" size="medium" type="submit" variant="contained"
+                        <Button color="secondary" size="medium" variant="contained"
                                 sx={{ml: 45, mt: -13}}>
                             Search
                         </Button>

@@ -102,6 +102,18 @@ class AdminService {
         return await promise;
     };
 
+    customerAccept = async (type,nicNo) => {
+        const promise = new Promise((resolve, reject) => {
+            axios.post(`${this.baseURL}admin/req/accept/${type}/${nicNo}`)
+                .then((res) => {
+                    return resolve(res)
+                })
+                .catch((err) => {
+                    return resolve(err)
+                })
+        })
+        return await promise;
+    };
 
 
     fetchCar = async () => {
@@ -130,9 +142,9 @@ class AdminService {
         return await promise;
     }
 
-    fetchCustomerDetail= async () => {
+    searchCustomer= async (nicNo) => {
         const promise = new Promise((resolve, reject) => {
-            axios.get(`${this.baseURL}admin/customer`)
+            axios.get(`${this.baseURL}admin/customer ${nicNo}`)
                 .then((res) => {
                     return resolve(res)
                 })

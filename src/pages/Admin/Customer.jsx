@@ -19,14 +19,8 @@ import Paper from "@mui/material/Paper";
 import TableContainer from "@mui/material/TableContainer";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
-import DeleteIcon from "@mui/icons-material/Delete";
 import TablePagination from "@mui/material/TablePagination";
 import CustomerService from "../../services/CustomerService";
-import DialogActions from "@mui/material/DialogActions";
-import Dialog from "@mui/material/Dialog";
-import DialogTitle from "@mui/material/DialogTitle";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogContent from "@mui/material/DialogContent";
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 
 const defaultPosition = toast.POSITION.BOTTOM_CENTER;
@@ -216,7 +210,7 @@ const ManageCustomer = ({}) => {
         licenceNo: "",
         licenceImg: "",
         username: "",
-        isAccept:false,
+        isAccept: false,
         /**
          * Exta data
          * */
@@ -238,16 +232,14 @@ const ManageCustomer = ({}) => {
 
     const [tblData, setTblData] = useState([]);
 
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState(false);
+    const [isOk, setOk] = useState(false);
 
 
     const handleClickOpen = () => {
         setOpen(true);
     };
 
-    const handleClose = () => {
-        setOpen(false);
-    };
 
     useEffect(() => {
         loadData();
@@ -262,10 +254,30 @@ const ManageCustomer = ({}) => {
         });
     };
 
-    const driverRequest = async (isAccepted) => {
-        this.setState({
-            isDialogOpen: false
-        });
+
+
+    const acceptRequest = async (isAccepted, nicNo) => {
+        let res = await AdminService.customerAccept("ACCEPTED", nicNo);
+
+        if (res.status === 200) {
+            setStatus({
+                alert: true,
+                message: res.data.message,
+                severity: 'success'
+            });
+            showToast('success', 'successfully Accepted!');
+            setOk(false);
+            loadData()
+        } else {
+            setStatus({
+                alert: true,
+                message: res.data.message,
+                severity: 'error'
+            });
+            showToast('error', 'Error');
+            setOk(false);
+        }
+
     };
 
 
@@ -282,7 +294,7 @@ const ManageCustomer = ({}) => {
         const newArr2 = []
         for (let i = 0; i < td.length; i++) {
             newArr2.push((createData(
-                td[i].email, td[i].password, td[i].address, td[i].contactNo, td[i].nicNo, td[i].nicImg, td[i].licenceNo, td[i].licenceImg,td[i].isAccept
+                td[i].email, td[i].password, td[i].nicNo, td[i].nicImg, td[i].licenceNo, td[i].licenceImg, td[i].address, td[i].contactNo, td[i].isAccept
             )))
         }
         console.log("new Arra", newArr2)
@@ -327,6 +339,12 @@ const ManageCustomer = ({}) => {
     const emptyRows =
         page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
+    const clearFields = () => {
+        setFormValues({
+            search: ""
+        });
+    };
+
     return (
 
         <div>
@@ -343,27 +361,6 @@ const ManageCustomer = ({}) => {
                 noValidate
                 autoComplete="off"
             >
-                <Dialog
-                    open={open}
-                    onClose={handleClose}
-                    aria-labelledby="alert-dialog-title"
-                    aria-describedby="alert-dialog-description"
-                >
-                    <DialogTitle id="alert-dialog-title">
-                        {"Confirm?"}
-                    </DialogTitle>
-                    <DialogContent>
-                        <DialogContentText id="alert-dialog-description">
-                  Are you sure you want to accept this Customer...?
-                        </DialogContentText>
-                    </DialogContent>
-                    <DialogActions>
-                        <Button onClick={handleClose}>No</Button>
-                        <Button onClick={handleClose} autoFocus>
-                           Yes
-                        </Button>
-                    </DialogActions>
-                </Dialog>
 
                 <InputBase
                     sx={{ml: 10, mt: 5, flex: 1}}
@@ -376,12 +373,14 @@ const ManageCustomer = ({}) => {
                 </IconButton>
                 <div>
                     <div>
-                        <Button color="secondary" size="medium" type="submit" variant="contained"
+                        <Button
+                                color="secondary" size="medium" variant="contained"
+                                value={formValues.search}
                                 sx={{ml: 45, mt: -13}}>
                             Search
                         </Button>
 
-                        <Button type="reset" variant="contained" color="success"
+                        <Button onClick={clearFields} type="reset" variant="contained" color="success"
                                 sx={{ml: 3, mt: -13}}>
                             Reset
                         </Button>
@@ -473,8 +472,7 @@ const ManageCustomer = ({}) => {
                                                         >
 
                                                             <IconButton onClick={() => {
-                                                                setOpen(true);
-                                                                driverRequest(row.isAccept)
+                                                                acceptRequest(row.isAccept, row.nicNo)
                                                             }}
                                                                         color="success" aria-label="delete"
                                                                         component="label">
