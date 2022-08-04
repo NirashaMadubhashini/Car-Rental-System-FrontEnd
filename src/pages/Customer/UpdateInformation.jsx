@@ -6,7 +6,26 @@ import {Grid} from "@mui/material";
 import TextField from "@mui/material/TextField";
 import RubberBtn from "../../component/common/RubberBandBtn";
 import CustomerService from "../../services/CustomerService";
+import {toast, ToastContainer} from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+const defaultPosition = toast.POSITION.BOTTOM_CENTER;
 
+
+export const showToast = (type = "success", msg, autoClose = 2000, className = "primaryColor", position = defaultPosition) => {
+    if (type === "success") {
+        toast.success(msg, {
+            autoClose: autoClose === null ? 2000 : autoClose,
+            className: className === null ? "primaryColor" : className,
+            position: position,
+        });
+    } else if (type === "error") {
+        toast.error(msg, {
+            autoClose: autoClose === null ? 2000 : autoClose,
+            className: className === null ? "dangerColor" : className,
+            position: position,
+        });
+    }
+};
 
 const UpdateInformation = ({}) => {
 
@@ -93,7 +112,7 @@ const UpdateInformation = ({}) => {
                     message: "S",
                     severity: 'success'
                 })
-
+                showToast('success', 'update successfully !');
                 clearFields();
                 loadData();
             } else {
@@ -102,6 +121,7 @@ const UpdateInformation = ({}) => {
                     message: "E",
                     severity: 'error'
                 });
+                showToast('error', 'Not Updated');
             }
         }
     };
@@ -155,6 +175,7 @@ const UpdateInformation = ({}) => {
     return (
 
         <div>
+            <ToastContainer/>
             <Grid item lg={12} xs={12} sm={12} md={12}>
                 <RubberBtn name="Update Informations"/>
             </Grid>
@@ -241,7 +262,7 @@ const UpdateInformation = ({}) => {
                                 sx={{ml: 10, mt: 5}}>
                             {btnLabel}
                         </Button>
-                        <Button type="reset" variant="contained" color="success"
+                        <Button onClick={clearFields} type="reset" variant="contained" color="success"
                                 sx={{ml: 3, mt: 5}}>
                             Reset
                         </Button>

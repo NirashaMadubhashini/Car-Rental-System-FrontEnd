@@ -10,6 +10,7 @@ import IconButton from "@mui/material/IconButton";
 import {Visibility, VisibilityOff} from "@mui/icons-material";
 import {showToast} from "../Admin/Car";
 import CustomerService from "../../services/CustomerService";
+import {toast, ToastContainer} from 'react-toastify';
 
 const SignUp = () => {
     const paperStyle = {padding: 20, height: '70vh', width: 350, margin: "20px auto"}
@@ -58,7 +59,6 @@ const SignUp = () => {
         /**
          * Exta data
          * */
-        name: "",
         isRegistered: false,
         isDriverRequested: false,
         isAccept: false
@@ -119,7 +119,7 @@ const SignUp = () => {
             let res = await CustomerService.registerCustomer(formValues);
             console.log(res.status)
 
-            console.log("res Status", res.data)
+            console.log("res Status", res)
             if (res.data.code === 200) {
 
                 setStatus({
@@ -145,6 +145,7 @@ const SignUp = () => {
 
         return (
             <Grid>
+            <ToastContainer/>
                 <Paper elevation={10} style={paperStyleContainer}>
                     <Grid align='center'>
                         <Avatar style={avatarStyle}><LockOpenIcon/></Avatar>

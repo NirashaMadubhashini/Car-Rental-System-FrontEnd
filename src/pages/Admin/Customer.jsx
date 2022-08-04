@@ -7,7 +7,6 @@ import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
 import RubberBtn from "../../component/common/RubberBandBtn";
 import AdminService from "../../services/AdminService";
-import {toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
@@ -22,11 +21,13 @@ import TableBody from "@mui/material/TableBody";
 import TablePagination from "@mui/material/TablePagination";
 import CustomerService from "../../services/CustomerService";
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import {toast, ToastContainer} from 'react-toastify';
+import CancelIcon from '@mui/icons-material/Cancel';
 
 const defaultPosition = toast.POSITION.BOTTOM_CENTER;
 
 
-function createData(email, password, nicNo, nicImg, licenceNo, licenceImg, address, contactNo, isAccept) {
+function createData(email, password, nicNo, nicImg, licenceNo, licenceImg, address, contactNo, isAccept, decline) {
     return {
         email,
         password,
@@ -36,7 +37,8 @@ function createData(email, password, nicNo, nicImg, licenceNo, licenceImg, addre
         licenceImg,
         address,
         contactNo,
-        isAccept
+        isAccept,
+        decline
     };
 }
 
@@ -122,6 +124,12 @@ const headCells = [
         numeric: false,
         disablePadding: true,
         label: 'Accept',
+    },
+    {
+        id: 'decline',
+        numeric: false,
+        disablePadding: true,
+        label: 'Decline',
     },
 ];
 
@@ -214,7 +222,6 @@ const ManageCustomer = ({}) => {
         /**
          * Exta data
          * */
-        name: "",
         isRegistered: false,
         isDriverRequested: false,
         // isAccept: false
@@ -255,17 +262,40 @@ const ManageCustomer = ({}) => {
     };
 
 
-
-    const acceptRequest = async (isAccepted, nicNo) => {
+    const acceptRequest = async (nicNo) => {
         let res = await AdminService.customerAccept("ACCEPTED", nicNo);
 
-        if (res.status === 200) {
+        if (res.data.code === 200) {
             setStatus({
                 alert: true,
                 message: res.data.message,
                 severity: 'success'
             });
             showToast('success', 'successfully Accepted!');
+            setOk(false);
+            loadData()
+        } else {
+            setStatus({
+                alert: true,
+                message: res.data.message,
+                severity: 'error'
+            });
+            showToast('error', 'Error');
+            setOk(false);
+        }
+
+    };
+
+    const declineRequest = async (nicNo) => {
+        let res = await AdminService.customerAccept("DENIED", nicNo);
+        console.log(res)
+        if (res.data.code === 200) {
+            setStatus({
+                alert: true,
+                message: res.data.message,
+                severity: 'success'
+            });
+            showToast('success', 'successfully DENIED!');
             setOk(false);
             loadData()
         } else {
@@ -294,7 +324,7 @@ const ManageCustomer = ({}) => {
         const newArr2 = []
         for (let i = 0; i < td.length; i++) {
             newArr2.push((createData(
-                td[i].email, td[i].password, td[i].nicNo, td[i].nicImg, td[i].licenceNo, td[i].licenceImg, td[i].address, td[i].contactNo, td[i].isAccept
+                td[i].email, td[i].password, td[i].nicNo, td[i].nicImg, td[i].licenceNo, td[i].licenceImg, td[i].address, td[i].contactNo, td[i].isAccept, td[i].decline
             )))
         }
         console.log("new Arra", newArr2)
@@ -347,8 +377,8 @@ const ManageCustomer = ({}) => {
 
 
     return (
-
         <div>
+            <ToastContainer/>
             <Grid item lg={12} xs={12} sm={12} md={12}>
                 <RubberBtn name="Manage Customer"/>
             </Grid>
@@ -375,9 +405,9 @@ const ManageCustomer = ({}) => {
                 <div>
                     <div>
                         <Button
-                                color="secondary" size="medium" variant="contained"
-                                value={formValues.search}
-                                sx={{ml: 45, mt: -13}}>
+                            color="secondary" size="medium" variant="contained"
+                            value={formValues.search}
+                            sx={{ml: 45, mt: -13}}>
                             Search
                         </Button>
 
@@ -478,6 +508,21 @@ const ManageCustomer = ({}) => {
                                                                         color="success" aria-label="delete"
                                                                         component="label">
                                                                 <CheckCircleOutlineIcon/>
+                                                            </IconButton>
+                                                        </TableCell>
+
+                                                        <TableCell component="th"
+                                                                   id={labelId}
+                                                                   scope="row"
+                                                                   padding="none"
+                                                        >
+
+                                                            <IconButton onClick={() => {
+                                                                declineRequest(row.nicNo)
+                                                            }}
+                                                                        color="error" aria-label="delete"
+                                                                        component="label">
+                                                                <CancelIcon/>
                                                             </IconButton>
                                                         </TableCell>
                                                     </TableRow>
