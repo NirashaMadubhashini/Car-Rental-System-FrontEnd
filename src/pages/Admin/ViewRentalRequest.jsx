@@ -32,16 +32,16 @@ const ViewRentalRequest = ({}) => {
                 <Grid container alignItems="center" justify="center" direction="row" spacing={2}
                       sx={{paddingLeft: 5, mt: 5}}
                 >
-                    <Grid item>
-                        <TextField
-                            helperText="Enter Customer NICNumber"
-                            variant="outlined"
-                            id="outlined-basic"
-                            label="Customer NIC Number"
-                            name="customerNICNumber"
+                    {/*<Grid item>*/}
+                    {/*    <TextField*/}
+                    {/*        helperText="Enter Customer NICNumber"*/}
+                    {/*        variant="outlined"*/}
+                    {/*        id="outlined-basic"*/}
+                    {/*        label="Customer NIC Number"*/}
+                    {/*        name="customerNICNumber"*/}
 
-                        />
-                    </Grid>
+                    {/*    />*/}
+                    {/*</Grid>*/}
                     <Grid item>
                         <TextField
                             helperText="Enter Driver Name"
@@ -51,57 +51,62 @@ const ViewRentalRequest = ({}) => {
 
                         />
                     </Grid>
-                    <Grid item>
-                        <TextField
-                            helperText="Enter Vehicle Number"
-                            id="demo-helper-text-aligned"
-                            label="Vehicle Number"
-                            name="vehicleNumber"
+                    {/*<Grid item>*/}
+                    {/*    <TextField*/}
+                    {/*        helperText="Enter Vehicle Number"*/}
+                    {/*        id="demo-helper-text-aligned"*/}
+                    {/*        label="Vehicle Number"*/}
+                    {/*        name="vehicleNumber"*/}
 
-                        />
-                    </Grid>
-                    <Grid item>
-                        <TextField
-                            helperText="Enter No.of Cars"
-                            id="demo-helper-text-aligned"
-                            label="No.of Cars"
-                            name="noOfCars"
+                    {/*    />*/}
+                    {/*</Grid>*/}
+                    {/*<Grid item>*/}
+                    {/*    <TextField*/}
+                    {/*        helperText="Enter No.of Cars"*/}
+                    {/*        id="demo-helper-text-aligned"*/}
+                    {/*        label="No.of Cars"*/}
+                    {/*        name="noOfCars"*/}
 
-                        />
-                    </Grid>
-                    <Grid item>
-                        <TextField
-                            helperText="Enter Payement"
-                            id="demo-helper-text-aligned"
-                            label="Payement"
-                            name="payement"
+                    {/*    />*/}
+                    {/*</Grid>*/}
+                    {/*<Grid item>*/}
+                    {/*    <TextField*/}
+                    {/*        helperText="Enter Payement"*/}
+                    {/*        id="demo-helper-text-aligned"*/}
+                    {/*        label="Payement"*/}
+                    {/*        name="payement"*/}
 
-                        />
-                    </Grid>
-                    <Grid item>
-                        <TextField
-                            helperText="Enter Date"
-                            id="demo-helper-text-aligned"
-                            label="Date"
-                            name="date"
+                    {/*    />*/}
+                    {/*</Grid>*/}
+                    {/*<Grid item>*/}
+                    {/*    <TextField*/}
+                    {/*        helperText="Enter Date"*/}
+                    {/*        id="demo-helper-text-aligned"*/}
+                    {/*        label="Date"*/}
+                    {/*        name="date"*/}
 
-                        />
-                    </Grid>
+                    {/*    />*/}
+                    {/*</Grid>*/}
                 </Grid>
-                <InputBase
-                    sx={{ml: 10, mt: 5, flex: 1}}
-                    placeholder="Search Customer NIC Number"
-                    inputProps={{'aria-label': 'search Customer NIC Number'}}
-                    variant="standard"
-                />
-                <IconButton type="submit" sx={{p: '20px'}} aria-label="search">
-                    <SearchIcon/>
-                </IconButton>
+                {/*<InputBase*/}
+                {/*    sx={{ml: 10, mt: 5, flex: 1}}*/}
+                {/*    placeholder="Search Customer NIC Number"*/}
+                {/*    inputProps={{'aria-label': 'search Customer NIC Number'}}*/}
+                {/*    variant="standard"*/}
+                {/*/>*/}
+                {/*<IconButton type="submit" sx={{p: '20px'}} aria-label="search">*/}
+                {/*    <SearchIcon/>*/}
+                {/*</IconButton>*/}
                 <div>
                     <div>
-                        <Button color="secondary" size="medium" type="submit" variant="contained"
-                                sx={{ml: 45, mt: -13}}>
-                            Search
+                        {/*<Button color="secondary" size="medium" type="submit" variant="contained"*/}
+                        {/*        sx={{ml: 45, mt: -13}}>*/}
+                        {/*    Search*/}
+                        {/*</Button>*/}
+
+                        <Button color="secondary" size="medium" variant="contained"
+                                sx={{ml: 38, mt: -13}}>
+                            Update
                         </Button>
 
                         <Button type="reset" variant="contained" color="success"

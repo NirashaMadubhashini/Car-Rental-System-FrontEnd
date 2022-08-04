@@ -24,9 +24,13 @@ import InfoIcon from '@mui/icons-material/Info';
 import CarDetails from "./CarDetail";
 import RequestDetails from "./RequestDetails";
 import UpdateInformation from "./UpdateInformation";
-import CustomerDashBoard from "./CustomerDashBoard";
 import PlaceRequest from "./PlaceRequest";
 import CheckIcon from '@mui/icons-material/Check';
+import CustomerDashBoard from "./CustomerDashBoard";
+
+
+
+
 
 const drawerWidth = 240;
 
@@ -204,6 +208,7 @@ export default function CustomerPanel() {
                         isRequestDetails ? <RequestDetails/> :
                             isPlaceRequest ? <PlaceRequest/> :
                                 <CustomerDashBoard/>
+
             }
         </MainPanel>
     );

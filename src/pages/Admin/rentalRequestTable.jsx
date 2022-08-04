@@ -110,18 +110,18 @@ const headCells = [
         disablePadding: true,
         label: 'Update',
     },
-    {
-        id: 'deleted',
-        numeric: false,
-        disablePadding: true,
-        label: 'Delete',
-    },
-    {
-        id: 'manageRequest',
-        numeric: false,
-        disablePadding: true,
-        label: 'Manage Request',
-    },
+    // {
+    //     id: 'deleted',
+    //     numeric: false,
+    //     disablePadding: true,
+    //     label: 'Delete',
+    // },
+    // {
+    //     id: 'manageRequest',
+    //     numeric: false,
+    //     disablePadding: true,
+    //     label: 'Manage Request',
+    // },
 ];
 
 function EnhancedTableHead(props) {
@@ -298,24 +298,24 @@ export default function RentalRequestTables() {
                                                 </IconButton>
 
                                             </TableCell>
-                                            <TableCell component="th"
-                                                       id={labelId}
-                                                       scope="row"
-                                                       padding="none">{row.delete}
+                                            {/*<TableCell component="th"*/}
+                                            {/*           id={labelId}*/}
+                                            {/*           scope="row"*/}
+                                            {/*           padding="none">{row.delete}*/}
 
-                                                <IconButton color="error" aria-label="delete" component="label">
-                                                    <DeleteIcon/>
-                                                </IconButton>
-                                            </TableCell>
+                                            {/*    <IconButton color="error" aria-label="delete" component="label">*/}
+                                            {/*        <DeleteIcon/>*/}
+                                            {/*    </IconButton>*/}
+                                            {/*</TableCell>*/}
 
-                                            <TableCell component="th"
-                                                       id={labelId}
-                                                       scope="row"
-                                                       padding="none">{row.manageRequest}
-                                                <IconButton color="secondary" aria-label="maintain" component="label">
-                                                    <ManageAccountsIcon/>
-                                                </IconButton>
-                                            </TableCell>
+                                            {/*<TableCell component="th"*/}
+                                            {/*           id={labelId}*/}
+                                            {/*           scope="row"*/}
+                                            {/*           padding="none">{row.manageRequest}*/}
+                                            {/*    <IconButton color="secondary" aria-label="maintain" component="label">*/}
+                                            {/*        <ManageAccountsIcon/>*/}
+                                            {/*    </IconButton>*/}
+                                            {/*</TableCell>*/}
                                         </TableRow>
                                     );
                                 })}

@@ -22,9 +22,10 @@ import {visuallyHidden} from "@mui/utils";
 import PropTypes from "prop-types";
 import {toast, ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
 const defaultPosition = toast.POSITION.BOTTOM_CENTER;
 
-function createData(idCar, registrationNO, brand, type, noOfPassengers, transmissionType, fuelType, color, frontViewImg, backViewImg, sideViewImg, internalViewImg, dailyRate, monthlyRate, freeKmForPrice, freeKmForDuration, priceForExtraKm ,update, deleted, maintain) {
+function createData(idCar, registrationNO, brand, type, noOfPassengers, transmissionType, fuelType, color, frontViewImg, backViewImg, sideViewImg, internalViewImg, dailyRate, monthlyRate, freeKmForPrice, freeKmForDuration, priceForExtraKm, update, deleted, maintain) {
     return {
         idCar,
         registrationNO,
@@ -545,6 +546,16 @@ const ManageCar = ({}) => {
 
     // car
 
+    //upload image start//
+    const [imgfile, uploadimg] = useState([])
+    console.log("Image FIles", imgfile);
+    const imgFilehandler = (e) => {
+        if (e.target.files.length !== 0) {
+            uploadimg(imgfile => [...imgfile, URL.createObjectURL(e.target.files[0])])
+        }
+    }
+    //upload image end//
+
 
     return (
         <div>
@@ -688,6 +699,7 @@ const ManageCar = ({}) => {
                             value={formValues.priceForExtraKm}
                         />
                     </Grid>
+
                     <Grid item>
                         <TextField
                             helperText="Upload Front_View_Img"
@@ -698,6 +710,16 @@ const ManageCar = ({}) => {
                             value={formValues.frontViewImg}
                         />
                     </Grid>
+
+                    {/*<div className="App">*/}
+                    {/*    <input type="file" onChange={imgFilehandler}*/}
+                    {/*           value={formValues.frontViewImg}*/}
+                    {/*           name="frontViewImg" helperText="Upload Front_View_Img"*/}
+                    {/*           id="demo-helper-text-aligned"*/}
+                    {/*           label="Front_View_Img"/>*/}
+
+                    {/*</div>*/}
+
                     <Grid item>
                         <TextField
                             helperText="Upload Back_View_Img"
@@ -708,6 +730,15 @@ const ManageCar = ({}) => {
                             value={formValues.backViewImg}
                         />
                     </Grid>
+
+                    {/*<div className="App">*/}
+                    {/*    <input type="file" onChange={imgFilehandler}*/}
+                    {/*           value={formValues.backViewImg}*/}
+                    {/*           name="backViewImg" helperText="Upload Back_View_Img"*/}
+                    {/*           id="demo-helper-text-aligned"*/}
+                    {/*           label="Back_View_Img"/>*/}
+
+                    {/*</div>*/}
 
                     <Grid item>
                         <TextField
@@ -720,6 +751,15 @@ const ManageCar = ({}) => {
                         />
                     </Grid>
 
+                    {/*<div className="App">*/}
+                    {/*    <input type="file" onChange={imgFilehandler}*/}
+                    {/*           value={formValues.sideViewImg}*/}
+                    {/*           name="sideViewImg" helperText="Upload Side_View_Img"*/}
+                    {/*           id="demo-helper-text-aligned"*/}
+                    {/*           label="Side_View_Img"/>*/}
+
+                    {/*</div>*/}
+
                     <Grid item>
                         <TextField
                             helperText="Upload  Internal_View_Img"
@@ -730,6 +770,16 @@ const ManageCar = ({}) => {
                             value={formValues.internalViewImg}
                         />
                     </Grid>
+
+                    {/*<div className="App">*/}
+                    {/*    <input type="file" onChange={imgFilehandler}*/}
+                    {/*           value={formValues.internalViewImg}*/}
+                    {/*           name="internalViewImg" helperText="Upload Internal_View_Img"*/}
+                    {/*           id="demo-helper-text-aligned"*/}
+                    {/*           label="Internal_View_Img"/>*/}
+
+                    {/*</div>*/}
+
                 </Grid>
                 <InputBase
                     id="outlined-basic"
@@ -829,6 +879,7 @@ const ManageCar = ({}) => {
                                                                    id={labelId}
                                                                    scope="row"
                                                                    padding="none">{row.frontViewImg}
+
                                                         </TableCell>
                                                         <TableCell component="th"
                                                                    id={labelId}
