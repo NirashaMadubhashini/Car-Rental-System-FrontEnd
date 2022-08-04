@@ -111,6 +111,18 @@ const headCells = [
         label: 'Contact Number',
     },
     {
+        id: 'username',
+        numeric: false,
+        disablePadding: true,
+        label: 'User Name',
+    },
+    {
+        id: 'password',
+        numeric: false,
+        disablePadding: true,
+        label: 'Password',
+    },
+    {
         id: 'update',
         numeric: false,
         disablePadding: true,
@@ -207,11 +219,11 @@ const ManageDriver = ({}) => {
         licenseNo: "",
         address: "",
         contactNo: "",
+        username: "",
+        password: "",
         /**
          * Exta data
          * */
-        username: "",
-        password: "",
         isAvailable: false,
     };
 
@@ -259,6 +271,8 @@ const ManageDriver = ({}) => {
             licenseNo: "",
             address: "",
             contactNo: "",
+            username: "",
+            password: "",
 
         });
     };
@@ -360,6 +374,8 @@ const ManageDriver = ({}) => {
             licenseNo: data.licenseNo,
             address: data.address,
             contactNo: data.contactNo,
+            username: data.username,
+            password: data.password,
 
         });
     };
@@ -509,6 +525,26 @@ const ManageDriver = ({}) => {
                             value={formValues.contactNo}
                         />
                     </Grid>
+                    <Grid item>
+                        <TextField
+                            helperText="Enter User Name"
+                            id="outlined-basic"
+                            label="User Name"
+                            name="username"
+                            onChange={handleInputChange}
+                            value={formValues.username}
+                        />
+                    </Grid>
+                    <Grid item>
+                        <TextField
+                            helperText="Enter Password"
+                            id="outlined-basic"
+                            label="Password"
+                            name="password"
+                            onChange={handleInputChange}
+                            value={formValues.password}
+                        />
+                    </Grid>
                 </Grid>
                 <InputBase
                     sx={{ml: 10, mt: 5, flex: 1}}
@@ -606,6 +642,16 @@ const ManageDriver = ({}) => {
                                                                    id={labelId}
                                                                    scope="row"
                                                                    padding="none">{row.contactNo}
+                                                        </TableCell>
+                                                        <TableCell component="th"
+                                                                   id={labelId}
+                                                                   scope="row"
+                                                                   padding="none">{row.username}
+                                                        </TableCell>
+                                                        <TableCell component="th"
+                                                                   id={labelId}
+                                                                   scope="row"
+                                                                   padding="none">{row.password}
                                                         </TableCell>
 
                                                         <TableCell component="th"

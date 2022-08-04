@@ -503,7 +503,7 @@ const ManageCustomer = ({}) => {
                                                         >
 
                                                             <IconButton onClick={() => {
-                                                                acceptRequest(row.isAccept, row.nicNo)
+                                                                acceptRequest(row.nicNo)
                                                             }}
                                                                         color="success" aria-label="delete"
                                                                         component="label">
