@@ -133,8 +133,8 @@ export default function CustomerPanel() {
                 return 'updateInformation'
             case 'Place Request':
                 return 'placeRequest'
-            case 'Request Details':
-                return 'requestDetails'
+            // case 'Request Details':
+            //     return 'requestDetails'
             default:
                 return ''
         }
@@ -186,14 +186,13 @@ export default function CustomerPanel() {
                     </DrawerHeader>
                     <Divider/>
                     <List>
-                        {['Car Details', 'Update Information', 'Place Request', 'Request Details'].map((text, index) => (
+                        {['Car Details', 'Update Information', 'Place Request'].map((text, index) => (
                             <ListItem key={text} disablePadding>
                                 <ListItemButton onClick={() => ListItemBtnToggle(text)}>
                                     <ListItemIcon>
                                         {index === 0 ? <CarCrashIcon/> :
-                                            index === 1 ? <SecurityUpdateGoodIcon/> :
-                                                index === 2 ? <CheckIcon/> :
-                                                    <InfoIcon/>}
+                                            index === 1 ? <SecurityUpdateGoodIcon/> : <CheckIcon/>
+                                        }
                                     </ListItemIcon>
                                     <ListItemText primary={text}/>
                                 </ListItemButton>
@@ -205,7 +204,7 @@ export default function CustomerPanel() {
             {
                 isCarDetail ? <CarDetails/> :
                     isUpdateInformation ? <UpdateInformation/> :
-                        isRequestDetails ? <RequestDetails/> :
+                        // isRequestDetails ? <RequestDetails/> :
                             isPlaceRequest ? <PlaceRequest/> :
                                 <CustomerDashBoard/>
 

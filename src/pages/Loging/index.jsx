@@ -4,7 +4,28 @@ import {Avatar, Button, Grid, Link, Paper, Typography} from "@mui/material";
 import LockIcon from '@mui/icons-material/Lock';
 import Image from '../../assets/img/car3.jpg';
 import Box from "@mui/material/Box";
+import AdminService from "../../services/AdminService";
+import LoginService from "../../services/LoginService";
+import {toast, ToastContainer} from 'react-toastify';
+import { useNavigate } from "react-router-dom";
 
+const defaultPosition = toast.POSITION.TOP_CENTER;
+
+export const showToast = (type = "success", msg, autoClose = 2000, className = "primaryColor", position = defaultPosition) => {
+    if (type === "success") {
+        toast.success(msg, {
+            autoClose: autoClose === null ? 2000 : autoClose,
+            className: className === null ? "primaryColor" : className,
+            position: position,
+        });
+    } else if (type === "error") {
+        toast.error(msg, {
+            autoClose: autoClose === null ? 2000 : autoClose,
+            className: className === null ? "dangerColor" : className,
+            position: position,
+        });
+    }
+};
 
 
 const Login = () => {
@@ -34,6 +55,7 @@ const Login = () => {
     };
 
     const [formValues, setFormValues] = useState(initialValues);
+    let navigate = useNavigate();
 
     const handleInputChange = (e) => {
         const {name, value} = e.target;
@@ -47,12 +69,46 @@ const Login = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         console.log("Form Values==>",formValues)
+        await login();
+
     }
 
-
+    const login = async () => {
+        let dto = {};
+        dto = formValues;
+        let res = await LoginService.loginUser(dto);//customer service --> postCustomer()
+        console.log(res.status)
+        console.log("res Status", res)
+        if (res.data.code === 200) {
+            showToast('success', res.data.message);
+            if (res.data.type === "Admin"){
+                navigate("/admin");
+            }else if (res.data.type === "Driver"){
+                navigate("/driver");
+            }else {
+                navigate("/customer");
+            }
+        }
+        if (res.data.code === 403) {
+            showToast('error', res.data.message);
+        }
+        if (res.data.code === 405) {
+            showToast('error', res.data.message);
+        }
+        if (res.data.code === 406) {
+            showToast('error', res.data.message);
+        }
+        if (res.data.code === 404) {
+            showToast('error', res.data.message);
+        }
+        if (res.data.code === 407){
+            showToast('error',res.data.message);
+        }
+    }
 
     return (
         <Grid>
+            <ToastContainer/>
             <Paper elevation={10} style={paperStyleContainer}>
                 <Paper elevation={10} style={paperStyle}>
                     <Grid align='center'>
@@ -88,7 +144,7 @@ const Login = () => {
                                    sx={{mt: 2}}/>
 
                         <Link href="admin" underline="none">
-                            <Button type='submit' color='primary' variant="contained" size="large" sx={{mt: 5}} fullWidth>Sign
+                            <Button  type='submit' color='primary' variant="contained" size="large" sx={{mt: 5}} fullWidth>Sign
                                 in</Button>
                         </Link>
 

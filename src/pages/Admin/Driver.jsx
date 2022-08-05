@@ -23,7 +23,7 @@ import TablePagination from "@mui/material/TablePagination";
 import AdminService from "../../services/AdminService";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-const defaultPosition = toast.POSITION.BOTTOM_CENTER;
+const defaultPosition = toast.POSITION.TOP_CENTER;
 
 
 function createData(did,nicNo, name, licenseNo, address, contactNo,username,password, update, deleted) {
@@ -546,29 +546,29 @@ const ManageDriver = ({}) => {
                         />
                     </Grid>
                 </Grid>
-                <InputBase
-                    sx={{ml: 10, mt: 5, flex: 1}}
-                    placeholder="Search NIC Number"
-                    inputProps={{'aria-label': 'search NIC Number'}}
-                    variant="standard"
-                />
-                <IconButton type="submit" sx={{p: '20px'}} aria-label="search">
-                    <SearchIcon/>
-                </IconButton>
+                {/*<InputBase*/}
+                {/*    sx={{ml: 10, mt: 5, flex: 1}}*/}
+                {/*    placeholder="Search NIC Number"*/}
+                {/*    inputProps={{'aria-label': 'search NIC Number'}}*/}
+                {/*    variant="standard"*/}
+                {/*/>*/}
+                {/*<IconButton type="submit" sx={{p: '20px'}} aria-label="search">*/}
+                {/*    <SearchIcon/>*/}
+                {/*</IconButton>*/}
                 <div>
                     <div>
-                        <Button color="secondary" size="medium" variant="contained"
-                                sx={{ml: 45, mt: -13}}>
-                            Search
-                        </Button>
+                        {/*<Button color="secondary" size="medium" variant="contained"*/}
+                        {/*        sx={{ml: 45, mt: -13}}>*/}
+                        {/*    Search*/}
+                        {/*</Button>*/}
 
                         <Button color={btnColor} size="medium" type="submit" variant="contained"
-                                sx={{ml: 3, mt: -13}}>
+                                sx={{ml: 5, mt: 5}}>
                             {btnLabel}
                         </Button>
 
                         <Button onClick={clearFields} type="reset" variant="contained" color="success"
-                                sx={{ml: 3, mt: -13}}>
+                                sx={{ml: 5, mt: 5}}>
                             Reset
                         </Button>
                     </div>

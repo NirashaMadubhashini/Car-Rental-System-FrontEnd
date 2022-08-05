@@ -8,7 +8,7 @@ import RubberBtn from "../../component/common/RubberBandBtn";
 import CustomerService from "../../services/CustomerService";
 import {toast, ToastContainer} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-const defaultPosition = toast.POSITION.BOTTOM_CENTER;
+const defaultPosition = toast.POSITION.TOP_CENTER;
 
 
 export const showToast = (type = "success", msg, autoClose = 2000, className = "primaryColor", position = defaultPosition) => {

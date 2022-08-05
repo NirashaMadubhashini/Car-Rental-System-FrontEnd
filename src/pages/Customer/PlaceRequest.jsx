@@ -114,27 +114,27 @@ const PlaceRequest = ({}) => {
                         />
                     </Grid>
                 </Grid>
-                <InputBase
-                    sx={{ml: 10, mt: 5, flex: 1}}
-                    placeholder="Search Car Name"
-                    inputProps={{'aria-label': 'search Car Name'}}
-                    variant="standard"
-                />
-                <IconButton type="submit" sx={{p:'20px'}} aria-label="search">
-                    <SearchIcon/>
-                </IconButton>
+                {/*<InputBase*/}
+                {/*    sx={{ml: 10, mt: 5, flex: 1}}*/}
+                {/*    placeholder="Search Car Name"*/}
+                {/*    inputProps={{'aria-label': 'search Car Name'}}*/}
+                {/*    variant="standard"*/}
+                {/*/>*/}
+                {/*<IconButton type="submit" sx={{p:'20px'}} aria-label="search">*/}
+                {/*    <SearchIcon/>*/}
+                {/*</IconButton>*/}
                 <div>
                     <div>
-                        <Button color="secondary" size="medium" type="submit" variant="contained"
-                                sx={{ml: 45, mt: -13}}>
-                            Search
-                        </Button>
+                        {/*<Button color="secondary" size="medium" type="submit" variant="contained"*/}
+                        {/*        sx={{ml: 45, mt: -13}}>*/}
+                        {/*    Search*/}
+                        {/*</Button>*/}
                         <Button  size="medium" type="submit" variant="contained"
-                                 sx={{ml:3, mt: -13}}>
+                                 sx={{ml:5, mt: 5}}>
                             Place Request
                         </Button>
                         <Button type="reset" variant="contained" color="success"
-                                sx={{ml: 3, mt: -13}}>
+                                sx={{ml: 5, mt: 5}}>
                             Reset
                         </Button>
                     </div>

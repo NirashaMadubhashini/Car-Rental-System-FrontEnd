@@ -23,7 +23,7 @@ import PropTypes from "prop-types";
 import {toast, ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const defaultPosition = toast.POSITION.BOTTOM_CENTER;
+const defaultPosition = toast.POSITION.TOP_CENTER;
 
 function createData(idCar, registrationNO, brand, type, noOfPassengers, transmissionType, fuelType, color, frontViewImg, backViewImg, sideViewImg, internalViewImg, dailyRate, monthlyRate, freeKmForPrice, freeKmForDuration, priceForExtraKm, update, deleted, maintain) {
     return {
@@ -781,30 +781,30 @@ const ManageCar = ({}) => {
                     {/*</div>*/}
 
                 </Grid>
-                <InputBase
-                    id="outlined-basic"
-                    sx={{ml: 10, mt: 5, flex: 1}}
-                    placeholder="Search RegistrationNO"
-                    inputProps={{'aria-label': 'search RegistrationNO'}}
-                    variant="standard"
-                />
-                <IconButton type="submit" sx={{p: '20px'}} aria-label="search">
-                    <SearchIcon/>
-                </IconButton>
+                {/*<InputBase*/}
+                {/*    id="outlined-basic"*/}
+                {/*    sx={{ml: 10, mt: 5, flex: 1}}*/}
+                {/*    placeholder="Search RegistrationNO"*/}
+                {/*    inputProps={{'aria-label': 'search RegistrationNO'}}*/}
+                {/*    variant="standard"*/}
+                {/*/>*/}
+                {/*<IconButton type="submit" sx={{p: '20px'}} aria-label="search">*/}
+                {/*    <SearchIcon/>*/}
+                {/*</IconButton>*/}
                 <div>
                     <div>
-                        <Button color="secondary" size="medium" variant="contained"
-                                sx={{ml: 45, mt: -13}}>
-                            Search
-                        </Button>
+                        {/*<Button color="secondary" size="medium" variant="contained"*/}
+                        {/*        sx={{ml: 45, mt: -13}}>*/}
+                        {/*    Search*/}
+                        {/*</Button>*/}
 
                         <Button color={btnColor} size="medium" type="submit" variant="contained"
-                                sx={{ml: 3, mt: -13}}>
+                                sx={{ml: 5, mt:5}}>
                             {btnLabel}
                         </Button>
 
                         <Button onClick={clearFields} type="reset" variant="contained" color="success"
-                                sx={{ml: 3, mt: -13}}>
+                                sx={{ml: 5, mt: 5}}>
                             Reset
                         </Button>
                     </div>

@@ -7,7 +7,6 @@ import AboutSection from "../pages/Loging";
 import LogingSection from "../pages/Loging";
 import SignUp from "../pages/Loging/SignUp";
 import CarDetails from "../pages/Customer/CarDetail";
-
 function AppRouter() {
   return (
       <BrowserRouter>

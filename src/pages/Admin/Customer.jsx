@@ -24,13 +24,12 @@ import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import {toast, ToastContainer} from 'react-toastify';
 import CancelIcon from '@mui/icons-material/Cancel';
 
-const defaultPosition = toast.POSITION.BOTTOM_CENTER;
+const defaultPosition = toast.POSITION.TOP_CENTER;
 
 
-function createData(email, password, nicNo, nicImg, licenceNo, licenceImg, address, contactNo, isAccept, decline) {
+function createData(email, nicNo, nicImg, licenceNo, licenceImg, address, contactNo, isAccept, decline) {
     return {
         email,
-        password,
         nicNo,
         nicImg,
         licenceNo,
@@ -76,12 +75,6 @@ const headCells = [
         numeric: false,
         disablePadding: true,
         label: 'Email',
-    },
-    {
-        id: 'password',
-        numeric: false,
-        disablePadding: true,
-        label: 'New Password',
     },
     {
         id: 'nicNo',
@@ -324,7 +317,7 @@ const ManageCustomer = ({}) => {
         const newArr2 = []
         for (let i = 0; i < td.length; i++) {
             newArr2.push((createData(
-                td[i].email, td[i].password, td[i].nicNo, td[i].nicImg, td[i].licenceNo, td[i].licenceImg, td[i].address, td[i].contactNo, td[i].isAccept, td[i].decline
+                td[i].email, td[i].nicNo, td[i].nicImg, td[i].licenceNo, td[i].licenceImg, td[i].address, td[i].contactNo, td[i].isAccept, td[i].decline
             )))
         }
         console.log("new Arra", newArr2)
@@ -393,30 +386,31 @@ const ManageCustomer = ({}) => {
                 autoComplete="off"
             >
 
-                <InputBase
-                    sx={{ml: 10, mt: 5, flex: 1}}
-                    placeholder="Search NIC Number"
-                    inputProps={{'aria-label': 'search NIC Number'}}
-                    variant="standard"
-                />
-                <IconButton type="submit" sx={{p: '20px'}} aria-label="search">
-                    <SearchIcon/>
-                </IconButton>
+                {/*<InputBase*/}
+                {/*    sx={{ml: 10, mt: 5, flex: 1}}*/}
+                {/*    placeholder="Search NIC Number"*/}
+                {/*    inputProps={{'aria-label': 'search NIC Number'}}*/}
+                {/*    variant="standard"*/}
+                {/*/>*/}
+                {/*<IconButton type="submit" sx={{p: '20px'}} aria-label="search">*/}
+                {/*    <SearchIcon/>*/}
+                {/*</IconButton>*/}
+
                 <div>
                     <div>
-                        <Button
-                            color="secondary" size="medium" variant="contained"
-                            value={formValues.search}
-                            sx={{ml: 45, mt: -13}}>
-                            Search
-                        </Button>
+                        {/*<Button*/}
+                        {/*    color="secondary" size="medium" variant="contained"*/}
+                        {/*    value={formValues.search}*/}
+                        {/*    sx={{ml: 45, mt: -13}}>*/}
+                        {/*    Search*/}
+                        {/*</Button>*/}
 
-                        <Button onClick={clearFields} type="reset" variant="contained" color="success"
-                                sx={{ml: 3, mt: -13}}>
-                            Reset
-                        </Button>
+                        {/*<Button onClick={clearFields} type="reset" variant="contained" color="success"*/}
+                        {/*        sx={{ml: 3, mt: 10}}>*/}
+                        {/*    Reset*/}
+                        {/*</Button>*/}
                     </div>
-
+<br/>
                     <Box sx={{width: '100%'}}>
                         <Paper sx={{width: '100%', mb: 2}}>
                             <EnhancedTableToolbar numSelected={selected.length}/>
@@ -458,11 +452,6 @@ const ManageCustomer = ({}) => {
                                                             padding="none"
                                                         >
                                                             {row.email}
-                                                        </TableCell>
-                                                        <TableCell component="th"
-                                                                   id={labelId}
-                                                                   scope="row"
-                                                                   padding="none">{row.password}
                                                         </TableCell>
                                                         <TableCell component="th"
                                                                    id={labelId}
