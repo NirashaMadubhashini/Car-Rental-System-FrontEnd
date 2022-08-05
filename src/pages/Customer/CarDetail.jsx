@@ -105,10 +105,10 @@ export default function CarDetails() {
 
         <div>
             <Dialog open={open} onClose={handleClose}>
-                <DialogTitle>Pick Up</DialogTitle>
+                <DialogTitle>Rent Details</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
-                        Plase Add Infomation Before you Pick up
+                        Please Add Information Before your car Rent
                     </DialogContentText>
 
                     <Box
