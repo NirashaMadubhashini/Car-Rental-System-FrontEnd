@@ -14,7 +14,7 @@ export default function Header() {
                     <Typography variant="h5" component="div" sx={{flexGrow: 1, marginLeft: 70,fontFamily:'sans-serif'}}>
                         Easy Car Rental
                     </Typography>
-                    <Button color="inherit">Login</Button>
+                    <Button color="inherit" >Login</Button>
                     {/*<Link href="/" underline="none" sx={{color:'white'}}>*/}
                     {/*    Login*/}
                     {/*</Link>*/}

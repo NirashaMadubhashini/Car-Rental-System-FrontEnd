@@ -114,21 +114,8 @@ const PlaceRequest = ({}) => {
                         />
                     </Grid>
                 </Grid>
-                {/*<InputBase*/}
-                {/*    sx={{ml: 10, mt: 5, flex: 1}}*/}
-                {/*    placeholder="Search Car Name"*/}
-                {/*    inputProps={{'aria-label': 'search Car Name'}}*/}
-                {/*    variant="standard"*/}
-                {/*/>*/}
-                {/*<IconButton type="submit" sx={{p:'20px'}} aria-label="search">*/}
-                {/*    <SearchIcon/>*/}
-                {/*</IconButton>*/}
                 <div>
                     <div>
-                        {/*<Button color="secondary" size="medium" type="submit" variant="contained"*/}
-                        {/*        sx={{ml: 45, mt: -13}}>*/}
-                        {/*    Search*/}
-                        {/*</Button>*/}
                         <Button  size="medium" type="submit" variant="contained"
                                  sx={{ml:5, mt: 5}}>
                             Place Request
@@ -138,9 +125,6 @@ const PlaceRequest = ({}) => {
                             Reset
                         </Button>
                     </div>
-
-                    <PlaceRequestTables/>
-
                 </div>
             </Box>
         </div>

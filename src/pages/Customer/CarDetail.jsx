@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {useEffect, useState} from 'react';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
@@ -9,571 +10,273 @@ import Typography from '@mui/material/Typography';
 import {red} from '@mui/material/colors';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Alto from '../../assets/img/alto.jpg';
-import K10 from '../../assets/img/alto-k10.jpg';
-import Celerio from '../../assets/img/Suzuki Celerio.jpg';
-import Axia from '../../assets/img/Axia.jpg';
-import Aqua from '../../assets/img/Aqua.jpg';
-import Corolla from '../../assets/img/Toyota Corolla Axio.jpg';
-import Bezza from '../../assets/img/Bezza.jpg';
-import Allion from '../../assets/img/Allion.jpg';
-import NKR from '../../assets/img/NKR.jfif';
-import Premio from '../../assets/img/Premio.jpg';
-import Mercedes from '../../assets/img/Mercedes.jpg';
-import BMW from '../../assets/img/bmw-i8.jpg';
 import {Grid} from "@mui/material";
 import RubberBtn from "../../component/common/RubberBandBtn";
 import CardActionArea from "@mui/material/CardActionArea";
-import Divider from "@mui/material/Divider";
-
+import Button from "@mui/material/Button";
+import Stack from "@mui/material/Stack";
+import TextField from "@mui/material/TextField";
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import Box from "@mui/material/Box";
+import CustomerService from "../../services/CustomerService";
+import {DatePicker, LocalizationProvider, TimePicker} from "@mui/x-date-pickers";
+import {AdapterDateFns} from "@mui/x-date-pickers/AdapterDateFns";
+import PhotoCamera from '@mui/icons-material/PhotoCamera';
+import AdminService from "../../services/AdminService";
+import {showToast} from "../Admin/Customer";
 
 export default function CarDetails() {
-    const [expanded, setExpanded] = React.useState(false);
 
-    const handleExpandClick = () => {
-        setExpanded(!expanded);
+    const initialValues = {
+        pickUpDate: "",
+        pickUpTime: "",
+        returnDate: "",
+        returnTime: "",
+        location: "",
+        slipFile: "",
     };
 
+    const [open, setOpen] = React.useState(false);
+    const [regNo, setRegNo] = React.useState("");
+    const [car, setCarData] = React.useState([]);
+    const [value, setValue] = React.useState(new Date('2014-08-18T21:11:54'));
+    const [formValues, setFormValues] = useState(initialValues);
+
+    const handleChange = (newValue) => {
+        setValue(newValue);
+    };
+    useEffect(() => {
+        loadCar(false);
+        console.log(loadCar(false))
+    }, [])
+
+    const loadCar = (boolean) => {
+        CustomerService.fetchCarByAvailability(boolean).then((res) => {
+            if (res.status === 200) {
+                setCarData(res.data.data)
+            }
+        });
+    };
+    const handleClickOpen = (registrationNO) => {
+        setOpen(true);
+        setRegNo(registrationNO);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+    const carStats = async () => {
+        let res = await CustomerService.carPurchase(regNo);
+
+        if (res.data.code === 200) {
+
+            showToast('success', 'successfully Accepted!');
+
+        } else {
+
+            showToast('error', 'Error');
+        }
+
+    };
+    const PurchaseBtnToggled = async () => {
+        await carStats();
+        // handleClose();
+    };
+
+    const handleInputChange = (e) => {
+        const {name, value} = e.target;
+        setFormValues({
+            ...formValues,
+            [name]: value,
+        });
+    };
+
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+    }
+
+
     return (
+
         <div>
-            <Grid item lg={12} xs={12} sm={12} md={12}>
-                <RubberBtn name="Car Details"/>
-            </Grid>
+            <Dialog open={open} onClose={handleClose}>
+                <DialogTitle>Pick Up</DialogTitle>
+                <DialogContent>
+                    <DialogContentText>
+                        Plase Add Infomation Before you Pick up
+                    </DialogContentText>
 
-            <Typography>
-                <Card sx={{maxWidth: 345, mt: 10, ml: 20}}>
-                    <CardHeader
-                        avatar={
-                            <Avatar sx={{bgcolor: red[500]}} aria-label="recipe">
-                                GC
-                            </Avatar>
-                        }
-                        action={
-                            <IconButton aria-label="settings">
-                                <MoreVertIcon/>
-                            </IconButton>
-                        }
-                        title="General Cars Rates"
-                        subheader="(30)"
-                    />
-                    <CardActionArea>
-                        <CardMedia
-                            component="img"
-                            height="194"
-                            image={Alto}
-                            alt="green iguana"
-                        />
-                        <CardContent>
-                            <Typography gutterBottom variant="h5" component="div">
-                                Suzuki Alto
-                            </Typography>
-                            <Typography paragraph>
-                                Brand : Suzuki Alto
-                                <br/>
-                                Transmission type : Premium
-                                <br/>
-                                Fuel type : Petrol
-                                <br/>
-                                Type : Manual
-                                <br/>
-                                No of passengers : 7
-                                <br/>
-                                Price : 2500(Daily)
-                            </Typography>
+                    <Box
+                        component="form"
+                        onSubmit={handleSubmit}
+                        sx={{
+                            '& > :not(style)': {},
+                        }}
+                        noValidate
+                        autoComplete="off"
+                    >
 
-                        </CardContent>
-                    </CardActionArea>
-                </Card>
 
-                <Card sx={{maxWidth: 345, mt: -62, ml: 70}}>
-                    <CardHeader
-                        avatar={
-                            <Avatar sx={{bgcolor: red[500]}} aria-label="recipe">
-                                GC
-                            </Avatar>
-                        }
-                        action={
-                            <IconButton aria-label="settings">
-                                <MoreVertIcon/>
-                            </IconButton>
-                        }
-                        title="General Cars Rates"
-                        subheader="(30)"
-                    />
-                    <CardActionArea>
-                        <CardMedia
-                            component="img"
-                            height="194"
-                            image={K10}
-                            alt="green iguana"
-                        />
-                        <CardContent>
-                            <Typography gutterBottom variant="h5" component="div">
-                                Suzuki Alto K10
-                            </Typography>
-                            <Typography paragraph>
-                                Brand : Suzuki Alto K10
-                                <br/>
-                                Transmission type : Premium
-                                <br/>
-                                Fuel type : Petrol
-                                <br/>
-                                Type : Auto
-                                <br/>
-                                No of passengers : 8
-                                <br/>
-                                Price : 3000(Daily)
-                            </Typography>
+                        <Grid container alignItems="center" justify="center" direction="row" spacing={2}
+                              sx={{paddingLeft:2, mt: 5}}
+                        >
+                            <Grid item>
+                                <LocalizationProvider dateAdapter={AdapterDateFns}>
+                                    <DatePicker
+                                        label="Basic example"
+                                        value={value}
+                                        onChange={(newValue) => {
+                                            setValue(newValue);
+                                        }}
+                                        renderInput={(params) => <TextField {...params} />}
+                                    />
+                                </LocalizationProvider>
+                            </Grid>
+                            <Grid item>
+                                <LocalizationProvider dateAdapter={AdapterDateFns}>
+                                    <TimePicker
+                                        label="Basic example"
+                                        value={value}
+                                        onChange={(newValue) => {
+                                            setValue(newValue);
+                                        }}
+                                        renderInput={(params) => <TextField {...params} />}
+                                    />
+                                </LocalizationProvider>
+                            </Grid>
+                            <Grid item>
+                                <LocalizationProvider dateAdapter={AdapterDateFns}>
+                                    <DatePicker
+                                        label="Basic example"
+                                        value={value}
+                                        onChange={(newValue) => {
+                                            setValue(newValue);
+                                        }}
+                                        renderInput={(params) => <TextField {...params} />}
+                                    />
+                                </LocalizationProvider>
+                            </Grid>
+                            <Grid item>
+                                <LocalizationProvider dateAdapter={AdapterDateFns}>
+                                    <TimePicker
+                                        label="Basic example"
+                                        value={value}
+                                        onChange={(newValue) => {
+                                            setValue(newValue);
+                                        }}
+                                        renderInput={(params) => <TextField {...params} />}
+                                    />
+                                </LocalizationProvider>
+                            </Grid>
+                            <Grid item>
+                                <TextField
+                                    helperText="Enter Location"
+                                    id="demo-helper-text-aligned"
+                                    label="Location"
+                                    name="location"
+                                    onChange={handleInputChange}
+                                    value={formValues.location}
+                                />
+                            </Grid>
 
-                        </CardContent>
-                    </CardActionArea>
-                </Card>
+                            <Grid item>
+                                <Button variant="contained" component="label" name="slipFile"
+                                        value={formValues.slipFile}>
+                                    Upload Photo
+                                    <input hidden accept="image/*" multiple type="file" />
+                                </Button>
+                            </Grid>
+                        </Grid>
+                    </Box>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleClose}>Cancel</Button>
+                    <Button onClick={PurchaseBtnToggled}>Purchase</Button>
+                </DialogActions>
+            </Dialog>
 
-                <Card sx={{maxWidth: 345, mt: -62, ml: 120}}>
-                    <CardHeader
-                        avatar={
-                            <Avatar sx={{bgcolor: red[500]}} aria-label="recipe">
-                                GC
-                            </Avatar>
-                        }
-                        action={
-                            <IconButton aria-label="settings">
-                                <MoreVertIcon/>
-                            </IconButton>
-                        }
-                        title="General Cars Rates"
-                        subheader="(30)"
-                    />
-                    <CardActionArea>
-                        <CardMedia
-                            component="img"
-                            height="194"
-                            image={Celerio}
-                            alt="green iguana"
-                        />
-                        <CardContent>
-                            <Typography gutterBottom variant="h5" component="div">
-                                Suzuki Celerio
-                            </Typography>
-                            <Typography paragraph>
-                                Brand : Suzuki Celerio
-                                <br/>
-                                Transmission type : Premium
-                                <br/>
-                                Fuel type : Petrol
-                                <br/>
-                                Type : Auto
-                                <br/>
-                                No of passengers : 5
-                                <br/>
-                                Price : 3300(Daily)
-                            </Typography>
+            <div>
+                <Grid item lg={12} xs={12} sm={12} md={12}>
+                    <RubberBtn name="Booking Your Car"/>
+                </Grid>
 
-                        </CardContent>
-                    </CardActionArea>
-                </Card>
+                <Box
+                    component="form"
+                    sx={{
+                        '& > :not(style)': {},
+                    }}
+                    noValidate
+                    autoComplete="off"
+                >
+                    <Grid
+                        container alignItems="center" justify="center" direction="row" spacing={5}
+                        sx={{paddingLeft: 5, paddingRight: 5, mt: 5}}
+                    >
+                        {car.map((data) => {
+                            return <Grid item xs={12} sm={6} md={3} key={car.indexOf(data)}>
+                                <Card sx={{mt: 3, mb: 5}}>
+                                    <CardHeader
+                                        avatar={
+                                            <Avatar sx={{bgcolor: red[500]}} aria-label="recipe">
+                                                GC
+                                            </Avatar>
+                                        }
+                                        action={
+                                            <IconButton aria-label="settings">
+                                                <MoreVertIcon/>
+                                            </IconButton>
+                                        }
+                                        title="General Cars Rates"
+                                        subheader="(30)"
+                                    />
+                                    <CardActionArea>
+                                        <CardMedia
+                                            component="img"
+                                            height="194"
+                                            image={Alto}
+                                            alt="green iguana"
+                                        />
+                                        <CardContent>
+                                            <Typography gutterBottom variant="h5" component="div">
+                                                {data.brand}
+                                            </Typography>
+                                            <Typography paragraph>
+                                                Brand : {data.brand}
+                                                <br/>
+                                                Transmission type : {data.transmissionType}
+                                                <br/>
+                                                Fuel type : {data.fuelType}
+                                                <br/>
+                                                Type : {data.type}
+                                                <br/>
+                                                No of passengers : {data.noOfPassengers}
+                                                <br/>
+                                                Price : {data.dailyRate}
+                                            </Typography>
 
-                <Card sx={{maxWidth: 345, mt: 10, ml: 20}}>
-                    <CardHeader
-                        avatar={
-                            <Avatar sx={{bgcolor: red[500]}} aria-label="recipe">
-                                GC
-                            </Avatar>
-                        }
-                        action={
-                            <IconButton aria-label="settings">
-                                <MoreVertIcon/>
-                            </IconButton>
-                        }
-                        title="General Cars Rates"
-                        subheader="(30)"
-                    />
-                    <CardActionArea>
-                        <CardMedia
-                            component="img"
-                            height="194"
-                            image={Axia}
-                            alt="green iguana"
-                        />
-                        <CardContent>
-                            <Typography gutterBottom variant="h5" component="div">
-                                Perodua (Daihatsu) Axia
-                            </Typography>
-                            <Typography paragraph>
-                                Brand : Perodua (Daihatsu) Axia
-                                <br/>
-                                Transmission type : Premium
-                                <br/>
-                                Fuel type : Petrol
-                                <br/>
-                                Type : Auto
-                                <br/>
-                                No of passengers : 2
-                                <br/>
-                                Price : 3800(Daily)
-                            </Typography>
+                                            <Stack spacing={2} direction="row">
+                                                <Button color="secondary" onClick={() => handleClickOpen(data.registrationNO)}
+                                                        variant="contained">Purchase</Button>
+                                                <Button color="success" variant="contained">Add Driver</Button>
+                                            </Stack>
 
-                        </CardContent>
-                    </CardActionArea>
-                </Card>
+                                        </CardContent>
+                                    </CardActionArea>
+                                </Card>
 
-                <Card sx={{maxWidth: 345, mt: -63, ml: 70}}>
-                    <CardHeader
-                        avatar={
-                            <Avatar sx={{bgcolor: red[500]}} aria-label="recipe">
-                                GC
-                            </Avatar>
-                        }
-                        action={
-                            <IconButton aria-label="settings">
-                                <MoreVertIcon/>
-                            </IconButton>
-                        }
-                        title="General Cars Rates"
-                        subheader="(30)"
-                    />
-                    <CardActionArea>
-                        <CardMedia
-                            component="img"
-                            height="194"
-                            image={Aqua}
-                            alt="green iguana"
-                        />
-                        <CardContent>
-                            <Typography gutterBottom variant="h5" component="div">
-                                Toyota Prius C/ Aqua
-                            </Typography>
-                            <Typography paragraph>
-                                Brand : Toyota Prius C/ Aqua
-                                <br/>
-                                Transmission type : Premium
-                                <br/>
-                                Fuel type : Petrol
-                                <br/>
-                                Type : Auto
-                                <br/>
-                                No of passengers : 8
-                                <br/>
-                                Price : 5000(Daily)
-                            </Typography>
+                            </Grid>
 
-                        </CardContent>
-                    </CardActionArea>
-                </Card>
-                <br/>
+                        })}
+                    </Grid>
+                </Box>
 
-                <Divider/>
 
-                <Card sx={{maxWidth: 345, mt: 10, ml: 20}}>
-                    <CardHeader
-                        avatar={
-                            <Avatar sx={{bgcolor: red[500]}} aria-label="recipe">
-                                PC
-                            </Avatar>
-                        }
-                        action={
-                            <IconButton aria-label="settings">
-                                <MoreVertIcon/>
-                            </IconButton>
-                        }
-                        title="Premium Cars"
-                        subheader="(14)"
-                    />
-                    <CardActionArea>
-                        <CardMedia
-                            component="img"
-                            height="194"
-                            image={Corolla}
-                            alt="green iguana"
-                        />
-                        <CardContent>
-                            <Typography gutterBottom variant="h5" component="div">
-                                Toyota Corolla Axio/ NZE141
-                            </Typography>
-                            <Typography paragraph>
-                                Brand : Toyota Corolla Axio/ NZE141
-                                <br/>
-                                Transmission type : Premium
-                                <br/>
-                                Fuel type : Petrol
-                                <br/>
-                                Type : Manual
-                                <br/>
-                                No of passengers : 4
-                                <br/>
-                                Price : 5500(Daily)
-                            </Typography>
-
-                        </CardContent>
-                    </CardActionArea>
-                </Card>
-
-                <Card sx={{maxWidth: 345, mt: -63, ml: 70}}>
-                    <CardHeader
-                        avatar={
-                            <Avatar sx={{bgcolor: red[500]}} aria-label="recipe">
-                                PC
-                            </Avatar>
-                        }
-                        action={
-                            <IconButton aria-label="settings">
-                                <MoreVertIcon/>
-                            </IconButton>
-                        }
-                        title="Premium Cars"
-                        subheader="(14)"
-                    />
-                    <CardActionArea>
-                        <CardMedia
-                            component="img"
-                            height="194"
-                            image={Bezza}
-                            alt="green iguana"
-                        />
-                        <CardContent>
-                            <Typography gutterBottom variant="h5" component="div">
-                                Perodua Bezza Prime Sedan (2017)
-                            </Typography>
-                            <Typography paragraph>
-                                Brand : Perodua Bezza Prime Sedan
-                                <br/>
-                                Transmission type : Premium
-                                <br/>
-                                Fuel type : Petrol
-                                <br/>
-                                Type : Auto
-                                <br/>
-                                No of passengers : 5
-                                <br/>
-                                Price : 5500(Daily)
-                            </Typography>
-
-                        </CardContent>
-                    </CardActionArea>
-                </Card>
-
-                <Card sx={{maxWidth: 345, mt: -63, ml: 120}}>
-                    <CardHeader
-                        avatar={
-                            <Avatar sx={{bgcolor: red[500]}} aria-label="recipe">
-                                PC
-                            </Avatar>
-                        }
-                        action={
-                            <IconButton aria-label="settings">
-                                <MoreVertIcon/>
-                            </IconButton>
-                        }
-                        title="Premium Cars"
-                        subheader="(14)"
-                    />
-                    <CardActionArea>
-                        <CardMedia
-                            component="img"
-                            height="194"
-                            image={Allion}
-                            alt="green iguana"
-                        />
-                        <CardContent>
-                            <Typography gutterBottom variant="h5" component="div">
-                                Toyota Allion NZT 260
-                            </Typography>
-                            <Typography paragraph>
-                                Brand : Toyota Allion NZT 260
-                                <br/>
-                                Transmission type : Premium
-                                <br/>
-                                Fuel type : Petrol
-                                <br/>
-                                Type : Manual
-                                <br/>
-                                No of passengers : 3
-                                <br/>
-                                Price : 5800(Daily)
-                            </Typography>
-
-                        </CardContent>
-                    </CardActionArea>
-                </Card>
-
-                <Card sx={{maxWidth: 345, mt: 13, ml: 20}}>
-                    <CardHeader
-                        avatar={
-                            <Avatar sx={{bgcolor: red[500]}} aria-label="recipe">
-                                PC
-                            </Avatar>
-                        }
-                        action={
-                            <IconButton aria-label="settings">
-                                <MoreVertIcon/>
-                            </IconButton>
-                        }
-                        title="Premium Cars"
-                        subheader="(14)"
-                    />
-                    <CardActionArea>
-                        <CardMedia
-                            component="img"
-                            height="194"
-                            image={NKR}
-                            alt="green iguana"
-                        />
-                        <CardContent>
-                            <Typography gutterBottom variant="h5" component="div">
-                                Toyota Axio NKR 165
-                            </Typography>
-                            <Typography paragraph>
-                                Brand : Toyota Axio NKR 165
-                                <br/>
-                                Transmission type : Premium
-                                <br/>
-                                Fuel type : Petrol
-                                <br/>
-                                Type : Manual
-                                <br/>
-                                No of passengers : 2
-                                <br/>
-                                Price : 6000(Daily)
-                            </Typography>
-
-                        </CardContent>
-                    </CardActionArea>
-                </Card>
-
-                <br/>
-                <Divider/>
-
-                <Card sx={{maxWidth: 345, mt: 10, ml: 20}}>
-                    <CardHeader
-                        avatar={
-                            <Avatar sx={{bgcolor: red[500]}} aria-label="recipe">
-                                LC
-                            </Avatar>
-                        }
-                        action={
-                            <IconButton aria-label="settings">
-                                <MoreVertIcon/>
-                            </IconButton>
-                        }
-                        title="Luxury Cars"
-                        subheader="(6)"
-                    />
-                    <CardActionArea>
-                        <CardMedia
-                            component="img"
-                            height="194"
-                            image={Premio}
-                            alt="green iguana"
-                        />
-                        <CardContent>
-                            <Typography gutterBottom variant="h5" component="div">
-                                Toyota Premio
-                            </Typography>
-                            <Typography paragraph>
-                                Brand : Toyota Premio
-                                <br/>
-                                Transmission type : Luxury
-                                <br/>
-                                Fuel type : Petrol
-                                <br/>
-                                Type : Manual
-                                <br/>
-                                No of passengers : 2
-                                <br/>
-                                Price : 10,000(Daily)
-                            </Typography>
-
-                        </CardContent>
-                    </CardActionArea>
-                </Card>
-
-                <Card sx={{maxWidth: 345, mt: -63, ml: 70}}>
-                    <CardHeader
-                        avatar={
-                            <Avatar sx={{bgcolor: red[500]}} aria-label="recipe">
-                                LC
-                            </Avatar>
-                        }
-                        action={
-                            <IconButton aria-label="settings">
-                                <MoreVertIcon/>
-                            </IconButton>
-                        }
-                        title="Luxury Cars"
-                        subheader="(6)"
-                    />
-                    <CardActionArea>
-                        <CardMedia
-                            component="img"
-                            height="194"
-                            image={Mercedes}
-                            alt="green iguana"
-                        />
-                        <CardContent>
-                            <Typography gutterBottom variant="h5" component="div">
-                                Mercedes
-                            </Typography>
-                            <Typography paragraph>
-                                Brand : Mercedes
-                                <br/>
-                                Transmission type : Luxury
-                                <br/>
-                                Fuel type : Petrol
-                                <br/>
-                                Type : Auto
-                                <br/>
-                                No of passengers : 2
-                                <br/>
-                                Price : 18,000(Daily)
-                            </Typography>
-
-                        </CardContent>
-                    </CardActionArea>
-                </Card>
-
-                <Card sx={{maxWidth: 345, mt: -62, ml: 120}}>
-                    <CardHeader
-                        avatar={
-                            <Avatar sx={{bgcolor: red[500]}} aria-label="recipe">
-                                LC
-                            </Avatar>
-                        }
-                        action={
-                            <IconButton aria-label="settings">
-                                <MoreVertIcon/>
-                            </IconButton>
-                        }
-                        title="Luxury Cars"
-                        subheader="(6)"
-                    />
-                    <CardActionArea>
-                        <CardMedia
-                            component="img"
-                            height="194"
-                            image={BMW}
-                            alt="green iguana"
-                        />
-                        <CardContent>
-                            <Typography gutterBottom variant="h5" component="div">
-                                BMW i8
-                            </Typography>
-                            <Typography paragraph>
-                                Brand : BMW i8
-                                <br/>
-                                Transmission type : Luxury
-                                <br/>
-                                Fuel type : Petrol
-                                <br/>
-                                Type : Manual
-                                <br/>
-                                No of passengers : 2
-                                <br/>
-                                Price : 18,000(Daily)
-                            </Typography>
-
-                        </CardContent>
-                    </CardActionArea>
-                </Card>
-            </Typography>
+            </div>
         </div>
     );
 }

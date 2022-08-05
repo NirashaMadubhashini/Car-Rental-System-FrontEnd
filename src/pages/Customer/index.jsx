@@ -131,8 +131,8 @@ export default function CustomerPanel() {
                 return 'carDetails'
             case 'Update Information':
                 return 'updateInformation'
-            case 'Place Request':
-                return 'placeRequest'
+            // case 'Place Request':
+            //     return 'placeRequest'
             // case 'Request Details':
             //     return 'requestDetails'
             default:
@@ -186,12 +186,11 @@ export default function CustomerPanel() {
                     </DrawerHeader>
                     <Divider/>
                     <List>
-                        {['Car Details', 'Update Information', 'Place Request'].map((text, index) => (
+                        {['Car Details', 'Update Information'].map((text, index) => (
                             <ListItem key={text} disablePadding>
                                 <ListItemButton onClick={() => ListItemBtnToggle(text)}>
                                     <ListItemIcon>
-                                        {index === 0 ? <CarCrashIcon/> :
-                                            index === 1 ? <SecurityUpdateGoodIcon/> : <CheckIcon/>
+                                        {index === 0 ? <CarCrashIcon/> : <SecurityUpdateGoodIcon/>
                                         }
                                     </ListItemIcon>
                                     <ListItemText primary={text}/>
@@ -205,7 +204,7 @@ export default function CustomerPanel() {
                 isCarDetail ? <CarDetails/> :
                     isUpdateInformation ? <UpdateInformation/> :
                         // isRequestDetails ? <RequestDetails/> :
-                            isPlaceRequest ? <PlaceRequest/> :
+                        //     isPlaceRequest ? <PlaceRequest/> :
                                 <CustomerDashBoard/>
 
             }

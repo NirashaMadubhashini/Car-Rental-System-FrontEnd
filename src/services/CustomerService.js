@@ -3,6 +3,32 @@ import axios from "axios";
 class CustomerService {
     baseURL = "http://localhost:8080/backEnd/api/v1/";
 
+    fetchCarByAvailability = async (status) => {
+        const promise = new Promise((resolve, reject) => {
+            axios.get(`${this.baseURL}/admin/car/getByStatus/${status}`)
+                .then((res) => {
+                    return resolve(res)
+                })
+                .catch((err) => {
+                    return resolve(err)
+                })
+        })
+        return await promise;
+    }
+
+    carPurchase = async (rid) => {
+        const promise = new Promise((resolve, reject) => {
+            axios.get(`${this.baseURL}/admin/car/pc/${rid}`)
+                .then((res) => {
+
+                    return resolve(res)
+                })
+                .catch((err) => {
+                    return resolve(err)
+                })
+        })
+        return await promise;
+    };
     registerCustomer = async (data) => {
         console.log("data",data)
         const promise = new Promise((resolve, reject) => {

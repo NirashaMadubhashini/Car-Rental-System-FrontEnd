@@ -18,7 +18,6 @@ function AppRouter() {
               <Route exact path='signUp' element={<SignUp/>}/>
           </Routes>
       </BrowserRouter>
-
   );
 }
 
