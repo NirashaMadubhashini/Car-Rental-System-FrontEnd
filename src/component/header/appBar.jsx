@@ -14,12 +14,12 @@ export default function Header() {
                     <Typography variant="h5" component="div" sx={{flexGrow: 1, marginLeft: 70,fontFamily:'sans-serif'}}>
                         Easy Car Rental
                     </Typography>
-                    <Button color="inherit" >Login</Button>
-                    {/*<Link href="/" underline="none" sx={{color:'white'}}>*/}
-                    {/*    Login*/}
-                    {/*</Link>*/}
+
+                    <Link href="/" underline="none">
+                        <Button  type='submit' color='primary' variant="contained" size="small" sx={{mt:1}} fullWidth>LogOut</Button>
+                    </Link>
+
                 </Toolbar>
-                {/*<Divider />*/}
             </AppBar>
         </Box>
     );
